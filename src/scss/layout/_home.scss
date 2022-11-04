@@ -2,7 +2,8 @@
     height: calc(100vh - 80px);
     display: grid;
     grid-template-columns:25% 50% 25%;
-    grid-template-rows: 20% 70% 10%;
+    grid-template-rows: 20% 67% 7%;
+    
     
     .hero-header {
         grid-column: 1/4;
@@ -57,8 +58,9 @@
             font-weight: 400;
         }
 
-        svg {
-            max-width: 80%;
+        .hero-underline-svg {
+            max-width: 250px;
+            width: 100%;
             
         }
     }
@@ -81,6 +83,7 @@
                 transition: .5s ease;
                 width: 100%;
                 height: 100%;
+                object-fit: contain;
 
             }
         }
@@ -121,17 +124,19 @@
 
     .svg-test {
         grid-column: 1/4;
-        display: none;
+        overflow: hidden;
     }
     
     .hero-wave-svg {
-        width: 100%;           
+        width: 100%;       
+    
     }
 }
 
 @media (max-width: 1300px) {
     .hero {
        grid-template-columns: 50% 50%;
+       grid-template-rows: 20% 50% 20% 10%;
         
         .hero-middle {
             grid-column: 1/3;
@@ -158,7 +163,10 @@
 
 @media (max-width: 700px) {
     .hero {
-        grid-template-rows: 20% 400px auto;
+
+        .hero-arrow-svg {
+            display: none;
+        }
 
         .hero-middle {
             grid-column: 1/3;
@@ -175,11 +183,50 @@
             }
         }
 
-        
-            
        .hero-left, .hero-right {
-        grid-row: 3;
+            grid-row: 3;
        }
        
+       .hero-wave-svg {
+            height: 100%;
+        
+        }
+
     }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: 20% 35% 15% 20% 10%;
+
+        .hero-header {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            
+            #hero-title {
+                line-height: 50px;
+            }
+
+            #hero-description {
+                font-size: 1rem;
+            }
+        }
+
+        .hero-right, .hero-left {
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+        .hero-right {
+            grid-row: 4;
+        }
+        .hero-left {
+            grid-row: 3;
+        }
+    } 
+    
 }
