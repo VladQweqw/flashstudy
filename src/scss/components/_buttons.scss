@@ -1,0 +1,46 @@
+button {
+    font-family: 'Inter';
+    cursor: pointer;
+}
+
+.secondary-btn {
+    padding: .5em .9em;
+    font-size: 1.25rem;
+    background-color: transparent;
+    color: $primary-text;
+    outline: none;
+    border: none;
+    border: 2px dashed $accent-color;
+    border-radius: 8px;
+    transition: 200ms ease;
+
+}
+.secondary-btn:hover {
+    border: 2px dotted $accent-color;
+    transform: translateY(-2px);
+}
+.secondary-btn:active {
+    scale: .9;
+}
+
+.primary-btn {
+    padding: .5em .9em;
+    font-size: 1.15rem;
+    background-color: $accent-color;
+    color: $primary-text;
+    outline: none;
+    border: none;
+    border: 2px solid $primary-color;
+    border-radius: 8px;
+    transition: 100ms ease;
+    box-shadow: 0 4px 0 $primary-color
+}
+.primary-btn:hover {
+    background-color: $btn-hover;
+    
+}
+.primary-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 $primary-color
+
+}

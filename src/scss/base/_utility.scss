@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+// @font-face {
+//     font-family: Inter;
+//     src: url('../../assets/fonts/Inter/static/Inter-Regular.ttf');
+// }
+
+$ff-body :'Poppins', sans-serif;
+$ff-logo :'Righteous', sans-serif;
+$ff-accent: 'Indie Flower', cursive;
+
+$primary-background:#121212;
+$background-contrast:#1C1C1C;
+
+$primary-color: #90564358;
+$accent-color: #D09683;
+
+$btn-hover: #d09683cb;
+
+$primary-text: #FFFFFF;
+$secondary-text: #FFFFFF80;

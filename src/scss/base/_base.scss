@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    box-sizing: border-box;
+    
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+img {
+    max-width: 100%;
+}
+
+button, input, textarea {
+    outline: none;
+    border: none;
+    font-family: $ff-body !important;
+
+}
+
+a {
+    text-decoration: none;
+    color: darkcyan;
+}
+::selection {
+    background-color: $accent-color;
+    color: white;
+}
+
+body {
+    font-family: $ff-body;
+    background-color: $primary-background;
+    color: $primary-text;
+    font-weight: 400;
+
+}
+
+#root {
+    display: grid;
+    grid-template-rows: 80px auto;
+}
+
+.accent {
+    color: $accent-color;
+}
+
+.accent-font {
+    font-family: $ff-accent;
+}
+
+.secondary-text {
+    color: $secondary-text;
+}
