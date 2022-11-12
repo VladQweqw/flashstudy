@@ -4,6 +4,8 @@ import {Route, Routes} from 'react-router'
 import Navbar from './components/navbar'
 import Footer from './components/footer'
 
+import Form from './layout/Form/form'
+
 import Home from './layout/Home/home'
 
 export default function App() {
@@ -13,6 +15,9 @@ export default function App() {
       <Navbar />
       <Routes>
           <Route index element={<Home />}></Route>
+
+          <Route path='/form' element={<Form />}></Route>
+
       </Routes>
       <Footer />
     </>

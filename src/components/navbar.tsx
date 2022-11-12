@@ -1,11 +1,14 @@
 import React,{} from 'react'
 
+import { useNavigate } from 'react-router'
 
 export default function Navbar() {
+    const navigate = useNavigate()
 
-   return(
+
+    return(
     <div className="navbar" >
-        <div className="brand">
+        <div onClick={() => navigate('/')} className="brand">
             <h1 id='logo'>FS</h1>
         </div>
 

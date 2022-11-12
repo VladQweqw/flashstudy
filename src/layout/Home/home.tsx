@@ -1,4 +1,5 @@
 import React,{useState, useEffect, useRef} from 'react'
+import { useNavigate } from 'react-router'
 
 import anime from "animejs"
 
@@ -16,7 +17,7 @@ const heroImages = ['Easy to manage', 'Remind of you exams','See your progress',
 export default function Home() {
    const [heroIndex, setHeroIndex] = useState(0)
    const dinamicText = useRef<any>(null)
-   
+   const navigate = useNavigate()
 
    // hero slideshow
    useEffect(() => {
@@ -128,9 +129,9 @@ export default function Home() {
       </div>
 
       <div className="hero-right">
-         <h1 className='primary-text'>Give it a try!</h1>
+         <h1 className='primary-text' >Give it a try!</h1>
       
-        <button className="primary-btn" title='Join now' type='button'>Join now</button>
+        <button className="primary-btn" onClick={() => navigate('/form')} title='Join now' type='button'>Join now</button>
 
       </div>
 

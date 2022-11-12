@@ -41,7 +41,7 @@ body {
 
 #root {
     display: grid;
-    grid-template-rows: 80px auto;
+    grid-template-rows: 80px minmax(calc(100vh - 200px), auto);
 }
 
 .accent {
@@ -70,4 +70,23 @@ body {
 .section-spacing {
     margin: 200px 0;
     
+}
+
+input {
+    background-color: $background-contrast;
+    outline: 2px solid $accent-color;
+    font-size: 1.25rem;
+    color: white;
+    padding: .75em;
+    width: 100%;
+    border-radius: 4px;
+    transition: 200ms ease;
+    
+}
+input:hover {
+    outline: 2px solid $btn-hover;
+
+}
+input:focus {
+    background-color:$primary-background ;
 }
