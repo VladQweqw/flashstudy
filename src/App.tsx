@@ -1,9 +1,10 @@
-import React,{} from 'react'
 import {Route, Routes} from 'react-router'
 
 // components
 import Navbar from './components/navbar'
-import Home from './layout/home'
+import Footer from './components/footer'
+
+import Home from './layout/Home/home'
 
 export default function App() {
 
@@ -13,6 +14,7 @@ export default function App() {
       <Routes>
           <Route index element={<Home />}></Route>
       </Routes>
+      <Footer />
     </>
    )
 }

@@ -20,3 +20,18 @@
     }
 
 }
+
+
+.footer {
+    background-color: $background-contrast;
+    width: 100%;
+    display: grid;
+    padding: .5rem;
+    height: 120px;
+
+    #copyright {
+        text-align: center;
+
+    }
+
+}

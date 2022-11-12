@@ -2,10 +2,14 @@ import React,{useState, useEffect, useRef} from 'react'
 
 import anime from "animejs"
 
-import heroImage1 from '../assets/images/hero-image-0.png'   
-import heroImage2 from '../assets/images/hero-image-1.png' 
-import heroImage3 from '../assets/images/hero-image-2.png'   
-import heroImage4 from '../assets/images/hero-image-3.png'   
+import heroImage1 from '../../assets/images/hero-image-0.png'   
+import heroImage2 from '../../assets/images/hero-image-1.png' 
+import heroImage3 from '../../assets/images/hero-image-2.png'   
+import heroImage4 from '../../assets/images/hero-image-3.png'   
+
+//components
+import Feed from './feed'
+import Reviews from '../reviews'
 
 const heroImages = ['Easy to manage', 'Remind of you exams','See your progress','Quiz yourself']
 
@@ -21,7 +25,7 @@ export default function Home() {
          targets: '.hero-underline-svg > path',
          strokeDashoffset: [anime.setDashoffset, 0],
          easing: 'linear',
-         duration: 500,
+         duration: 400,
          delay: 2000,
 
       })
@@ -77,12 +81,13 @@ export default function Home() {
    
 
    return(
-    <div className="hero">
+    <>
+      <div className="hero">
       <div className="hero-header">
-         <h1 id="hero-title">Flash study</h1>
+         <h1 id="hero-title" className='m3'>Flash study</h1>
          
          <div>
-            <p id="hero-description">Find more materials. 
+            <p id="hero-description" className='m2'>Find more materials. 
             <span className='accent accent-font'>Study more efficently. </span> 
             <br />
             Test your abilities.</p>
@@ -137,5 +142,10 @@ export default function Home() {
       </div>
 
     </div>
+
+    <Feed />
+    <Reviews />
+      
+    </>
    )
 }

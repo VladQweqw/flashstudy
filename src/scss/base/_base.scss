@@ -54,4 +54,20 @@ body {
 
 .secondary-text {
     color: $secondary-text;
+    text-align: center;
+}
+
+.m3 {
+    font-size: calc(3.5vmin + 1.5rem) !important;
+}
+.m2 {
+    font-size: calc(1vmin + 1rem) !important;
+}
+.m1 {
+    font-size: 1rem;
+}
+
+.section-spacing {
+    margin: 200px 0;
+    
 }
