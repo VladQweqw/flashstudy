@@ -6,11 +6,11 @@ export default function SideNavbar() {
    return(
     <>
         <div className="logo">
-            FS
+            <h1>FS</h1>
         </div>
 
         <div className="side-navbar">
-        
+            
         </div>
 
     </>

@@ -1,8 +1,10 @@
 import React,{useEffect} from 'react'
 
 import anime from 'animejs'
+import { useNavigate } from 'react-router'
 
 export default function Cards() {
+   const navigate = useNavigate();
 
    useEffect(() => {
       
@@ -29,6 +31,11 @@ export default function Cards() {
       <Card />
       <Card />
 
+
+      <div className="practice-buttons">
+         <button onClick={() => navigate('practice')} className="practice-button primary-btn" id='practice-btn'>Practice</button>
+         <button onClick={() => navigate('quiz')} className="practice-button primary-btn" id='quiz-btn'>Quiz</button>
+      </div>
 
     </section>
    )
