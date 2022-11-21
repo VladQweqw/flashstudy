@@ -1,0 +1,321 @@
+.side-navbar {
+    grid-row: 2/3;
+    width: 100%;
+    height: 100%;
+    background-color: $background-contrast;
+    border-radius: 8px;
+
+}
+
+.logo {
+    background-color: $background-contrast;
+    padding: 1rem;
+    font-size: 2.5rem;
+    font-family: $ff-logo;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 1;
+
+
+    ::first-letter {
+        color: $accent-color;
+    }
+}
+
+.side-nav {
+    background-color: $background-contrast;
+    border-radius: 8px;
+    height: 100%;
+    grid-column: 2/3;
+}
+
+.account {
+    display: grid;
+    grid-template-columns: 80px auto;
+    grid-template-rows: 80px auto;
+    gap: 1rem;
+    padding: 1vw;
+    height: 100vh;
+ 
+    .account-header {
+        font-size: 2.5rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        font-family: $ff-logo;
+
+        .account-option {
+            cursor: pointer;
+            transition: 200ms ease;
+            position: relative;
+
+            .account-option-svg {
+                position: absolute;
+                top: 100%;
+                width: 100%;
+                left: 0;
+            }
+            
+        }
+        .account-option-active {
+            color: $accent-color;
+        }
+
+        .account-option:hover {
+            color: $accent-color;
+        }
+
+    }
+    
+}
+
+.account-slides {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5rem 1rem;
+    grid-auto-flow: dense;
+    grid-auto-rows: 250px;
+
+    .add-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        
+    }
+    
+    .slide {
+        background-color: $background-contrast;
+        border-radius: 8px;
+        cursor: pointer;
+        outline: 2px solid transparent;
+        transition: 200ms ease;
+        height: 100%;
+
+    }
+
+    .card-slide {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        
+        .slide-text {
+            display: grid;
+            grid-template-rows: 35px auto 30px;
+            padding: .5rem;
+            row-gap: .5rem;
+
+            .slide-title {
+                font-size: 1.5rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                font-weight: 400;
+                height: fit-content;
+                
+            }
+
+            .slide-description {
+                font-size: 1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+                color: $secondary-text;
+
+            }
+            
+            .slide-last-updated {
+                color: $accent-color;
+                font-size: minmax(.2rem, 2vw);
+            }
+        }
+
+        .slide-thumbnail {
+            position: relative;
+            height: 250px;
+            
+            .card-image-overlay {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right, $background-contrast, rgba(0,0,0,0));
+            }
+
+            .slide-thumbnail-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 0 8px 8px 0;
+                
+            }
+        }
+
+    }
+
+    .note-slide {
+        display: grid;
+        grid-template-rows: 35px auto 30px;
+        padding: .5rem;
+        row-gap: .5rem;
+
+        .note-title {
+            font-size: 1.5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            font-weight: 400;
+            height: fit-content;
+            
+        }
+
+        .note-description {
+            font-size: 1rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+            color: $secondary-text;
+
+        }
+        
+        .slide-last-updated {
+            color: $accent-color;
+            font-size: minmax(.2rem, 2vw);
+        }
+    }
+
+    .exam-slide {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        gap: .5rem;
+
+        .slide-text {
+            display: grid;
+            grid-template-rows: 35px auto 30px;
+            padding: .5rem;
+            row-gap: .5rem;
+
+            .slide-title {
+                font-size: 1.5rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                font-weight: 400;
+                height: fit-content;
+                
+            }
+    
+            .slide-description {
+                font-size: 1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 6;
+                -webkit-box-orient: vertical;
+                color: $secondary-text;
+    
+            }
+            
+            .slide-last-updated {
+                color: $accent-color;
+                font-size: minmax(.2rem, 2vw);
+            }
+
+        }
+
+        .slide-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .exam-days-number {
+                font-size: 4rem;
+                color: $accent-color;
+                font-weight: 400;
+            }
+            .exam-days-number-bottom {
+                line-height: 15px;
+                font-size: 1.25rem;
+            }
+
+        }
+
+    }
+
+    .slide:hover {
+        outline: 2px solid $accent-color;
+    }
+    .slide:active {
+        scale: .95;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .account {
+        grid-template-columns: 30px auto;
+        grid-template-rows: 80px auto;
+        gap: 1rem;
+        padding: 1vw;
+        height: 100vh;
+
+        .side-navbar {
+            display: none;
+        }
+        
+        .account-header {
+            justify-content: center;
+            align-items: center;
+            display: none;
+
+            .hamburger {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                width: 30px;
+                height: 20px;
+                justify-content: space-between;
+                gap: .1px;
+                cursor: pointer;
+
+                .line {
+                    width: 100%;
+                    height: 2px;
+                    background-color: white;
+                }
+            }
+        } 
+    }
+    
+
+    
+    .side-nav {
+        grid-row: 1;
+        grid-column: 1/3;
+    }
+    .logo {
+        grid-column: 1;
+        grid-row: 1;
+        width: fit-content;
+
+    }
+
+    .account-cards {
+        grid-template-columns: auto;
+        grid-column: 1/3;
+    }
+
+}

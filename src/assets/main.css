@@ -47,7 +47,7 @@ body {
 
 #root {
   display: grid;
-  grid-template-rows: 80px minmax(calc(100vh - 200px), auto);
+  grid-template-rows: auto;
 }
 
 .accent {
@@ -104,6 +104,7 @@ input:focus {
   display: flex;
   padding: 1rem 2rem;
   align-items: center;
+  position: fixed;
   justify-content: space-between;
 }
 .navbar #logo {
@@ -183,6 +184,7 @@ button {
   display: grid;
   grid-template-columns: 25% 50% 25%;
   grid-template-rows: 20% 70% 10%;
+  margin-top: 80px;
 }
 .hero .hero-header {
   grid-column: 1/4;
@@ -659,5 +661,277 @@ button {
   }
   .form .form-wrapper .form-left {
     padding: 5vw;
+  }
+}
+.side-navbar {
+  grid-row: 2/3;
+  width: 100%;
+  height: 100%;
+  background-color: #1C1C1C;
+  border-radius: 8px;
+}
+
+.logo {
+  background-color: #1C1C1C;
+  padding: 1rem;
+  font-size: 2.5rem;
+  font-family: "Righteous", sans-serif;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row: 1;
+}
+.logo ::first-letter {
+  color: #D09683;
+}
+
+.side-nav {
+  background-color: #1C1C1C;
+  border-radius: 8px;
+  height: 100%;
+  grid-column: 2/3;
+}
+
+.account {
+  display: grid;
+  grid-template-columns: 80px auto;
+  grid-template-rows: 80px auto;
+  gap: 1rem;
+  padding: 1vw;
+  height: 100vh;
+}
+.account .account-header {
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Righteous", sans-serif;
+}
+.account .account-header .account-option {
+  cursor: pointer;
+  transition: 200ms ease;
+  position: relative;
+}
+.account .account-header .account-option .account-option-svg {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+}
+.account .account-header .account-option-active {
+  color: #D09683;
+}
+.account .account-header .account-option:hover {
+  color: #D09683;
+}
+
+.account-slides {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem 1rem;
+  grid-auto-flow: dense;
+  grid-auto-rows: 250px;
+}
+.account-slides .add-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+.account-slides .slide {
+  background-color: #1C1C1C;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: 2px solid transparent;
+  transition: 200ms ease;
+  height: 100%;
+}
+.account-slides .card-slide {
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+.account-slides .card-slide .slide-text {
+  display: grid;
+  grid-template-rows: 35px auto 30px;
+  padding: 0.5rem;
+  row-gap: 0.5rem;
+}
+.account-slides .card-slide .slide-text .slide-title {
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-weight: 400;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.account-slides .card-slide .slide-text .slide-description {
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  color: rgba(255, 255, 255, 0.5019607843);
+}
+.account-slides .card-slide .slide-text .slide-last-updated {
+  color: #D09683;
+  font-size: minmax(0.2rem, 2vw);
+}
+.account-slides .card-slide .slide-thumbnail {
+  position: relative;
+  height: 250px;
+}
+.account-slides .card-slide .slide-thumbnail .card-image-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #1C1C1C, rgba(0, 0, 0, 0));
+}
+.account-slides .card-slide .slide-thumbnail .slide-thumbnail-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0 8px 8px 0;
+}
+.account-slides .note-slide {
+  display: grid;
+  grid-template-rows: 35px auto 30px;
+  padding: 0.5rem;
+  row-gap: 0.5rem;
+}
+.account-slides .note-slide .note-title {
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-weight: 400;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.account-slides .note-slide .note-description {
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  color: rgba(255, 255, 255, 0.5019607843);
+}
+.account-slides .note-slide .slide-last-updated {
+  color: #D09683;
+  font-size: minmax(0.2rem, 2vw);
+}
+.account-slides .exam-slide {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 0.5rem;
+}
+.account-slides .exam-slide .slide-text {
+  display: grid;
+  grid-template-rows: 35px auto 30px;
+  padding: 0.5rem;
+  row-gap: 0.5rem;
+}
+.account-slides .exam-slide .slide-text .slide-title {
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-weight: 400;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.account-slides .exam-slide .slide-text .slide-description {
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  color: rgba(255, 255, 255, 0.5019607843);
+}
+.account-slides .exam-slide .slide-text .slide-last-updated {
+  color: #D09683;
+  font-size: minmax(0.2rem, 2vw);
+}
+.account-slides .exam-slide .slide-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.account-slides .exam-slide .slide-right .exam-days-number {
+  font-size: 4rem;
+  color: #D09683;
+  font-weight: 400;
+}
+.account-slides .exam-slide .slide-right .exam-days-number-bottom {
+  line-height: 15px;
+  font-size: 1.25rem;
+}
+.account-slides .slide:hover {
+  outline: 2px solid #D09683;
+}
+.account-slides .slide:active {
+  scale: 0.95;
+}
+
+@media (max-width: 900px) {
+  .account {
+    grid-template-columns: 30px auto;
+    grid-template-rows: 80px auto;
+    gap: 1rem;
+    padding: 1vw;
+    height: 100vh;
+  }
+  .account .side-navbar {
+    display: none;
+  }
+  .account .account-header {
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+  .account .account-header .hamburger {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 30px;
+    height: 20px;
+    justify-content: space-between;
+    gap: 0.1px;
+    cursor: pointer;
+  }
+  .account .account-header .hamburger .line {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+  }
+  .side-nav {
+    grid-row: 1;
+    grid-column: 1/3;
+  }
+  .logo {
+    grid-column: 1;
+    grid-row: 1;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .account-cards {
+    grid-template-columns: auto;
+    grid-column: 1/3;
   }
 }/*# sourceMappingURL=main.css.map */
