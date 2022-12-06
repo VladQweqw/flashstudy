@@ -1,9 +1,14 @@
+//base
 @import '../scss/base/utility';
 @import '../scss//base/base';
 
+//components
 @import '../scss//components/navbar';
 @import '../scss/components/buttons';
+@import '../scss/components/additional';
 
+//layout
 @import '../scss/layout/home';
 @import '../scss/layout/form';
 @import '../scss/layout/account';
+

@@ -79,7 +79,7 @@ body {
   margin: 200px 0;
 }
 
-input {
+input, textarea {
   background-color: #1C1C1C;
   outline: 2px solid #D09683;
   font-size: 1.25rem;
@@ -90,11 +90,15 @@ input {
   transition: 200ms ease;
 }
 
-input:hover {
+textarea {
+  resize: none;
+}
+
+input:hover, textarea:hover {
   outline: 2px solid rgba(208, 150, 131, 0.7960784314);
 }
 
-input:focus {
+input:focus, textarea:focus {
   background-color: #121212;
 }
 
@@ -177,6 +181,22 @@ button {
 .primary-btn:active {
   transform: translateY(4px);
   box-shadow: 0 1px 0 rgba(144, 86, 67, 0.3450980392);
+}
+
+.error .error-text {
+  text-align: center;
+}
+.error .error-text .status-message {
+  font-size: calc(1rem + 2vmin);
+  color: #D09683;
+}
+.error .error-text .error-fullword {
+  display: flex;
+  align-items: center;
+  line-height: calc(10vmin + 100px);
+}
+.error .error-text .error-fullword .error-word {
+  font-size: calc(3rem + 20vmin);
 }
 
 .hero {
@@ -592,6 +612,7 @@ button {
   width: 100%;
   margin: 0 auto;
   min-height: 600px;
+  max-height: 800px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -605,9 +626,26 @@ button {
 .form .form-wrapper .form-left {
   padding: 3vw;
   text-align: center;
-  display: grid;
-  grid-template-rows: 50px auto 50px;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+}
+.form .form-wrapper .form-left .input {
+  position: relative;
+}
+.form .form-wrapper .form-left .input .see-password {
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  left: 95%;
+  transition: 200ms ease;
+  transform: translate(-50%, -50%);
+}
+.form .form-wrapper .form-left .input .see-password:hover {
+  color: #D09683;
+}
+.form .form-wrapper .form-left .input .see-password:active {
+  scale: 0.9;
 }
 .form .form-wrapper .form-left .m3 {
   font-size: 2rem !important;
@@ -625,7 +663,7 @@ button {
 }
 .form .form-wrapper .form-left .login-form .submit-btn {
   font-size: 1.25rem;
-  padding: 1rem;
+  padding: 0.75rem;
 }
 .form .form-wrapper .form-right {
   background-color: #D09683;
@@ -652,6 +690,10 @@ button {
 }
 .form .form-wrapper .form-right .other-form-method h1 {
   font-weight: 400;
+}
+
+.errors .error-message {
+  color: rgb(170, 0, 0);
 }
 
 @media (max-width: 900px) {
@@ -748,6 +790,22 @@ button {
   outline: 2px solid transparent;
   transition: 200ms ease;
   height: 100%;
+  position: relative;
+}
+.account-slides .slide .slide-options {
+  position: absolute;
+  z-index: 99;
+  width: 30px;
+  right: 0;
+  height: 50px;
+  display: grid;
+  place-items: center;
+}
+.account-slides .slide .slide-options i {
+  transition: 200ms ease;
+}
+.account-slides .slide .slide-options:hover i {
+  color: #D09683;
 }
 .account-slides .card-slide {
   display: grid;
@@ -903,12 +961,136 @@ button {
 }
 .cards .practice-buttons .practice-button {
   font-size: 1.25rem;
+  width: 125px;
 }
 .cards .practice-buttons #practice-btn {
   border-radius: 8px 0 0 8px;
 }
 .cards .practice-buttons #quiz-btn {
   border-radius: 0 8px 8px 0;
+}
+
+.add-slide-modal-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5019607843);
+  transition: 200ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1vw;
+}
+.add-slide-modal-wrapper textarea {
+  min-height: 150px;
+}
+.add-slide-modal-wrapper .add-slide-modal {
+  max-width: 900px;
+  width: 100%;
+  background-color: #1C1C1C;
+  border-radius: 8px;
+  min-height: 600px;
+  display: grid;
+  grid-template-rows: 200px auto 75px;
+  transition: 200ms ease;
+}
+.add-slide-modal-wrapper .add-slide-modal .thumbnail-image-wrapper {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+.add-slide-modal-wrapper .add-slide-modal .thumbnail-image-wrapper .thumbnail-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: 200ms ease;
+}
+.add-slide-modal-wrapper .add-slide-modal .thumbnail-image-wrapper:hover .thumbnail-image {
+  scale: 1.2;
+}
+.add-slide-modal-wrapper .add-slide-modal .add-slide-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+.add-slide-modal-wrapper .add-slide-modal .color-select {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  gap: 1rem;
+  overflow-x: auto;
+  max-width: 900px;
+  padding: 0.5rem 1rem;
+}
+.add-slide-modal-wrapper .add-slide-modal .color-select .color {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 40px;
+  transition: 200ms ease;
+  outline: 2px solid transparent;
+}
+.add-slide-modal-wrapper .add-slide-modal .color-select .color:hover {
+  scale: 1.1;
+  outline: 2px solid white;
+}
+.add-slide-modal-wrapper .add-slide-modal .color-select .color:active {
+  scale: 0.9;
+}
+.add-slide-modal-wrapper .add-slide-modal .color-select .color-select-active {
+  outline: 2px solid white;
+}
+.add-slide-modal-wrapper .add-slide-modal .add-slide-btn-wrapper {
+  padding: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.add-slide-modal-wrapper .add-slide-modal .add-slide-btn-wrapper .add-slide-btn {
+  max-width: 200px;
+  width: 100%;
+}
+
+.add-notes-modal-wrapper .add-slide-modal {
+  display: grid;
+  grid-template-rows: auto 75px;
+  padding: 1vw;
+}
+.add-notes-modal-wrapper .add-slide-modal textarea {
+  height: 100%;
+}
+
+.add-exams-modal-wrapper .add-slide-modal {
+  display: grid;
+  grid-template-rows: 200px auto 75px;
+  padding: 1vw;
+}
+.add-exams-modal-wrapper .add-slide-modal .slide-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+.add-exams-modal-wrapper .add-slide-modal .slide-header #slide-days-left {
+  color: rgba(255, 255, 255, 0.5019607843);
+  font-size: 1.15rem;
+}
+.add-exams-modal-wrapper .add-slide-modal .slide-header input[type=date] {
+  max-width: 400px;
+  text-align: center;
 }
 
 @media (max-width: 900px) {

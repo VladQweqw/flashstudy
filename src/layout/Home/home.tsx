@@ -10,7 +10,7 @@ import heroImage4 from '../../assets/images/hero-image-3.png'
 
 //components
 import Feed from './feed'
-import Reviews from '../reviews'
+import Reviews from './reviews'
 import Navbar from '../../components/navbar'
 
 const heroImages = ['Easy to manage', 'Remind of you exams','See your progress','Quiz yourself']

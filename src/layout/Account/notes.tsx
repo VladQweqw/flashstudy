@@ -1,8 +1,10 @@
 import React,{useEffect} from 'react'
 import anime from 'animejs'
+import { Outlet } from 'react-router'
+import { useNavigate } from 'react-router'
 
 export default function Notes() {
-   
+   const navigate = useNavigate();
 
    useEffect(() => {
       
@@ -18,8 +20,8 @@ export default function Notes() {
 
    return(
     <section className="account-slides notes" id='notes'>
-
-      <div className="account-slide slide add-slide" id='add-note'>
+      <Outlet />
+      <div onClick={() => navigate('add')} className="account-slide slide add-slide" id='add-note'>
          <h1>+</h1>
       </div>
 
@@ -38,7 +40,7 @@ export default function Notes() {
 
 
 function Card() {
-
+   
    return(
       <div className="account-slide note-slide slide">
          <h1 className="note-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam aperiam veniam maiores totam vel dolores hic voluptate sit, consequuntur laborum iure ullam recusandae porro quae!</h1>

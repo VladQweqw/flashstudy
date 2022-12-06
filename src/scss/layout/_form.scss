@@ -10,6 +10,7 @@
         width: 100%;
         margin: 0 auto;
         min-height: 600px;
+        max-height: 800px;
         height: fit-content;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -22,10 +23,31 @@
         .form-left {
             padding: 3vw;
             text-align: center;
-            display: grid;
-            grid-template-rows: 50px auto 50px;
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
             
+            .input {
+                position: relative;
+
+                .see-password {
+                    position: absolute;
+                    top: 50%;
+                    cursor: pointer;
+                    left: 95%;
+                    transition: 200ms ease;
+                    transform: translate(-50%, -50%);
+                }
+                .see-password:hover {
+                    color: $accent-color;
+                }
+                .see-password:active {
+                    scale: .9;
+                }
+                
+
+            }
+
             .m3 {
                 font-size: 2rem !important;
             }
@@ -44,7 +66,7 @@
 
                 .submit-btn {
                     font-size: 1.25rem;
-                    padding: 1rem;
+                    padding: .75rem;
                 }
             }
             
@@ -86,6 +108,12 @@
 
     }
     
+}
+
+.errors {
+    .error-message {
+        color: rgb(170, 0, 0);
+    }
 }
 
 @media (max-width: 900px) {

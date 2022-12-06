@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 
 import anime from 'animejs'
-import { useNavigate } from 'react-router'
+import { Outlet, useNavigate } from 'react-router'
 
 export default function Cards() {
    const navigate = useNavigate();
@@ -20,8 +20,9 @@ export default function Cards() {
 
    return(
     <section className="account-slides cards" id='cards'>
-
-      <div className="account-slide slide add-slide" id='add-card'>
+      <Outlet />
+      
+      <div onClick={() => navigate('add')} className="account-slide slide add-slide" id='add-card'>
          <h1>+</h1>
       </div>
 
@@ -48,6 +49,10 @@ function Card() {
 
    return(
       <div className="account-slide slide card-slide">
+         <span className='slide-options'>
+            <i className="fa-solid fa-ellipsis-vertical"></i>
+         </span>
+
          <div className="slide-text">
             <h1 className="slide-title">Lorem ipsum dolor awdaw  </h1>
             <p className="slide-description">

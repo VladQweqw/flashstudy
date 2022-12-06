@@ -1,0 +1,26 @@
+.error {
+
+    .error-text {
+        text-align: center;
+        
+        .status-message {
+            font-size: calc(1rem + 2vmin);
+            color: $accent-color;
+        }
+
+        .error-fullword {
+            display: flex;
+            align-items: center;
+            line-height: calc(10vmin + 100px);
+
+            .error-word {
+                font-size: calc(3rem + 20vmin);
+                
+            }
+            
+
+        }
+
+    }
+
+}

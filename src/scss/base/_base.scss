@@ -72,7 +72,8 @@ body {
     
 }
 
-input {
+
+input, textarea {
     background-color: $background-contrast;
     outline: 2px solid $accent-color;
     font-size: 1.25rem;
@@ -83,10 +84,13 @@ input {
     transition: 200ms ease;
     
 }
-input:hover {
+textarea {
+    resize: none;
+}
+input:hover, textarea:hover {
     outline: 2px solid $btn-hover;
 
 }
-input:focus {
+input:focus, textarea:focus {
     background-color:$primary-background ;
 }
