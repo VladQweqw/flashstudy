@@ -1,0 +1,145 @@
+.practice {
+    display: grid;
+    width: 100%;
+    grid-template-rows: auto 50px;
+    gap: 1rem;
+    padding: 1vw;
+    height: calc(100vh - 120px);
+    overflow: hidden;
+    place-items: center;
+
+    .cards {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        max-width: 900px;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        
+    }
+
+    .card-wrapper {
+        perspective: 2000px;
+        width: 100%;
+        margin: 0 auto;
+        flex: none;
+        height: 100%;
+        max-width: 900px;
+        transition: 200ms ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .practice-card {
+        padding: 1rem;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        width: 100%;
+        height: 80%;
+        position: relative;
+
+        .practice-card-side {
+            display: grid;
+            grid-template-rows: 100px auto;
+            top: 0;
+            left: 0;
+            border-radius: 8px;
+            place-items: center;
+            text-align: center;
+            padding: 1vw;
+            width: 100%;
+            height: 100%;
+            position: absolute;   
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            background-color: $background-contrast;
+            overflow-y: auto;
+
+            h1 {
+                font-size: calc(1rem + 1.50vmin);
+                font-weight: 400;     
+                color: $secondary-text;
+                transition: 200ms ease;    
+                   
+            }
+
+            .card-title {
+                color: $accent-color;
+                font-weight: 400;                
+                font-size: 1.25rem;
+            }
+
+        }
+       
+        .practice-card-back {
+            transform: rotateY(180deg);
+        }
+
+        
+        .practice-card-front {
+            text-align: center;
+
+        }
+
+    }
+
+    .practice-card:hover {
+        box-shadow: 0 4px 5px #00000070;
+
+        .practice-card-side {
+            h1 {
+                color: white;
+            }
+        }
+        
+    }
+
+
+    .flipped-card {
+        transform: rotateY(-180deg);
+
+    }
+   
+
+    .practice-controls {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        max-width: 900px;
+        margin: 0 auto;
+
+        .practice-next {
+            text-align: right;
+        }
+        .practice-control {
+            cursor: pointer;
+
+            i {
+                font-size: 2rem;
+                transition: 200ms ease;
+            }
+            
+        }
+        .practice-control:hover {
+            i {
+                color: $accent-color;
+                scale: 1.15;
+            }
+        }
+
+    }
+
+}
+
+@media (max-width: 900px) {
+    .practice {
+        grid-column: 1/3;
+
+    }
+}
+
+

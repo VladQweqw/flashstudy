@@ -3,6 +3,8 @@
     .error-text {
         text-align: center;
         
+   
+        
         .status-message {
             font-size: calc(1rem + 2vmin);
             color: $accent-color;
@@ -23,4 +25,11 @@
 
     }
 
+   
+}
+.err-btns {
+    display: flex;
+    margin-top: 2rem;
+    gap: 1rem;
+    justify-content: center;
 }

@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import anime from 'animejs'
+import { useNavigate } from 'react-router'
 
 export default function Error() {
-
+   const navigate = useNavigate();
 
   useEffect(() => {
    anime.timeline({
@@ -36,6 +37,10 @@ export default function Error() {
             <h1 className="status-message">
                Page not found
             </h1>
+            <div className='err-btns'>
+               <button onClick={() => navigate(-1)} className="primary-btn">Go back</button>
+               <button onClick={() => navigate('/account')} className="secondary-btn">Go home</button>
+            </div>
         </div>
 
         <svg id='reviews-right-svg'  viewBox="0 0 212 528" fill="none" xmlns="http://www.w3.org/2000/svg">

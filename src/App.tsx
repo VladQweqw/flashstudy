@@ -17,6 +17,9 @@ import CardsAdd from './layout/Account/actions/cardsAdd'
 import NotesAdd from './layout/Account/actions/notesAdd'
 import ExamsAdd from './layout/Account/actions/examsAdd'
 
+import Practice from './layout/Account/actions/practice'
+import Quiz from './layout/Account/actions/quiz'
+
 export default function App() {
 
   
@@ -38,6 +41,9 @@ export default function App() {
             <Route path='exams' element={<Exams />}>
               <Route path='add' element={<ExamsAdd />}></Route>
             </Route>
+
+            <Route path='cards/practice' element={<Practice />}></Route>
+            <Route path='cards/quiz' element={<Quiz />}></Route>
           </Route>
 
           <Route path='*' element={<Error />}></Route>

@@ -22,7 +22,7 @@ export default function Cards() {
     <section className="account-slides cards" id='cards'>
       <Outlet />
       
-      <div onClick={() => navigate('add')} className="account-slide slide add-slide" id='add-card'>
+      <div onClick={() => navigate('/account/cards/add')} className="account-slide slide add-slide" id='add-card'>
          <h1>+</h1>
       </div>
 

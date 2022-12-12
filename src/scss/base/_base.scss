@@ -94,3 +94,22 @@ input:hover, textarea:hover {
 input:focus, textarea:focus {
     background-color:$primary-background ;
 }
+
+::-webkit-scrollbar {
+        width: 5px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: $background-contrast;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: $accent-color;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: white;
+    }

@@ -2,6 +2,7 @@ import {useRef, useState, useEffect} from 'react'
 import axios from 'axios';
 import { ENDPOINT } from '../../functions/API';
 import { AnimatePresence, motion } from 'framer-motion';
+import { json } from 'stream/consumers';
 
 type response = {
    message: string,
@@ -58,39 +59,38 @@ export default function SignUp() {
    const [error, setError] = useState<string | null>(null)
    const [data, setData] = useState<response | undefined>(undefined);
 
-   const [seePassword, setSeePassword] = useState(false);
-
+   const [seePassword, setSeePassword] = useState(true);
+   
    const URL = 'api/Auth/register';
 
-   function formUseFetch() {
+    async function formUseFetch() {
       
       const options = {
-         userName: 'DanutzuThau',
-         email: 'vladpoienariu@gmail.com',
-         password: 'dWf8fuJ3sprb',
-         confirmPassword: 'dWf8fuJ3sprb',
+         userName: 'Jugule',
+         email: 'dawdada@gmail.com',
+         password: 'dWf8fu3sprb',
+         confirmPassword: 'dWf8fu3sprb',
+         
       }
       
-      axios.post<response>(ENDPOINT + URL, options, {
+
+      await axios({
+         method: 'POST',
+         url: ENDPOINT + URL,
+         data: options,
          headers: {
-             'Access-Control-Allow-Origin': '*',
-             'Content-Type': 'application/json',
-         },
-     })
-     .then((response) => {                     
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+         }
+      })
+      .then((response) => {
          setData(response.data)
-     })
-     .catch((err) => {
-         setError(err);
-     })
-     .finally(() => setLoading(false));
+         
+      })
+      .catch((err) => console.log(err.response))
 
    }
-   
 
-   if(!loading && !error) console.log(data);
-   if(error !== '' && error != null) console.log(error);
-      
 
    return(
     <form action="submit" id="signup-form" className='login-form'>
@@ -122,6 +122,8 @@ export default function SignUp() {
          //       formUseFetch
          //    )
          // )
+
+
          formUseFetch();
          
          
