@@ -1,6 +1,5 @@
 import React,{useState, useEffect, useRef} from 'react'
 import { useNavigate } from 'react-router'
-
 import anime from "animejs"
 
 import heroImage1 from '../../assets/images/hero-image-0.png'   
@@ -23,6 +22,10 @@ export default function Home() {
    // hero slideshow
    useEffect(() => {
       
+      window.addEventListener('scroll', (e) => {
+         (document.querySelector('.hero-wave-svg') as HTMLElement).classList.add('svg-test-hidden')
+      })
+
       anime({
          targets: '.hero-underline-svg > path',
          strokeDashoffset: [anime.setDashoffset, 0],
@@ -62,6 +65,8 @@ export default function Home() {
       }, 3000)
 
       return () => clearInterval(intervalId);
+      
+
    }, [])
 
    useEffect(() => {
@@ -82,10 +87,11 @@ export default function Home() {
    }, [heroIndex])
    
 
+
    return(
     <>
       <Navbar />
-
+      
       <div className="hero">
 
          <div className="hero-header">

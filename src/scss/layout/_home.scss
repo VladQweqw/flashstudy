@@ -124,13 +124,21 @@
 
     .svg-test {
         grid-column: 1/4;
-        overflow: hidden;
+        pointer-events: none;
     }
-    
+  
     .hero-wave-svg {
-        width: 100%;       
-    
+        width: 100%;  
+        transition: 400ms ease;
+        transform: translateY(0%);
+
     }
+    .svg-test-hidden {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+
 }
 
 // feed

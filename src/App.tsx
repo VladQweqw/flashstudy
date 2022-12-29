@@ -19,35 +19,52 @@ import ExamsAdd from './layout/Account/actions/examsAdd'
 
 import Practice from './layout/Account/actions/practice'
 import Quiz from './layout/Account/actions/quiz'
+import Settings from './components/settings'
+import { useLocation } from 'react-router'
+import Chart from './layout/Account/chart'
 
 export default function App() {
-
+  const location = useLocation();
+  const background = location.state && location.state.background;
+  console.log(background);
   
+    
    return(
     <>
-      <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/form' element={<Form />}></Route>
+      <Routes location={background || location}>
+          <Route path='/'>
+            <Route index element={<Home />}></Route>
+            <Route path='/form' element={<Form />}></Route>
+            <Route path="settings" element={<Settings />} />
 
-          <Route path='/account' element={<Account />}>
-            <Route index element={<Cards />}></Route>
+            <Route path='/account' element={<Account />}>
+              <Route index element={<Cards />}></Route>
 
-            <Route path='cards' element={<Cards />}>
-              <Route path='add' element={<CardsAdd />}></Route>
-            </Route>
-            <Route path='notes' element={<Notes />}>
-              <Route path='add' element={<NotesAdd />}></Route>
-            </Route>
-            <Route path='exams' element={<Exams />}>
-              <Route path='add' element={<ExamsAdd />}></Route>
+              <Route path='stats' element={<Chart />}></Route>
+              <Route path='cards' element={<Cards />}>
+                <Route path='add' element={<CardsAdd />}></Route>
+              </Route>
+              <Route path='notes' element={<Notes />}>
+                <Route path='add' element={<NotesAdd />}></Route>
+              </Route>
+              <Route path='exams' element={<Exams />}>
+                <Route path='add' element={<ExamsAdd />}></Route>
+              </Route>
+
+              <Route path='cards/practice' element={<Practice />}></Route>
+              <Route path='cards/quiz' element={<Quiz />}></Route>
+
             </Route>
 
-            <Route path='cards/practice' element={<Practice />}></Route>
-            <Route path='cards/quiz' element={<Quiz />}></Route>
           </Route>
-
+          
           <Route path='*' element={<Error />}></Route>
       </Routes>
+      {background && (
+            <Routes>
+              <Route path="settings" element={<Settings />} />
+            </Routes>
+          )}
       {/* <Footer /> */}
     </>
    )

@@ -1,8 +1,7 @@
-import {useRef, useState, useEffect} from 'react'
+import {useRef, useState} from 'react'
 import axios from 'axios';
 import { ENDPOINT } from '../../functions/API';
 import { AnimatePresence, motion } from 'framer-motion';
-import { json } from 'stream/consumers';
 
 type response = {
    message: string,
