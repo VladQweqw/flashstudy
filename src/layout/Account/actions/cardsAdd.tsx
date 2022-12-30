@@ -1,6 +1,5 @@
-import React,{useState} from 'react'
-import { useNavigate } from 'react-router'
-
+import {useState} from 'react'
+import Modal from '../../../components/modal'
 import { motion } from 'framer-motion'
 
 const colors = [
@@ -51,14 +50,10 @@ const colors = [
 ]
 
 export default function CardsAdd() {
-   const navigate = useNavigate();
-
    const [colorIndex, setColorIndex] = useState(0)
-
    document.querySelectorAll('.color').forEach((color) => {
 
-      color.addEventListener('click', (e) => {
-
+      color.addEventListener('click', () => {
          document.querySelectorAll('.color').forEach((color) => {
             color.classList.remove('color-select-active')
          })
@@ -69,65 +64,53 @@ export default function CardsAdd() {
    })
 
    return(
-        <motion.div 
-        initial={{
-         opacity: 0
-        }}
-         animate={{
-            opacity:1
-         }}
-        onClick={(e) => {
-            if( (e.target as HTMLDivElement).classList.contains('add-slide-modal-wrapper')) {
-               navigate(-1)
-            }
-         
-        }} className="add-slide-modal-wrapper add-card-modal-wrapper">
+        <Modal>
             <motion.div
-     
-            initial={{
-               translateY: '100%',
-               opacity: 0,
-               scale: 0,
+         
+         initial={{
+            translateY: '100%',
+            opacity: 0,
+            scale: 0,
 
-            }}
-            animate={{
-               translateY: '0%',
-               scale: 1,
-               opacity:1,
-               transition: {
-                  duration: .2
-               }
-            }}
-            style={{
-               backgroundColor: colors[colorIndex].colorHex
-            }} className="add-slide-modal">
-               <div className="thumbnail-image-wrapper">
-                  <img src="https://images.unsplash.com/photo-1458222960031-58c2a8f3ae50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="slide-thumbnail-image" className="thumbnail-image" />
+         }}
+         animate={{
+            translateY: '0%',
+            scale: 1,
+            opacity:1,
+            transition: {
+               duration: .2
+            }
+         }}
+         style={{
+            backgroundColor: colors[colorIndex].colorHex
+         }} className="slide-modal modal--wrapper">
+            <div className="thumbnail-image-wrapper">
+               <img src="https://images.unsplash.com/photo-1458222960031-58c2a8f3ae50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="slide-thumbnail-image" className="thumbnail-image" />
+            </div>
+
+            <form className="add-slide-content">
+
+               <input type="text" id='add-card-input add-slide-input' className="input" placeholder='Title' name='Title' />
+
+               <textarea className='input textarea'id='add-card-textarea add-slide-textarea' placeholder='Description (optional)'></textarea>
+
+            </form>
+            <div className="color-select">
+                  {colors.map((color, index: number) => {
+                     
+                     return <span
+                     title={color.colorName}
+                     onClick={() => setColorIndex(index)}
+                     key={index} className="color" style={{
+                        backgroundColor: color.colorHex
+                     }}></span>
+                  })}
                </div>
 
-               <form className="add-slide-content">
-
-                  <input type="text" id='add-card-input add-slide-input' className="input" placeholder='Title' name='Title' />
-
-                  <textarea className='input textarea'id='add-card-textarea add-slide-textarea' placeholder='Description (optional)'></textarea>
-
-               </form>
-               <div className="color-select">
-                     {colors.map((color, index: number) => {
-                        
-                        return <span
-                        title={color.colorName}
-                        onClick={() => setColorIndex(index)}
-                        key={index} className="color" style={{
-                           backgroundColor: color.colorHex
-                        }}></span>
-                     })}
-                  </div>
-
-               <div className="add-slide-btn-wrapper">
-                  <button className="add-slide-btn primary-btn ">Create</button>
-               </div>
+            <div className="add-slide-btn-wrapper">
+               <button className="add-slide-btn primary-btn ">Create</button>
+            </div>
             </motion.div>
-        </motion.div>
+        </Modal>
    )
 }

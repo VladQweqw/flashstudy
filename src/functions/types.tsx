@@ -1,0 +1,1 @@
+export type colorThemes = 'DARK'| 'LIGHT'

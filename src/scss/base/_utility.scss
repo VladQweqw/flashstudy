@@ -6,18 +6,18 @@
 //     font-family: Inter;
 //     src: url('../../assets/fonts/Inter/static/Inter-Regular.ttf');
 // }
+$ff-body :  var(--ff-body, 'Poppins');
+$ff-logo :  var(--ff-logo, 'Righteous');
+$ff-accent: var(--ff-accent, 'Indie Flower');
 
-$ff-body :'Poppins', sans-serif;
-$ff-logo :'Righteous', sans-serif;
-$ff-accent: 'Indie Flower', cursive;
+$primary-background: var(--primary-background, #121212);
+$background-contrast: var(--background-contrast, #1C1C1C);
 
-$primary-background:#121212;
-$background-contrast:#1C1C1C;
+$primary-color: var(--primary-color, #90564358);
+$accent-color:  var(--accent-color, #D09683);
 
-$primary-color: #90564358;
-$accent-color: #D09683;
+$btn-hover: var(--btn-hover, #d09683cb);
 
-$btn-hover: #d09683cb;
+$primary-text:  var(--primary-text, #FFFFFF);
+$secondary-text: var(--secondary-text, #FFFFFF80);
 
-$primary-text: #FFFFFF;
-$secondary-text: #FFFFFF80;

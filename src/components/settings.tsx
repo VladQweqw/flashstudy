@@ -1,37 +1,40 @@
-import React,{useState} from 'react'
+import  { useState, useEffect } from 'react'
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router';
+import Modal from './modal';
+import { saveToLocal, getFromLocal, setDarkMode } from '../functions/functions';
+
 
 export default function Settings() {
-   const navigate = useNavigate();
    const [settingsPanel, setSettingsPanel] = useState(<Account />)
 
+    document.querySelectorAll('.navbar-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.navbar-item').forEach((e) => {
+          e.classList.remove('navbar-item-active')
+        })
+        item.classList.add('navbar-item-active')
+
+      })
+   })
+
    return(
-    <motion.div 
-    initial={{
-      opacity: 0,
-    }}
-    animate={{
-      opacity: 1
-    }}
-    className="settings-wrapper" onClick={(e) => {
-      if((e.target as HTMLElement).classList.contains('settings-wrapper')) {
-         navigate(-1)
-      }
-    }}>
+    <Modal>
         <motion.div
         initial={{
           translateY: '100%',
-          opacity: 0,
-        }}
-        animate={{
+          scale: 0,
+
+       }}
+       animate={{
           translateY: '0%',
-          opacity: 1,
-          
-        }}
+          scale: 1,
+          transition: {
+             duration: .4
+          }
+       }}
         className="settings">
             <ul className="settings-navbar">
-                <li className="navbar-item" onClick={() => setSettingsPanel(<Account />)}>Account</li>
+                <li className="navbar-item navbar-item-active" onClick={() => setSettingsPanel(<Account />)}>Account</li>
                 <li className="navbar-item" onClick={() => setSettingsPanel(<Aspect />)} >Aspect</li>
             </ul>
 
@@ -39,24 +42,65 @@ export default function Settings() {
                 {settingsPanel}
             </div>
         </motion.div>
-    </motion.div>
+    </Modal>
    )
 }
 
 function Account() {
-
+  
   return(
-    <div className="settings-section account-settings">
-      <h1>cal</h1>
-    </div>
+    <>
+      <div className="settings-container">
+        <h2 className="settings-title">Name</h2>
+
+      </div>
+     
+
+    </>
   )
 }
 
 function Aspect() {
+  const [isDarkMode, setIsDarkMode] = useState(false)  
+  
+  useEffect(() => {
+    let theme = getFromLocal('darkMode');
+    
+    if(theme !== false && theme !== true) {
+      setIsDarkMode(true)
+    }else {
+      setIsDarkMode(
+        getFromLocal('darkMode')
+      )
+    }
 
-  return(
-    <div className="settings-section aspect-settings">
-      <h1>awd</h1>
-    </div>
+  }, [])
+  
+
+  return(      
+      <>
+      <div className="settings-container">
+        <h2 className="settings-title">Theme</h2>
+
+        <div className="cl-toggle-switch">
+          <p> {isDarkMode ? 'Dark': 'Light'} </p>
+        <label className="cl-switch">
+          <input checked={isDarkMode} onChange={(e) => {
+
+            setDarkMode(
+              !isDarkMode ? 'DARK' : 'LIGHT'
+            )
+
+            setIsDarkMode(!isDarkMode)
+            saveToLocal('darkMode', !isDarkMode)
+          }} type="checkbox" />
+          <span></span>
+        </label>
+        </div>
+
+      </div>
+     
+
+    </>
   )
 }

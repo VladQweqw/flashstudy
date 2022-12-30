@@ -22,13 +22,19 @@ import Quiz from './layout/Account/actions/quiz'
 import Settings from './components/settings'
 import { useLocation } from 'react-router'
 import Chart from './layout/Account/chart'
-
+import { getFromLocal } from './functions/functions'
+import { setDarkMode } from './functions/functions'
 export default function App() {
   const location = useLocation();
-  const background = location.state && location.state.background;
-  console.log(background);
-  
-    
+  const background = location.state && location.state.background;  
+  let theme = getFromLocal('darkMode');
+
+    if(theme !== false && theme !== true) {
+      setDarkMode('DARK')
+    }else {
+      setDarkMode(getFromLocal('darkMode') ? 'DARK' : 'LIGHT')
+    }
+
    return(
     <>
       <Routes location={background || location}>
