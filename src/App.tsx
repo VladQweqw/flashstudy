@@ -10,7 +10,7 @@ import Home from './layout/Home/home'
 
 import Account from './layout/Account/account'
 import Cards from './layout/Account/cards'
-import Notes from './layout/Account/notes'
+import Notes from './layout/Account/notes'    
 import Exams from './layout/Account/exams'
 
 import CardsAdd from './layout/Account/actions/cardsAdd'
@@ -22,7 +22,13 @@ import Quiz from './layout/Account/actions/quiz'
 import Settings from './components/settings'
 import { useLocation } from 'react-router'
 import Chart from './layout/Account/chart'
+<<<<<<< HEAD
 import { getFromLocal, setDarkMode, setBackground } from './functions/functions'
+=======
+import { getFromLocal } from './functions/functions'
+import { setDarkMode } from './functions/functions'
+import Popup from './components/popup'
+>>>>>>> 1d8e05a (add popup)
 
 export default function App() {
   const location = useLocation();
@@ -43,6 +49,7 @@ export default function App() {
 
    return(
     <>
+     <Popup />
       <Routes location={background || location}>
           <Route path='/'>
             <Route index element={<Home />}></Route>

@@ -346,6 +346,40 @@ button {
   justify-content: center;
 }
 
+.popup {
+  position: fixed;
+  z-index: 9999;
+  right: 1rem;
+  border-radius: 8px;
+  top: calc(100% - 5rem);
+  background-color: var(--background-contrast, #1C1C1C);
+  color: white;
+  transition: 200ms ease;
+  transform: translateX(150%);
+  padding: 1rem;
+}
+.popup .popup-title {
+  font-size: 1.25rem;
+  color: white;
+  font-weight: 400;
+}
+
+.popup-active {
+  transform: translateX(0%) !important;
+}
+
+.popup-success {
+  background-color: green;
+}
+
+.popup-warning {
+  background-color: orange;
+}
+
+.popup-error {
+  background-color: red;
+}
+
 .hero {
   height: calc(100vh - 80px);
   display: grid;

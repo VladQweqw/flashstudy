@@ -58,6 +58,7 @@ export function setDarkMode(mode: colorThemes) {
     
 }
 
+<<<<<<< HEAD
 export function setBackground(id: number) {
     const accountElement = document.getElementById('account');    
     if(id === 0) {
@@ -72,3 +73,26 @@ export function setBackground(id: number) {
 
     saveToLocal('backgroundId', JSON.stringify(id));
   }
+=======
+export function togglePopup(message: string, state: "SUCCESS" | 'WARNING' | 'ERROR') {
+    const title = document.getElementById('popup-title')
+    const popup = document.getElementById('popup')
+    console.log(title, popup);
+    
+    title!.innerText = message;
+    if(state === 'SUCCESS') {
+        popup?.classList.add('popup-success')
+    }else if(state === 'ERROR') {
+        popup?.classList.add('popup-error')
+    }else {
+        popup?.classList.add('popup-warning')
+    }
+    
+    popup?.classList.add('popup-active')
+    setTimeout(() => {
+
+        popup?.classList.remove('popup-active')
+    }, 3000);
+
+}
+>>>>>>> 1d8e05a (add popup)
