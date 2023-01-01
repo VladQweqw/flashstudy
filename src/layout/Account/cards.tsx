@@ -31,7 +31,21 @@ export default function Cards() {
       <Card />
       <Card />
       <Card />
-
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+        <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
 
       <div className="practice-buttons">
          <button onClick={() => navigate('practice')} className="practice-button primary-btn" id='practice-btn'>Practice</button>

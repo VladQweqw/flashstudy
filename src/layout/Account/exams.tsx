@@ -32,7 +32,21 @@ const navigate = useNavigate();
       <Exam />
       <Exam />
       <Exam />
-
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
+      <Exam />
 
     </section>
    )

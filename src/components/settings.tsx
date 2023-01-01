@@ -2,20 +2,24 @@ import  { useState, useEffect } from 'react'
 import { motion } from 'framer-motion';
 import Modal from './modal';
 import { saveToLocal, getFromLocal, setDarkMode } from '../functions/functions';
-
+import { setBackground, backgroundImages } from '../functions/functions';
 
 export default function Settings() {
    const [settingsPanel, setSettingsPanel] = useState(<Account />)
 
+   useEffect(() => {
     document.querySelectorAll('.navbar-item').forEach((item) => {
+
       item.addEventListener('click', () => {
         document.querySelectorAll('.navbar-item').forEach((e) => {
           e.classList.remove('navbar-item-active')
         })
-        item.classList.add('navbar-item-active')
 
+        item.classList.add('navbar-item-active')
       })
    })
+   }, [])
+   
 
    return(
     <Modal>
@@ -74,33 +78,67 @@ function Aspect() {
       )
     }
 
+    document.querySelectorAll('.background-grid-image').forEach((item, index) => {
+
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.background-grid-image').forEach((e) => {
+          e.classList.remove('background-grid-image-active')
+        })
+
+        item.classList.add('background-grid-image-active')
+        setBackground(index)
+      })
+   })
+
   }, [])
-  
 
   return(      
       <>
-      <div className="settings-container">
+      <Setting>
         <h2 className="settings-title">Theme</h2>
-
         <div className="cl-toggle-switch">
-          <p> {isDarkMode ? 'Dark': 'Light'} </p>
-        <label className="cl-switch">
-          <input checked={isDarkMode} onChange={(e) => {
+            <p> {isDarkMode ? 'Dark': 'Light'} </p>
+          <label className="cl-switch">
+            <input checked={isDarkMode} onChange={(e) => {
 
-            setDarkMode(
-              !isDarkMode ? 'DARK' : 'LIGHT'
-            )
+              setDarkMode(
+                !isDarkMode ? 'DARK' : 'LIGHT'
+              )
 
-            setIsDarkMode(!isDarkMode)
-            saveToLocal('darkMode', !isDarkMode)
-          }} type="checkbox" />
-          <span></span>
-        </label>
+              setIsDarkMode(!isDarkMode)
+              saveToLocal('darkMode', !isDarkMode)
+            }} type="checkbox" />
+            <span></span>
+          </label>
         </div>
+      </Setting>
+      
+      <Setting>
+        <h2 className="settings-title">Background</h2>
+        <div className="background-grid">
+          {backgroundImages.map((image, index) => {
+            if(image === 'DEFAULT_IMAGE') return  <div onClick={() => {
+              console.log('a');
+              setBackground(0)
+            }} key={index} className="default background-grid-image background-grid-image-active">
+            <p>Default</p>
+          </div>
 
-      </div>
-     
+            return <img onClick={() => setBackground(index)} className='background-grid-image' src={image} alt="image" key={index} />
+          })}
+        </div>
+      </Setting>
 
     </>
   )
+}
+
+function Setting(props: any) {
+  
+  return(
+    <div className="settings-container">        
+        {props.children}
+    </div>
+  )
+
 }

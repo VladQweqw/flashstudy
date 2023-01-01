@@ -82,7 +82,7 @@ export default function Account() {
     }, [window.location.pathname])
 
    return(
-    <div className="account">
+    <div className="account" id='account'>
         <SideNavbar />
         
         <header className="account-header">
