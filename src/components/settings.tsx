@@ -118,11 +118,18 @@ function Aspect() {
         <div className="background-grid">
           {backgroundImages.map((image, index) => {
             if(image === 'DEFAULT_IMAGE') return  <div onClick={() => {
-              console.log('a');
               setBackground(0)
             }} key={index} className="default background-grid-image background-grid-image-active">
             <p>Default</p>
           </div>
+          if(index === 1) return  <div onClick={() => {
+            setBackground(1)
+          }} key={index} className="background-grid-image custom">
+          <input defaultValue={getFromLocal('customBackground') || ''} type="text" placeholder='Custom URL' id='custom-background-id' />
+          <button id="apply-custom-background" onClick={() => {
+            saveToLocal('customBackground', (document.getElementById('custom-background-id') as HTMLInputElement).value )
+          }} className='primary-btn'>Apply</button>
+        </div>
 
             return <img onClick={() => setBackground(index)} className='background-grid-image' src={image} alt="image" key={index} />
           })}

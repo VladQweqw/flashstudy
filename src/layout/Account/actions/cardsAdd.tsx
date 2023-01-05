@@ -96,7 +96,7 @@ export default function CardsAdd() {
 
             </form>
             <div className="color-select">
-                  {colors.map((color, index: number) => {
+                  {/* {colors.map((color, index: number) => {
                      
                      return <span
                      title={color.colorName}
@@ -104,7 +104,7 @@ export default function CardsAdd() {
                      key={index} className="color" style={{
                         backgroundColor: color.colorHex
                      }}></span>
-                  })}
+                  })} */}
                </div>
 
             <div className="add-slide-btn-wrapper">

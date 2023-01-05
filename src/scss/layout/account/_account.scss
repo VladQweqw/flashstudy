@@ -418,21 +418,34 @@
         gap: 1rem;
         
         .background-grid {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: repeat(5, 200px);
+            display: flex;
+            flex-direction: row;
             overflow-x: auto;
+            gap: 1rem;
             grid-template-rows: auto;
             padding: 2px;
 
+            #custom-background-id {
+                text-align: center;
+            }
+            
             .background-grid-image {
                 object-fit: cover;
-                width: 100%;
-                height: 100%;
+                width: 200px;
+                height: 150px;
                 transition: 200ms ease;
                 cursor: pointer;
                 outline: 2px solid transparent;
                 border-radius: 6px;
+                flex: none;
+            }
+            .custom {
+                padding: 1rem;
+                display: flex;
+                justify-content: space-between;
+                width: 200px;
+                height: 150px;
+                flex-direction: column;
             }
             .default {
                 display: grid;
@@ -503,7 +516,7 @@
             .settings-container {
                 display: flex;
                 justify-content: space-between;
-                
+
                 gap: 1rem;
                 align-items: center;
                 border: 2px solid gray;
@@ -512,6 +525,7 @@
 
             .settings-title {
               font-weight: 400;
+              font-size: 1.3rem;
             }
 
             .cl-toggle-switch {
@@ -528,6 +542,7 @@
 
     }
 
+    
     .slide-modal {       
         
         .thumbnail-image-wrapper {
