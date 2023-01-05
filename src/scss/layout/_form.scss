@@ -86,6 +86,7 @@
             
             .form-svg {
                 position: absolute;
+                z-index: 1;
                 left: 0%;
                 top: 5%;
                 left: 50%;
@@ -98,7 +99,8 @@
           
             
             .other-form-method {
-
+                position: relative;
+                z-index: 99;
                 h1 {
                     font-weight: 400;
                 }

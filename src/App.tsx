@@ -22,7 +22,7 @@ import Quiz from './layout/Account/actions/quiz'
 import Settings from './components/settings'
 import { useLocation } from 'react-router'
 import Chart from './layout/Account/chart'
-import { getFromLocal, setDarkMode, setBackground } from './functions/functions'
+import { getFromLocal, setDarkMode } from './functions/functions'
 
 export default function App() {
   const location = useLocation();
@@ -36,10 +36,7 @@ export default function App() {
       setDarkMode(getFromLocal('darkMode') ? 'DARK' : 'LIGHT')
     }
 
-    window.onload = function() {
-      setBackground(JSON.parse(getFromLocal('backgroundId')) || 0);
-
-    }
+    document.body.addEventListener('contextmenu', (e) => e.preventDefault())
 
    return(
     <>

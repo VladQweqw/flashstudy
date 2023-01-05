@@ -1,52 +1,49 @@
-import React,{ useRef, useState } from 'react'
-
-import axios from 'axios';
+import { useRef, useState } from 'react'
 import { ENDPOINT } from '../../functions/API';
-import { formValidation } from './signUp';
+import { useNavigate } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
-
-type response = {
-    message: string,
-    isSucces: boolean,
-    errors: string[],
-    expireDate: string | null
- }
+import { formValidation, callFormApi, encodeAndSave, decodeAndRetrieve } from '../../functions/functions';
 
 export default function SignIn() {
     const email = useRef<HTMLInputElement>(null);
     const password = useRef<HTMLInputElement>(null); 
+    const navigate = useNavigate()
 
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null)
-    const [data, setData] = useState<response | undefined>(undefined);
     const [seePassword, setSeePassword] = useState(false);
-
-    const URL = 'api/Auth/Login';
+    const [formErrors, setFormErrors] = useState< string[]>([]);
     
-    function formUseFetch() {        
-        const options = {
-            email: (email.current as HTMLInputElement).value,
-            password: (password.current as HTMLInputElement).value,
+    function callApi() {
+        setLoading(true)
+        
+        const userData = {
+           email:    email.current!.value,
+           password: password.current!.value,
         }
+        
+        callFormApi({
+           method: 'post',
+           url: ENDPOINT + 'login',
+           data: userData
+        }).then((response) => {
+            encodeAndSave('token', response.data.token)
+            navigate('/account/cards')
+        }
+        )
+           .catch((err) => {
+              console.log(err.response.data);
+            setFormErrors([err.response.data.toString()])
+            //   if(err?.response?.data?.error) {
+            //      setFormErrors([err?.response?.data?.error])
+            //   }
+              
+           }
+        )
+        .finally(() => setLoading(false))
+        
+     }
 
-        axios.post<response>(ENDPOINT + URL, options, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-            },
-        })
-        .then((response) => {            
-            setData(response.data)
-        })
-        .catch((err) => {
-            setError(err);
-        })
-        .finally(() => setLoading(false));
-
-    }
-
-    if(!loading && !error) console.log(data);
-    if(error !== '' && error != null) console.log(error);   
+    // if(loading) return <h1>loading</h1>
 
     return(
     <form action="submit" id="login-form" className='login-form'>
@@ -62,10 +59,41 @@ export default function SignIn() {
         </div>
         <button type='submit' onClick={(e) => {
             e.preventDefault();
-            formUseFetch();
+
+            let resp = formValidation(
+                'DummyName',
+                password.current!.value,
+                email.current!.value,
+             );
+             
+             if(resp.length) {
+                setFormErrors(resp)
+             }else {
+                callApi()
+             }
             
         }} className='submit-btn primary-btn' id='signin-btn' >Submit</button>
 
+<div className="errors">
+         <AnimatePresence>
+            {formErrors && formErrors.map((error, index) => {
+               return <motion.p 
+               exit={{
+                  opacity: 0,
+                  scale: 0,
+               }}
+               initial={{
+                  opacity: 0,
+                  scale: 0,
+               }}
+               animate={{
+                  opacity: 1,
+                  scale: 1,
+               }}
+               className='error-message' key={index}>{error}</motion.p>
+            })}
+         </AnimatePresence>
+      </div>
         
     </form>
    )

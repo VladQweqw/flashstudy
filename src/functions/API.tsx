@@ -1,10 +1,12 @@
-import React,{useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import axios from 'axios'
+import { decodeAndRetrieve } from './functions';
 
-type METHOD = 'post' | 'get';
-export const ENDPOINT = 'https://localhost:7021/';
+export const ENDPOINT = 'http://trphost.go.ro:8081/api/';
+const token = decodeAndRetrieve('token');
 
-export default function useFetch<Type>(url: string, method: METHOD, options: any = '') : {
+
+export default function useFetch<Type>(url: string, method: 'POST' | 'GET' | 'PUT') : {
     data: Type | undefined,
     loading: boolean,
     error: string | null;
@@ -14,15 +16,23 @@ export default function useFetch<Type>(url: string, method: METHOD, options: any
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null)
     const [data, setData] = useState<Type | undefined>(undefined);
-
-    useEffect(() => {
-        setLoading(true);
-        
-        axios[method]<Type>(ENDPOINT + url, options, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
+    
+    useEffect(() => {        
+        setLoading(true);   
+    
+        axios.interceptors.request.use(
+            config => {
+                config.headers!.authorization = `Bearer ${token}`
+                return config
             },
+            error => {
+                return Promise.reject(error)
+            }
+        )
+        
+        axios.request({
+            method,
+            url: ENDPOINT + url,
         })
         .then((response) => {            
             setData(response.data)
@@ -31,16 +41,25 @@ export default function useFetch<Type>(url: string, method: METHOD, options: any
             setError(err);
         })
         .finally(() => setLoading(false));
+        setLoading(false)
     }, [url])
 
     function reFetch() {
-        setLoading(true);
+        setLoading(true);   
         
-        axios[method]<Type>(ENDPOINT + url, options, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
+        axios.interceptors.request.use(
+            config => {
+                config.headers!.authorization = `Bearer ${token}`
+                return config
             },
+            error => {
+                return Promise.reject(error)
+            }
+        )
+        
+        axios.request({
+            method,
+            url: ENDPOINT + url,
         })
         .then((response) => {            
             setData(response.data)

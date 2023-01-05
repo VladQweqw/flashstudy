@@ -1,11 +1,18 @@
-import React,{useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 
 import anime from 'animejs'
 import { Outlet, useNavigate } from 'react-router'
+import Context from './actions/context';
+import useFetch from '../../functions/API';
 
 export default function Cards() {
    const navigate = useNavigate();
+   const [isContextMenu, setIsContextMenu] = useState(false);
+   const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number}>({x: 0, y: 0})
 
+   // const { data, loading, error, reFetch} = useFetch<any>('slide', 'GET');
+   // console.log(data, error);
+   
    useEffect(() => {
       
       anime({
@@ -21,31 +28,16 @@ export default function Cards() {
    return(
     <section className="account-slides cards" id='cards'>
       <Outlet />
-      
+      {isContextMenu && <Context {...contextMenuCoords} />}
       <div onClick={() => navigate('/account/cards/add')} className="account-slide slide add-slide" id='add-card'>
          <h1>+</h1>
       </div>
 
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-        <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+
+      <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
 
       <div className="practice-buttons">
          <button onClick={() => navigate('practice')} className="practice-button primary-btn" id='practice-btn'>Practice</button>
@@ -59,13 +51,20 @@ export default function Cards() {
 
 
 
-function Card() {
+function Card(data: any) {
+   const {isContextMenu, setIsContextMenu, setContextMenuCoords} = data;
+   const container = useRef<HTMLDivElement | null>(null)
 
    return(
-      <div className="account-slide slide card-slide">
-         <span className='slide-options'>
-            <i className="fa-solid fa-ellipsis-vertical"></i>
-         </span>
+          <div ref={container} onContextMenu={(e) => {
+            setIsContextMenu(!isContextMenu)
+
+            let x = e.pageX - (e.target as HTMLDivElement).offsetLeft
+            let y = e.pageY - (e.target as HTMLDivElement).offsetTop
+
+            setContextMenuCoords({x, y,})
+
+          }} className="account-slide slide card-slide">
 
          <div className="slide-text">
             <h1 className="slide-title">Lorem ipsum dolor awdaw  </h1>

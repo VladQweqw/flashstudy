@@ -1,21 +1,22 @@
-import React,{ useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
 import anime from 'animejs'
-
+import { setBackground, getFromLocal } from '../../functions/functions'
 import SideNavbar from '../../components/sideNavbar'
 import { useNavigate } from 'react-router'
-
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Account() {
     const navigate = useNavigate();
     const option1 = useRef<any>(null)
     const option2 = useRef<any>(null)
     const option3 = useRef<any>(null)
-
+    const [isModalOpen, setIModalOpen] = useState(false)
 
     
     useEffect(() => {
-        
+        setBackground(JSON.parse(getFromLocal('backgroundId')) || 0)
+
         option1.current = anime({
             targets:'#cards > .account-option-svg path',
             strokeDashoffset: [anime.setDashoffset, 0],
@@ -84,6 +85,48 @@ export default function Account() {
    return(
     <div className="account" id='account'>
         <SideNavbar />
+
+        <AnimatePresence >
+       {isModalOpen && 
+           <div onClick={(e) => {
+            setIModalOpen(false)
+                // if(!(e.target as HTMLElement).classList.contains('not-close')) {
+                //     setIModalOpen(false)
+                // }
+           }} className="extended-navbar-wrapper">
+                <motion.div
+            animate={{
+                translateY: '0%'
+            }}
+            initial={{
+                translateY: '-100%'
+            }}
+            exit={{
+                translateY: '-100%'
+            }}
+            className="extended-navbar not-close">
+                <div className='extended-wrapper not-close'>
+                    <div onClick={() => navigate('cards')} className="extended-navbar-item category-switch not-close">Cards</div>
+                    <div onClick={() => navigate('notes')} className="extended-navbar-item category-switch not-close">Notes</div>
+                    <div onClick={() => navigate('exams')} className="extended-navbar-item category-switch not-close">Exam</div>
+                </div>
+
+                <div onClick={() => navigate('stats')}  className="extended-navbar-item not-close">Stats</div>
+                <div onClick={() => navigate('/settings')}  className="extended-navbar-item not-close">Settings</div>
+
+
+                </motion.div>
+           </div>
+       }
+       </AnimatePresence>
+
+        <div className="hamburger-wrapper" onClick={() => setIModalOpen(true)}>
+            <div className="hamburger">
+                <span className="line"></span>
+                <span className="line"></span>
+                <span className="line"></span>
+            </div>
+        </div>
         
         <header className="account-header">
            <span ref={option1} onClick={(e) => {navigate((e.target as HTMLSpanElement).id)}} 
@@ -109,12 +152,6 @@ export default function Account() {
                 <path d="M49.7207 14C47.8597 6.3704 25.943 12.5858 38.3891 8.76751C50.9596 4.91106 119.584 5.40032 87.5753 4.32741C55.5665 3.2545 -33.7757 6.90335 15.5402 2.96934C54.993 -0.177872 85.0136 1.43129 92.3955 1.27234" stroke="#D09683" strokeWidth="2"/>
                 </svg>
             </span>
-
-            <div className="hamburger">
-                <span className="line"></span>
-                <span className="line"></span>
-                <span className="line"></span>
-            </div>
         </header>
 
         <Outlet />

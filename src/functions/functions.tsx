@@ -1,4 +1,6 @@
+import { formErrors } from "./types";
 import { colorThemes } from "./types";
+import axios from "axios";
 
 const colorThemesValues = {
     DARK: {
@@ -59,7 +61,9 @@ export function setDarkMode(mode: colorThemes) {
 }
 
 export function setBackground(id: number) {
-    const accountElement = document.getElementById('account');    
+    const accountElement = document?.getElementById('account');
+    if(!accountElement) return    
+    
     if(id === 0) {
         accountElement!.style.background = '#121212'
         saveToLocal('backgroundId', JSON.stringify(id));
@@ -72,3 +76,36 @@ export function setBackground(id: number) {
 
     saveToLocal('backgroundId', JSON.stringify(id));
   }
+
+
+export async function callFormApi(options: any) {    
+    console.log('started');
+    
+    return axios.request(options)
+} 
+
+export function formValidation(username: string, password: string, email: string): string[] {
+    let errors = [];
+
+    
+    if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        errors.push("Email not valid");
+    }
+
+    if(username.length < 3) {    
+       errors.push('Username too short')
+    }
+    
+    return errors;
+ }
+
+
+export function encodeAndSave(key: string, token: string) {
+    saveToLocal(
+        key, window.btoa(token)
+    )
+ }
+
+ export function decodeAndRetrieve(token: string) {
+    return window.atob(getFromLocal(token) || '')
+ }

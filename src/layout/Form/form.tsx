@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
 
 import SignIn from './signIn';
 import SignUp from './signUp';
@@ -15,7 +15,7 @@ export default function Form() {
                 <h1 className="m3">{formState ? 'Sign in' : 'Sign up'}</h1>
             
 
-                    {formState ? <SignIn /> : <SignUp />}
+                    {formState ? <SignIn /> : <SignUp setFormState={setFormState} />}
     
 
             </div>
