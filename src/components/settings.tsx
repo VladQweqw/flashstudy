@@ -4,6 +4,7 @@ import Modal from './modal';
 import { saveToLocal, getFromLocal, setDarkMode } from '../functions/functions';
 import { setBackground, backgroundImages } from '../functions/functions';
 
+
 export default function Settings() {
    const [settingsPanel, setSettingsPanel] = useState(<Account />)
 
@@ -100,7 +101,6 @@ function Aspect() {
             <p> {isDarkMode ? 'Dark': 'Light'} </p>
           <label className="cl-switch">
             <input checked={isDarkMode} onChange={(e) => {
-
               setDarkMode(
                 !isDarkMode ? 'DARK' : 'LIGHT'
               )
@@ -116,21 +116,29 @@ function Aspect() {
       <Setting>
         <h2 className="settings-title">Background</h2>
         <div className="background-grid">
-          {backgroundImages.map((image, index) => {
-            if(image === 'DEFAULT_IMAGE') return  <div onClick={() => {
+
+        <div onClick={() => {
               setBackground(0)
-            }} key={index} className="default background-grid-image background-grid-image-active">
+            }}  className="default background-grid-image background-grid-image-active">
             <p>Default</p>
           </div>
-          if(index === 1) return  <div onClick={() => {
-            setBackground(1)
-          }} key={index} className="background-grid-image custom">
+
+        <div className="background-grid-image custom">
           <input defaultValue={getFromLocal('customBackground') || ''} type="text" placeholder='Custom URL' id='custom-background-id' />
           <button id="apply-custom-background" onClick={() => {
-            saveToLocal('customBackground', (document.getElementById('custom-background-id') as HTMLInputElement).value )
+            let inpValue = (document.getElementById('custom-background-id') as HTMLInputElement).value
+            if(inpValue === '') return alert('Add a valid URL')
+            saveToLocal('customBackground', inpValue)
+            saveToLocal('backgroundId', 1)
+
+            backgroundImages[1] = inpValue
+            setBackground(1)
+
           }} className='primary-btn'>Apply</button>
         </div>
 
+          {backgroundImages.map((image, index) => {
+            if(image === 'DEFAULT' || image === '') return;
             return <img onClick={() => setBackground(index)} className='background-grid-image' src={image} alt="image" key={index} />
           })}
         </div>

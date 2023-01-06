@@ -10,8 +10,8 @@ export default function Cards() {
    const [isContextMenu, setIsContextMenu] = useState(false);
    const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number}>({x: 0, y: 0})
 
-   // const { data, loading, error, reFetch} = useFetch<any>('slide', 'GET');
-   // console.log(data, error);
+   const { data, loading, error, reFetch} = useFetch<any>('slide', 'GET');
+   console.log(data, error);
    
    useEffect(() => {
       

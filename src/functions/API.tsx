@@ -5,7 +5,6 @@ import { decodeAndRetrieve } from './functions';
 export const ENDPOINT = 'http://trphost.go.ro:8081/api/';
 const token = decodeAndRetrieve('token');
 
-
 export default function useFetch<Type>(url: string, method: 'POST' | 'GET' | 'PUT') : {
     data: Type | undefined,
     loading: boolean,
@@ -20,19 +19,23 @@ export default function useFetch<Type>(url: string, method: 'POST' | 'GET' | 'PU
     useEffect(() => {        
         setLoading(true);   
     
-        axios.interceptors.request.use(
-            config => {
-                config.headers!.authorization = `Bearer ${token}`
-                return config
-            },
-            error => {
-                return Promise.reject(error)
-            }
-        )
-        
+        // axios.interceptors.request.use(
+        //     config => {
+        //         config.headers!.authorization = `Bearer ${token}`
+        //         return config
+        //     },
+        //     error => {
+        //         return Promise.reject(error)
+        //     }
+        // )image.png
+
         axios.request({
-            method,
+            method: 'get',
             url: ENDPOINT + url,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+            }
         })
         .then((response) => {            
             setData(response.data)
@@ -45,29 +48,29 @@ export default function useFetch<Type>(url: string, method: 'POST' | 'GET' | 'PU
     }, [url])
 
     function reFetch() {
-        setLoading(true);   
+        // setLoading(true);   
         
-        axios.interceptors.request.use(
-            config => {
-                config.headers!.authorization = `Bearer ${token}`
-                return config
-            },
-            error => {
-                return Promise.reject(error)
-            }
-        )
+        // axios.interceptors.request.use(
+        //     config => {
+        //         config.headers!.authorization = `Bearer ${token}`
+        //         return config
+        //     },
+        //     error => {
+        //         return Promise.reject(error)
+        //     }
+        // )
         
-        axios.request({
-            method,
-            url: ENDPOINT + url,
-        })
-        .then((response) => {            
-            setData(response.data)
-        })
-        .catch((err) => {
-            setError(err);
-        })
-        .finally(() => setLoading(false));
+        // axios.request({
+        //     method,
+        //     url: ENDPOINT + url,
+        // })
+        // .then((response) => {            
+        //     setData(response.data)
+        // })
+        // .catch((err) => {
+        //     setError(err);
+        // })
+        // .finally(() => setLoading(false));
     }
     
     return {data, loading, error, reFetch}

@@ -1,4 +1,3 @@
-import { formErrors } from "./types";
 import { colorThemes } from "./types";
 import axios from "axios";
 
@@ -29,15 +28,6 @@ const colorThemesValues = {
     },
 }
 
-export const backgroundImages = [
-    'DEFAULT_IMAGE',
-    getFromLocal('customBackground'),
-    'https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/956999/milky-way-starry-sky-night-sky-star-956999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-]
-
 export function saveToLocal(name: string, data: any) {
     localStorage.setItem(name, JSON.stringify(data));
 }
@@ -61,9 +51,18 @@ export function setDarkMode(mode: colorThemes) {
     
 }
 
+export const backgroundImages = [
+    'DEFAULT',
+    getFromLocal('customBackground'),
+    'https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/956999/milky-way-starry-sky-night-sky-star-956999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  ]
+  
+
 export function setBackground(id: number) {
     const accountElement = document?.getElementById('account');
-    if(!accountElement) return    
     
     if(id === 0) {
         accountElement!.style.background = '#121212'
