@@ -1,26 +1,8 @@
 import {useState} from 'react'
-
+import { practiceQuestion } from '../../../functions/types';
 import { motion } from 'framer-motion'
-
-interface practiceQuestion {
-    question: string,
-    answer: string,
-}
-
-const practiceQuestions = [
-    {
-        question: 'O kurwa daca iti iei',
-        answer: 'sa o ti in locul ei',
-    },
-    {
-        question: 'Ii dau cu pula pe tate si ii place, vai ce ma satisface',
-        answer: 'gulie',
-    },
-    {
-        question: '210 production pe beat',
-        answer: 'ma drogez, bag splif la vena si dansez',
-    },
-]
+import { practiceQuestions } from '../../../functions/functions';
+import { slowSlideAniamte, slowSlideInitial } from '../../../functions/functions';
 
 export default function Practice() {
     const [slideIndex, setSlideIndex] = useState(0);
@@ -45,13 +27,8 @@ export default function Practice() {
 
    return(
     <motion.div
-    initial={{
-        translateY: '100%',
-        
-    }}
-    animate={{
-        translateY: '0%'
-    }}
+    initial={slowSlideInitial}
+    animate={slowSlideAniamte}
     
     className="practice">
 

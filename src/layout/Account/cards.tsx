@@ -8,13 +8,12 @@ import useFetch from '../../functions/API';
 export default function Cards() {
    const navigate = useNavigate();
    const [isContextMenu, setIsContextMenu] = useState(false);
-   const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number}>({x: 0, y: 0})
+   const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
 
    // const { data, loading, error, reFetch} = useFetch<any>('slide', 'GET');
    // console.log(data, error);
    
    useEffect(() => {
-      
       anime({
          targets: '.slide',
          delay: anime.stagger(100),
@@ -22,7 +21,6 @@ export default function Cards() {
          opacity: [0, 1],
          duration:  50,
       })
-
    }, [])
 
    return(
@@ -38,7 +36,7 @@ export default function Cards() {
       <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
       <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
       <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-
+      
       <div className="practice-buttons">
          <button onClick={() => navigate('practice')} className="practice-button primary-btn" id='practice-btn'>Practice</button>
          <button onClick={() => navigate('quiz')} className="practice-button primary-btn" id='quiz-btn'>Quiz</button>
@@ -56,13 +54,13 @@ function Card(data: any) {
    const container = useRef<HTMLDivElement | null>(null)
 
    return(
-          <div ref={container} onContextMenu={(e) => {
-            setIsContextMenu(!isContextMenu)
+          <div ref={container} onClick={() => setIsContextMenu(false)} onContextMenu={(e) => {
+            setIsContextMenu(true)
 
             let x = e.pageX - (e.target as HTMLDivElement).offsetLeft
             let y = e.pageY - (e.target as HTMLDivElement).offsetTop
 
-            setContextMenuCoords({x, y,})
+            setContextMenuCoords({x, y, id: 2}) // change
 
           }} className="account-slide slide card-slide">
 

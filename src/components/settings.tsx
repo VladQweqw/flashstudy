@@ -1,9 +1,8 @@
 import  { useState, useEffect } from 'react'
 import { motion } from 'framer-motion';
 import Modal from './modal';
-import { saveToLocal, getFromLocal, setDarkMode } from '../functions/functions';
+import { saveToLocal, getFromLocal, setDarkMode, togglePopup } from '../functions/functions';
 import { setBackground, backgroundImages } from '../functions/functions';
-
 
 export default function Settings() {
    const [settingsPanel, setSettingsPanel] = useState(<Account />)
@@ -127,19 +126,24 @@ function Aspect() {
           <input defaultValue={getFromLocal('customBackground') || ''} type="text" placeholder='Custom URL' id='custom-background-id' />
           <button id="apply-custom-background" onClick={() => {
             let inpValue = (document.getElementById('custom-background-id') as HTMLInputElement).value
-            if(inpValue === '') return alert('Add a valid URL')
+            if(inpValue === '') return togglePopup('Add a valid URL', 'ERROR')
             saveToLocal('customBackground', inpValue)
             saveToLocal('backgroundId', 1)
 
             backgroundImages[1] = inpValue
             setBackground(1)
-
+            togglePopup('Style applied', "SUCCESS")
           }} className='primary-btn'>Apply</button>
         </div>
 
           {backgroundImages.map((image, index) => {
             if(image === 'DEFAULT' || image === '') return;
-            return <img onClick={() => setBackground(index)} className='background-grid-image' src={image} alt="image" key={index} />
+            return <img onClick={() => {
+              setBackground(index) 
+              togglePopup('Style applied', "SUCCESS")
+            }} className='background-grid-image' onError={(e) => {
+              (e.target as HTMLImageElement).src = 'https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
+            }} src={image} alt="image" key={index} />
           })}
         </div>
       </Setting>

@@ -1,51 +1,20 @@
-import React,{useState, useEffect, useRef} from 'react'
-
-type questionType = {
-   answer: string,
-   isCorrect: boolean,
-}
-
-const quizArr = [
-   {
-      question:'E cabral negru',
-      answer: 'Da awwwwwwwwdad',
-   },
-   {
-      question:'Ronaldoo ce facusi',
-      answer: 'Pierdui',
-   },
-   {
-      question:'Juguule',
-      answer: 'pichinez chichinez',
-   },
-   {
-      question:'aheha gasper awda wdaw dhawh dhawh dhjaw hjdajhw dhjawhj dhjadh jwhjd hj dahwhdk ahwkdh kawhk dhk awdddddddddddaw daw d a gasper awda wdaw dhawh dhawh dhjaw hjdajhw dhjawhj dhjadh jwhjd hj dahwhdk ahwkdh kawhk dhk awdddddddddddaw daw d a gasper awda wdaw dhawh dhawh dhjaw hjdajhw dhjawhj dhjadh jwhjd hj dahwhdk ahwkdh kawhk dhk awdddddddddddaw daw d a',
-      answer: 'gasper awda wdaw dhawh dhawh dhjaw hjdajhw dhjawhj dhjadh jwhjd hj dahwhdk ahwkdh kawhk dhk awdddddddddddaw daw d a',
-   },
-]
-
-
-const correctPhrases = [
-   'Well done', 'Good job', 'Keep going', 'Awesome', 'Genius'
-]
-const wrongPhrases = [
-   'Could be worse', 'Hard question anyway', 'Damn..', 'F'
-]
+import {useState, useEffect, useRef} from 'react'
+import { questionType } from '../../../functions/types'
+import { correctPhrases, wrongPhrases, quizArr } from '../../../functions/functions'
+import { motion } from 'framer-motion';
+import { slowSlideAniamte, slowSlideInitial } from '../../../functions/functions';
 
 export default function Quiz() {
    const [questionIndex, setQuestionIndex] = useState(0);
    const [shuffledAnswers, setShuffledAnswers] = useState<any>([])
    const [statusMessage, setStatusMessage] = useState('')
    const [isQuestionAnswered, setIsQuestionAnswered] = useState(false)
-
    const footer = useRef<HTMLDivElement | null>(null);
 
    useEffect(() => {
       shuffleAnswers()
 
    }, [questionIndex])
-
-
 
    function checkAnswer(answer: boolean, element: HTMLDivElement) {
       if(isQuestionAnswered) return;
@@ -75,8 +44,6 @@ export default function Quiz() {
       footer.current?.classList.add('footer-active');
    }
 
-   
-   
    function shuffleAnswers() {
       const formated = quizArr.map(({answer, question}) => {
          return {
@@ -113,7 +80,10 @@ export default function Quiz() {
    }
 
    return(
-    <div className="quiz-wrapper"> 
+    <motion.div 
+    initial={slowSlideInitial}
+    animate={slowSlideAniamte}
+    className="quiz-wrapper"> 
 
       <div className="quiz">
          <div className="quiz-progress">
@@ -147,7 +117,7 @@ export default function Quiz() {
             </button>
          </div>
       </div>
-   </div>
+   </motion.div>
    )
 }
 

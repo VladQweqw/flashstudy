@@ -228,4 +228,13 @@ input:focus, textarea:focus {
         background-color: #61b5b4;
        }
 
-       
+
+.z-top {
+    z-index: 999;
+}
+.z-middle {
+    z-index: 99;
+}
+.z-last {
+    z-index: 9;
+}

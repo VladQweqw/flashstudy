@@ -12,3 +12,12 @@ export type response = {
     errors: string[]
  }
  
+ export type questionType = {
+   answer: string,
+   isCorrect: boolean,
+}
+
+export interface practiceQuestion {
+   question: string,
+   answer: string,
+}

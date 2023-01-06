@@ -22,8 +22,10 @@ import Quiz from './layout/Account/actions/quiz'
 import Settings from './components/settings'
 import { useLocation } from 'react-router'
 import Chart from './layout/Account/chart'
-import { getFromLocal, setDarkMode, setBackground } from './functions/functions'
+import { getFromLocal, setDarkMode } from './functions/functions'
 import Popup from './components/popup'
+
+import CardsEdit from './layout/Account/actions/cardsEdit'
 
 export default function App() {
   const location = useLocation();
@@ -50,20 +52,23 @@ export default function App() {
 
             <Route path='/account' element={<Account />}>
               <Route index element={<Cards />}></Route>
-
               <Route path='stats' element={<Chart />}></Route>
+              <Route path='cards/practice' element={<Practice />}></Route>
+              <Route path='cards/quiz' element={<Quiz />}></Route>
+
+
               <Route path='cards' element={<Cards />}>
                 <Route path='add' element={<CardsAdd />}></Route>
+                <Route path='edit' element={<CardsEdit />}></Route>
               </Route>
+
               <Route path='notes' element={<Notes />}>
                 <Route path='add' element={<NotesAdd />}></Route>
               </Route>
+
               <Route path='exams' element={<Exams />}>
                 <Route path='add' element={<ExamsAdd />}></Route>
               </Route>
-
-              <Route path='cards/practice' element={<Practice />}></Route>
-              <Route path='cards/quiz' element={<Quiz />}></Route>
 
             </Route>
 

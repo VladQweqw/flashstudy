@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Modal from '../../../components/modal';
-
+import { slideAnimate, slideInitial } from '../../../functions/functions';
 
 export default function NotesAdd() {
 
@@ -8,20 +8,8 @@ export default function NotesAdd() {
         <Modal>
             <motion.div
       
-      initial={{
-         translateY: '100%',
-         opacity: 0,
-         scale: 0,
-
-      }}
-      animate={{
-         translateY: '0%',
-         scale: 1,
-         opacity:1,
-         transition: {
-            duration: .2
-         }
-      }}
+      initial={slideInitial}
+      animate={slideAnimate}
       className="notes-modal modal--wrapper">
          <form className="add-slide-content">
 

@@ -36,7 +36,7 @@
 
 .popup {
     position: fixed;
-    z-index: 9999;
+    z-index: 999999;
     right: 1rem;
     border-radius: 8px;
     top: calc(100% - 5rem);
@@ -44,10 +44,10 @@
     color: white;
     transition: 200ms ease;
     transform: translateX(150%);
-    padding: 1rem;
+    padding: .75em 1em;
 
     .popup-title {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         color: white;
         font-weight: 400;
     }

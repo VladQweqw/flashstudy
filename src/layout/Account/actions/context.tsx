@@ -1,7 +1,8 @@
-import React,{} from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router'
 
-export default function Context(coords: {x: number, y: number}) {
+export default function Context(data: {x: number, y: number, id: number | null}) {
+   const navigate = useNavigate();
 
    return(
     <motion.div
@@ -17,11 +18,11 @@ export default function Context(coords: {x: number, y: number}) {
         scale: 0,
     }}
     style={{
-        top: `${coords.y}px`,
-        left: `${coords.x}px`,
+        top: `${data.y}px`,
+        left: `${data.x}px`,
     }} className="context-menu">
         
-        <div className="context-option">Edit</div>
+        <div className="context-option" onClick={() => navigate(`edit?id=${data.id}`)}>Edit</div>
         <div className="context-option">Remove</div>
 
     </motion.div>

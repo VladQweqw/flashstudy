@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import Modal from '../../../components/modal';
 import { motion } from 'framer-motion'
-
+import { slideAnimate, slideInitial } from '../../../functions/functions';
 
 export default function ExamsAdd() {
    const [daysUntilExam, setDaysUntilExam] = useState(0)
@@ -20,20 +20,8 @@ export default function ExamsAdd() {
         <Modal>
             <motion.div
       
-      initial={{
-         translateY: '100%',
-         opacity: 0,
-         scale: 0,
-
-      }}
-      animate={{
-         translateY: '0%',
-         scale: 1,
-         opacity:1,
-         transition: {
-            duration: .2
-         }
-      }}
+      initial={slideInitial}
+      animate={slideAnimate}
       className="exam-modal modal--wrapper">
          <div className="slide-header">
             <input

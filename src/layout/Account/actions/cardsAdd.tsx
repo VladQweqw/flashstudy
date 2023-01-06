@@ -2,6 +2,8 @@ import {useState} from 'react'
 import Modal from '../../../components/modal'
 import { motion } from 'framer-motion'
 
+import { slideAnimate, slideInitial } from '../../../functions/functions'
+
 const colors = [
    {
       colorName: 'Gray',
@@ -67,20 +69,8 @@ export default function CardsAdd() {
         <Modal>
             <motion.div
          
-         initial={{
-            translateY: '100%',
-            opacity: 0,
-            scale: 0,
-
-         }}
-         animate={{
-            translateY: '0%',
-            scale: 1,
-            opacity:1,
-            transition: {
-               duration: .2
-            }
-         }}
+         initial={slideInitial}
+         animate={slideAnimate}
          style={{
             backgroundColor: colors[colorIndex].colorHex
          }} className="slide-modal modal--wrapper">
