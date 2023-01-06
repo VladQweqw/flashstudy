@@ -1,4 +1,4 @@
-import React,{useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import { useNavigate } from 'react-router'
 import anime from "animejs"
 
@@ -6,8 +6,8 @@ import heroImage1 from '../../assets/images/hero-image-0.png'
 import heroImage2 from '../../assets/images/hero-image-1.png' 
 import heroImage3 from '../../assets/images/hero-image-2.png'   
 import heroImage4 from '../../assets/images/hero-image-3.png'   
+import { togglePopup } from '../../functions/functions'
 
-//components
 import Feed from './feed'
 import Reviews from './reviews'
 import Navbar from '../../components/navbar'
@@ -18,9 +18,9 @@ export default function Home() {
    const [heroIndex, setHeroIndex] = useState(0)
    const dinamicText = useRef<any>(null)
    const navigate = useNavigate()
-
-   // hero slideshow
+   
    useEffect(() => {
+      togglePopup('card created', 'SUCCESS')
       
       window.addEventListener('scroll', (e) => {
          (document.querySelector('.hero-wave-svg') as HTMLElement).classList.add('svg-test-hidden')
