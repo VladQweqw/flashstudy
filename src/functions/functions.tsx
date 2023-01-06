@@ -87,6 +87,7 @@ export function togglePopup(message: string, state: "SUCCESS" | 'WARNING' | 'ERR
     }else {
         popup?.classList.add('popup-warning')
     }
+    console.log('a');
     
     popup?.classList.add('popup-active')
     setTimeout(() => {
