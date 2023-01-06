@@ -7,7 +7,7 @@ export default function SideNavbar() {
     
    return(
     <>
-        <div className="logo">
+        <div className="logo" onClick={() => navigate('/account/cards')}>
             <h1>FS</h1>
         </div>
     

@@ -3,6 +3,7 @@ import { questionType } from '../../../functions/types'
 import { correctPhrases, wrongPhrases, quizArr } from '../../../functions/functions'
 import { motion } from 'framer-motion';
 import { slowSlideAniamte, slowSlideInitial } from '../../../functions/functions';
+import { useNavigate } from 'react-router';
 
 export default function Quiz() {
    const [questionIndex, setQuestionIndex] = useState(0);
@@ -10,6 +11,8 @@ export default function Quiz() {
    const [statusMessage, setStatusMessage] = useState('')
    const [isQuestionAnswered, setIsQuestionAnswered] = useState(false)
    const footer = useRef<HTMLDivElement | null>(null);
+   const [answers, setAnswers] = useState({correct: 0, wrong: 0})
+ 
 
    useEffect(() => {
       shuffleAnswers()
@@ -32,14 +35,22 @@ export default function Quiz() {
          setStatusMessage(
             correctPhrases[Math.floor(Math.random()*correctPhrases.length)]
          )
+
+         setAnswers((prev: any) => {
+            return {correct: prev.correct + 1, wrong: prev.wrong}
+         })
       }else {
 
          setStatusMessage(
             wrongPhrases[Math.floor(Math.random()*wrongPhrases.length)]
          )
 
+         setAnswers((prev: any) => {
+            return {correct: prev.correct, wrong: prev.wrong + 1}
+         })
       }
-
+      console.log(answers);
+      
       setIsQuestionAnswered(true)
       footer.current?.classList.add('footer-active');
    }
@@ -86,41 +97,73 @@ export default function Quiz() {
     className="quiz-wrapper"> 
 
       <div className="quiz">
-         <div className="quiz-progress">
-            <div className="quiz-progress-value">
-               <span>{questionIndex + 1}</span> / <span>{quizArr.length}</span>
-            </div>
-         </div>
-         <div className="question-wrapper">
-            <h1 id='question' className="question">
-               {quizArr[questionIndex].question}
-            </h1>
-         </div>
 
-         <div className="answers">
-            {shuffledAnswers && shuffledAnswers.map((question: questionType, index: number) => {
-               const {answer, isCorrect} = question;
+         {questionIndex >= quizArr.length - 1 ? 
+            <QuizResult {...answers} /> :
+            <>
+               <div className="quiz-progress">
+               <div className="quiz-progress-value">
+                  <span>{questionIndex + 1}</span> / <span>{quizArr.length}</span>
+               </div>
+               </div>
+               <div className="question-wrapper">
+                  <h1 id='question' className="question">
+                     {quizArr[questionIndex].question}
+                  </h1>
+               </div>
+               <div className="answers">
+                  {shuffledAnswers && shuffledAnswers.map((question: questionType, index: number) => {
+                     const {answer, isCorrect} = question;
 
-               return  <Answer char={
-                  String.fromCharCode(65 + index)
-               } answer={answer} isCorrect={isCorrect} checkAnswer={checkAnswer} key={index} />
-            })}
-      
-         </div>
+                     return  <Answer char={
+                        String.fromCharCode(65 + index)
+                     } answer={answer} isCorrect={isCorrect} checkAnswer={checkAnswer} key={index} />
+                  })}
+            
+               </div>
+               <div ref={footer} className="footer ">
+                  <h1 className="message">{statusMessage}</h1>
 
+                  <button className="next-question" onClick={() => nextQuestion()}>
+                     <i className="fa-solid fa-arrow-right"></i>
+                  </button>
+               </div>
+            </>
+         }
 
-         <div ref={footer} className="footer ">
-            <h1 className="message">{statusMessage}</h1>
-
-            <button className="next-question" onClick={() => nextQuestion()}>
-               <i className="fa-solid fa-arrow-right"></i>
-            </button>
-         </div>
       </div>
    </motion.div>
    )
 }
 
+
+function QuizResult(data: {correct: number, wrong: number}) {
+   const navigate = useNavigate()
+   
+   return(
+      <div className="quiz-result">
+         <h1 className="quiz-result-message">
+            {data.correct > data.wrong ? 'Well done!' : 'Next time'}
+         </h1>
+            <div className="result-wrapper">
+               <div className="result">
+                  <h1 className="answer-count" id='correct-answer'>{data.correct}</h1>
+                  <p className="answer-text">Correct</p>
+               </div>
+               <div className="result">
+                  <h1 className="answer-count" id='wrong-answer'>{data.wrong}</h1>
+                  <p className="answer-text">Wrong</p>
+               </div>
+            </div>
+
+            <div className="btn-wrapper">
+               <button className="secondary-btn" onClick={() => navigate('/account/cards')}>Home</button>
+               <button className="primary-btn" onClick={() => navigate('/account/stats')}>See stats</button>
+            </div>
+      </div>
+   )
+
+}
 
 const Answer = (props: {
    answer: string,

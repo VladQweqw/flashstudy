@@ -111,8 +111,18 @@ export default function Account() {
                     <div onClick={() => navigate('exams')} className="extended-navbar-item category-switch not-close">Exam</div>
                 </div>
 
-                <div onClick={() => navigate('stats')}  className="extended-navbar-item not-close">Stats</div>
-                <div onClick={() => navigate('/settings')}  className="extended-navbar-item not-close">Settings</div>
+                <div onClick={() => navigate('stats')}  className="extended-navbar-item extended-item-icon not-close">
+                    <span>
+                    <i className="fa-solid fa-gear"></i>
+                    <p>Stats</p>
+                    </span>
+                    </div>
+                <div onClick={() => navigate('/settings')}  className="extended-navbar-item extended-item-icon not-close">
+                    <span>
+                        <i className="fa-solid fa-chart-simple"></i>  
+                        <p>Settings</p>
+                    </span>
+                </div>
 
 
                 </motion.div>
