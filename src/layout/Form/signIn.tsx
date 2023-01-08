@@ -3,6 +3,7 @@ import { ENDPOINT } from '../../functions/API';
 import { useNavigate } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
 import { formValidation, callFormApi, encodeAndSave, decodeAndRetrieve } from '../../functions/functions';
+import Loader from '../../components/loader';
 
 export default function SignIn() {
     const email = useRef<HTMLInputElement>(null);
@@ -43,7 +44,7 @@ export default function SignIn() {
         
      }
 
-    // if(loading) return <h1>loading</h1>
+    if(loading) return <Loader />
 
     return(
     <form action="submit" id="login-form" className='login-form'>

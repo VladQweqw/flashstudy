@@ -4,6 +4,7 @@ import anime from 'animejs'
 import { Outlet, useNavigate } from 'react-router'
 import Context from './actions/context';
 import useFetch from '../../functions/API';
+import Loader from '../../components/loader';
 
 export default function Cards() {
    const navigate = useNavigate();
@@ -22,6 +23,8 @@ export default function Cards() {
          duration:  50,
       })
    }, [])
+   
+   // return <Loader />
 
    return(
     <section className="account-slides cards" id='cards'>

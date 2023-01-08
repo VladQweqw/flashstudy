@@ -67,3 +67,32 @@
 .popup-error {
     background-color: red;
 }
+
+.loader-wrapper {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    justify-content: center;
+    padding: 1rem;
+
+    .loader {
+        width: 48px;
+        height: 48px;
+        background: #fff;
+        border-radius: 50%;
+        position: relative;
+        animation: skLinRotate 1s ease-in-out infinite alternate;
+      }
+      .loader:after{
+        content:"";
+        position: absolute;
+        inset: 5px;
+        border-radius: 50%;
+        border: 5px solid transparent;
+        border-top-color: $accent-color;
+      }
+      @keyframes skLinRotate {
+        95% ,100% { transform: rotate(840deg) }
+      }
+}

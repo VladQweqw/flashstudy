@@ -3,7 +3,7 @@ import { ENDPOINT } from '../../functions/API';
 import { AnimatePresence, motion } from 'framer-motion';
 import { callFormApi, formValidation } from '../../functions/functions';
 import SignIn from './signIn';
-
+import Loader from '../../components/loader';
 
 export default function SignUp({setFormState}: any) {
 
@@ -44,7 +44,7 @@ export default function SignUp({setFormState}: any) {
       
    }
 
-   // if(loading) return <h1>loading</h1>
+   if(loading) return <Loader />
 
    return(
     <form action="submit" id="signup-form" className='login-form'>
