@@ -2,6 +2,7 @@ import {useState} from 'react'
 
 import SignIn from './signIn';
 import SignUp from './signUp';
+import Loader from '../../components/loader';
 import { Outlet } from 'react-router';
 
 export default function Form() {
@@ -18,7 +19,7 @@ export default function Form() {
                 <h1 className="m3">{formState ? 'Sign in' : 'Sign up'}</h1>
             
 
-                    {formState ? <SignIn /> : <SignUp setFormState={setFormState} />}
+                {formState ? <SignIn /> : <SignUp setFormState={setFormState} />}
     
 
             </div>
