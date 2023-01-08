@@ -114,11 +114,21 @@ input:focus, textarea:focus {
     ::-webkit-scrollbar-thumb:hover {
       background: white;
     }
-
+    .switch-wrapper {
+        margin-left: auto;
+    }
+    #forgot-pwd {
+        text-align: right;
+        cursor: pointer;
+        transition: 200ms ease;
+    }
+    #forgot-pwd:hover {
+        color: #fff;
+    }
     .cl-toggle-switch {
         position: relative;
        }
-       
+    
        .cl-switch {
         position: relative;
         display: inline-block;

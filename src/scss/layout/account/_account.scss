@@ -53,7 +53,6 @@
 
 }
 
-
 .side-nav {
     background-color: $background-contrast;
     border-radius: 8px;
@@ -110,7 +109,6 @@
     grid-auto-flow: dense;
     height: calc(100vh - 120px);
     overflow-y: auto;
-    padding: 2px;
     grid-auto-rows: 250px;
     overflow-x: hidden;
     padding-bottom: 75px;
@@ -524,6 +522,19 @@
                 border: 2px solid gray;
                 padding: 1rem;
                 border-radius: 6px;
+            
+            .change-username-form {
+                display: flex;
+                // flex-wrap: wrap;
+                gap: 1rem;
+                
+                .input {
+                    max-width: 250px;
+                  
+                }
+              
+
+            }
 
             .settings-title {
               font-weight: 400;
@@ -637,7 +648,6 @@
     
 }
 
-
 .hamburger-wrapper {
     display: none;
     box-shadow: 0 0 5px #00000080;
@@ -709,6 +719,47 @@
 }
 
 @media (max-width: 900px) {
+    
+    .modal-wrapper {
+        .settings {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: 75px auto;
+
+            .settings-navbar {
+                grid-row: 1/2;
+                grid-column: 1/2;
+                flex-direction: row;
+                align-items: center;
+                padding: 1rem;
+                max-width: 100%;
+
+                .navbar-item {
+                    border: 2px solid transparent;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                }
+                
+                .navbar-item:hover {
+                    border: 2px solid $accent-color;
+                }
+                .navbar-item-active {
+                    background-color: $accent-color;
+                }
+
+            }
+            .settings-container {
+                flex-direction: column;
+                overflow: hidden;
+                max-width: 100%;
+                width: 100%;
+                
+                
+
+
+            }
+        }
+    }
     .logo {
         background-color: transparent;
     }
@@ -788,11 +839,7 @@
         position: relative;
         grid-template-columns: auto;
         grid-template-rows: 275px;
-
-        .add-slide {
-            height: 250px !important;
-        }
-
+        
         .card-slide {
             grid-template-columns: auto;
 

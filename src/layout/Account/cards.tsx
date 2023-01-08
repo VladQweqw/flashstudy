@@ -22,7 +22,7 @@ export default function Cards() {
          duration:  50,
       })
    }, [])
-
+   
    return(
     <section className="account-slides cards" id='cards'>
       <Outlet />

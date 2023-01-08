@@ -26,6 +26,7 @@ import { getFromLocal, setDarkMode } from './functions/functions'
 import Popup from './components/popup'
 
 import CardsEdit from './layout/Account/actions/cardsEdit'
+import ForgotPassword from './components/forgotPassword'
 
 export default function App() {
   const location = useLocation();
@@ -47,7 +48,9 @@ export default function App() {
       <Routes location={background || location}>
           <Route path='/'>
             <Route index element={<Home />}></Route>
-            <Route path='/form' element={<Form />}></Route>
+            <Route path='/form' element={<Form />}>
+              <Route path='forgot' element={<ForgotPassword />}></Route>
+            </Route>
             <Route path="settings" element={<Settings />} />
 
             <Route path='/account' element={<Account />}>

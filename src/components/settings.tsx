@@ -56,7 +56,10 @@ function Account() {
     <>
       <div className="settings-container">
         <h2 className="settings-title">Name</h2>
-
+        <form className='change-username-form'>
+          <input type="text" name='change_username' id='change-uid' className="input" placeholder='New Username' />
+          <button className="primary-btn">Change</button>
+        </form>
       </div>
      
 

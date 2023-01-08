@@ -19,15 +19,15 @@ export default function useFetch<Type>(url: string, method: 'POST' | 'GET' | 'PU
     useEffect(() => {        
         setLoading(true);   
     
-        // axios.interceptors.request.use(
-        //     config => {
-        //         config.headers!.authorization = `Bearer ${token}`
-        //         return config
-        //     },
-        //     error => {
-        //         return Promise.reject(error)
-        //     }
-        // )image.png
+        axios.interceptors.request.use(
+            config => {
+                config.headers!.authorization = `Bearer ${token}`
+                return config
+            },
+            error => {
+                return Promise.reject(error)
+            }
+        )
 
         axios.request({
             method: 'get',

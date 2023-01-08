@@ -2,12 +2,13 @@ import { useRef, useState } from 'react'
 import { ENDPOINT } from '../../functions/API';
 import { useNavigate } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
-import { formValidation, callFormApi, encodeAndSave, decodeAndRetrieve } from '../../functions/functions';
+import { formValidation, callFormApi, encodeAndSave, saveToSession } from '../../functions/functions';
 
 export default function SignIn() {
     const email = useRef<HTMLInputElement>(null);
     const password = useRef<HTMLInputElement>(null); 
     const navigate = useNavigate()
+    const remeber = useRef<HTMLInputElement>(null)
 
     const [loading, setLoading] = useState<boolean>(false);
     const [seePassword, setSeePassword] = useState(false);
@@ -27,6 +28,7 @@ export default function SignIn() {
            data: userData
         }).then((response) => {
             encodeAndSave('token', response.data.token)
+
             navigate('/account/cards')
         }
         )
@@ -57,6 +59,7 @@ export default function SignIn() {
             {seePassword ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
          </span>
         </div>
+
         <button type='submit' onClick={(e) => {
             e.preventDefault();
 
@@ -73,6 +76,8 @@ export default function SignIn() {
              }
             
         }} className='submit-btn primary-btn' id='signin-btn' >Submit</button>
+         <p id="forgot-pwd" className='secondary-text' onClick={() => navigate('forgot')}>Forgot details?</p>
+      
 
 <div className="errors">
          <AnimatePresence>

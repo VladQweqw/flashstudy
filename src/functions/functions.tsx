@@ -131,6 +131,14 @@ export function getFromLocal(name: string) {
     return JSON.parse(localStorage.getItem(name)!);
 }
 
+export function saveToSession(name: string, data: any) {
+    sessionStorage.setItem(name, JSON.stringify(data))
+}
+
+export function getFromSession(name: string) {
+    return JSON.parse(sessionStorage.getItem(name)!)
+}
+
 export function encodeAndSave(key: string, token: string) {
     saveToLocal(
         key, window.btoa(token)
@@ -155,10 +163,15 @@ export async function callFormApi(options: any) {
 
 export function formValidation(username: string, password: string, email: string): string[] {
     let errors = [];
-
+    console.log('a');
+    
     
     if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         errors.push("Email not valid");
+    }
+    
+    if(password.length < 8) {
+        errors.push('Password too weak')
     }
 
     if(username.length < 3) {    
