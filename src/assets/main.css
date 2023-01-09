@@ -442,6 +442,27 @@ button {
   }
 }
 
+.forgot-modal {
+  background-color: var(--background-contrast, #1C1C1C);
+  padding: 2rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+}
+.forgot-modal label {
+  font-size: 1.15rem;
+  text-align: center;
+  color: var(--secondary-text, rgba(255, 255, 255, 0.5019607843));
+}
+.forgot-modal .primary-btn {
+  max-width: 100%;
+  width: 100%;
+}
+
 .hero {
   height: calc(100vh - 80px);
   display: grid;

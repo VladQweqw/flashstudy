@@ -24,7 +24,7 @@ export default function Cards() {
       })
    }, [])
    
-   return <Loader />
+   // return <Loader />
 
    return(
     <section className="account-slides cards" id='cards'>

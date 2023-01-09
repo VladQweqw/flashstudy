@@ -80,7 +80,7 @@ export default function SignIn() {
          <p id="forgot-pwd" className='secondary-text' onClick={() => navigate('forgot')}>Forgot details?</p>
       
 
-<div className="errors">
+      <div className="errors">
          <AnimatePresence>
             {formErrors && formErrors.map((error, index) => {
                return <motion.p 

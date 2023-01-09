@@ -35,7 +35,7 @@ function SendEmail({setIsEmailSent}: any) {
             
         // }).catch((err) => console.log(err)
         // )
-
+        setIsEmailSent(false)
     }
 
     return(

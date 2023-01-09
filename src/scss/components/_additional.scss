@@ -96,3 +96,29 @@
         95% ,100% { transform: rotate(840deg) }
       }
 }
+
+.forgot-modal {
+    background-color: $background-contrast;
+    padding: 2rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+
+    label {
+        font-size: 1.15rem;
+        text-align: center;
+        color: $secondary-text;
+
+    }
+
+    .primary-btn {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    
+}
