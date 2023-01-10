@@ -13,7 +13,7 @@ export default function Navbar() {
         </div>
 
         <nav className="nav">
-            <button className="join-now-btn secondary-btn">Join now</button>
+            <button className="join-now-btn secondary-btn" onClick={() => navigate('/form')}>Join now</button>
         </nav>
     </div>
    )

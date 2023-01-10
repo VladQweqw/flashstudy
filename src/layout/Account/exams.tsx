@@ -1,11 +1,13 @@
-import React,{useEffect} from 'react'
+import {useEffect, useState, useRef} from 'react'
 import anime from 'animejs'
 import { Outlet } from 'react-router'
 import { useNavigate } from 'react-router';
+import Context from './actions/context';
 
 export default function Exams() {
 const navigate = useNavigate();
-   
+const [isContextMenu, setIsContextMenu] = useState(false);
+const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
 
    useEffect(() => {
       
@@ -22,31 +24,19 @@ const navigate = useNavigate();
    return(
     <section className="account-slides exams" id='exams'>
       <Outlet />
+      {isContextMenu && <Context {...contextMenuCoords} />}
       
       <div onClick={() => navigate('add')} className="account-slide slide add-slide" id='add-exam'>
          <h1>+</h1>
       </div>
 
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
-      <Exam />
+      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
 
     </section>
    )
@@ -55,10 +45,19 @@ const navigate = useNavigate();
 
 
 
-function Exam() {
+function Exam(data: any) {
+   const {setIsContextMenu, setContextMenuCoords} = data;
 
    return(
-      <div className="account-slide exam-slide slide">
+      <div  onClick={() => setIsContextMenu(false)} onContextMenu={(e) => {
+         setIsContextMenu(true)
+
+         let x = e.pageX - (e.target as HTMLDivElement).offsetLeft
+         let y = e.pageY - (e.target as HTMLDivElement).offsetTop
+
+         setContextMenuCoords({x, y, id: 2}) // change
+
+       }} className="account-slide exam-slide slide">
             <div className="slide-text">
                <h1 className="slide-title">Test matea awd awd awd </h1>
                <p className="slide-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi voluptatum libero praesentium. Necessitatibus, hic commodi.</p>

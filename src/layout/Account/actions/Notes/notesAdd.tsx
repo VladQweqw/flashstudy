@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import Modal from '../../../components/modal';
-import { slideAnimate, slideInitial } from '../../../functions/functions';
+import Modal from '../../../../components/modal';
+import { slideAnimate, slideInitial } from '../../../../functions/functions';
 
 export default function NotesAdd() {
 

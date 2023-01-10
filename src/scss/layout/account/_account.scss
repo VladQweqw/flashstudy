@@ -108,8 +108,10 @@
     gap: .75rem;
     grid-auto-flow: dense;
     height: calc(100vh - 120px);
+    
     overflow-y: auto;
     grid-auto-rows: 250px;
+    padding: 2px;
     overflow-x: hidden;
     padding-bottom: 75px;
 
@@ -476,7 +478,6 @@
                 font-size: 1.25rem;
                 padding: .5rem 1rem;
                 cursor: pointer;
-                z-index: 1;
                 border: 2px solid transparent;
                 transition: 200ms ease;
                 border-radius: 0 4px 4px 0;
@@ -894,7 +895,7 @@
     position: fixed;
     transform: 200ms ease;
     width: 200px;
-    z-index: 99999999;
+    z-index: 999;
     border-radius: 8px;
     background-color: $background-contrast;
     overflow: hidden;

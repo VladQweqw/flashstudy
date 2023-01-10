@@ -239,12 +239,25 @@ input:focus, textarea:focus {
        }
 
 
-.z-top {
-    z-index: 999;
-}
-.z-middle {
-    z-index: 99;
-}
-.z-last {
-    z-index: 9;
-}
+    input:-webkit-autofill {
+        -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+        -webkit-text-fill-color: $background-contrast;
+    }
+    
+    input:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0 50px white inset;/*your box-shadow*/
+        -webkit-text-fill-color: $background-contrast;
+    }        
+
+// .z-3 {
+//     z-index: 999;
+// }
+// .z-2 {
+//     z-index: 99;
+// }
+// .z-1 {
+//     z-index: 1;
+// }
+// .z-0 {
+//     z-index: -1;
+// }

@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
-import Modal from '../../../components/modal';
+import Modal from '../../../../components/modal';
 import { motion } from 'framer-motion'
 
 export default function CardsEdit() {

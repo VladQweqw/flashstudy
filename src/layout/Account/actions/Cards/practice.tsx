@@ -1,8 +1,8 @@
 import {useState} from 'react'
-import { practiceQuestion } from '../../../functions/types';
+import { practiceQuestion } from '../../../../functions/types';
 import { motion } from 'framer-motion'
-import { practiceQuestions } from '../../../functions/functions';
-import { slowSlideAniamte, slowSlideInitial } from '../../../functions/functions';
+import { practiceQuestions } from '../../../../functions/functions';
+import { slowSlideAniamte, slowSlideInitial } from '../../../../functions/functions';
 
 export default function Practice() {
     const [slideIndex, setSlideIndex] = useState(0);

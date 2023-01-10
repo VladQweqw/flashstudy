@@ -254,16 +254,14 @@ input:focus, textarea:focus {
   background-color: #61b5b4;
 }
 
-.z-top {
-  z-index: 999;
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 50px white inset; /* Change the color to your own background color */
+  -webkit-text-fill-color: var(--background-contrast, #1C1C1C);
 }
 
-.z-middle {
-  z-index: 99;
-}
-
-.z-last {
-  z-index: 9;
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 50px white inset; /*your box-shadow*/
+  -webkit-text-fill-color: var(--background-contrast, #1C1C1C);
 }
 
 .navbar {
@@ -1076,6 +1074,7 @@ button {
   height: calc(100vh - 120px);
   overflow-y: auto;
   grid-auto-rows: 250px;
+  padding: 2px;
   overflow-x: hidden;
   padding-bottom: 75px;
 }
@@ -1394,7 +1393,6 @@ button {
   font-size: 1.25rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  z-index: 1;
   border: 2px solid transparent;
   transition: 200ms ease;
   border-radius: 0 4px 4px 0;
@@ -1720,7 +1718,7 @@ button {
   position: fixed;
   transform: 200ms ease;
   width: 200px;
-  z-index: 99999999;
+  z-index: 999;
   border-radius: 8px;
   background-color: var(--background-contrast, #1C1C1C);
   overflow: hidden;

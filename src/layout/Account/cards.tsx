@@ -53,11 +53,10 @@ export default function Cards() {
 
 
 function Card(data: any) {
-   const {isContextMenu, setIsContextMenu, setContextMenuCoords} = data;
-   const container = useRef<HTMLDivElement | null>(null)
+   const {setIsContextMenu, setContextMenuCoords} = data;
 
    return(
-          <div ref={container} onClick={() => setIsContextMenu(false)} onContextMenu={(e) => {
+          <div onClick={() => setIsContextMenu(false)} onContextMenu={(e) => {
             setIsContextMenu(true)
 
             let x = e.pageX - (e.target as HTMLDivElement).offsetLeft

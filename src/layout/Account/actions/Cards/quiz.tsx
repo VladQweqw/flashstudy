@@ -1,8 +1,8 @@
 import {useState, useEffect, useRef} from 'react'
-import { questionType } from '../../../functions/types'
-import { correctPhrases, wrongPhrases, quizArr } from '../../../functions/functions'
+import { questionType } from '../../../../functions/types'
+import { correctPhrases, wrongPhrases, quizArr } from '../../../../functions/functions'
 import { motion } from 'framer-motion';
-import { slowSlideAniamte, slowSlideInitial } from '../../../functions/functions';
+import { slowSlideAniamte, slowSlideInitial } from '../../../../functions/functions';
 import { useNavigate } from 'react-router';
 
 export default function Quiz() {

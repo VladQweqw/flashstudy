@@ -1,7 +1,7 @@
 import {useState} from 'react'
-import Modal from '../../../components/modal';
+import Modal from '../../../../components/modal';
 import { motion } from 'framer-motion'
-import { slideAnimate, slideInitial } from '../../../functions/functions';
+import { slideAnimate, slideInitial } from '../../../../functions/functions';
 
 export default function ExamsAdd() {
    const [daysUntilExam, setDaysUntilExam] = useState(0)

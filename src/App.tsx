@@ -1,32 +1,38 @@
 import {Route, Routes} from 'react-router'
+import { useLocation } from 'react-router'
+import { getFromLocal, setDarkMode } from './functions/functions'
 
-// components
+// universal
 import Navbar from './components/navbar'
 import Footer from './components/footer'
 import Error from './components/error'
-
-import Form from './layout/Form/form'
-import Home from './layout/Home/home'
-
-import Account from './layout/Account/account'
-import Cards from './layout/Account/cards'
-import Notes from './layout/Account/notes'    
-import Exams from './layout/Account/exams'
-
-import CardsAdd from './layout/Account/actions/cardsAdd'
-import NotesAdd from './layout/Account/actions/notesAdd'
-import ExamsAdd from './layout/Account/actions/examsAdd'
-
-import Practice from './layout/Account/actions/practice'
-import Quiz from './layout/Account/actions/quiz'
+import Practice from './layout/Account/actions/Cards/practice'
+import Quiz from './layout/Account/actions/Cards/quiz'
 import Settings from './components/settings'
-import { useLocation } from 'react-router'
-import Chart from './layout/Account/chart'
-import { getFromLocal, setDarkMode } from './functions/functions'
 import Popup from './components/popup'
+import Chart from './layout/Account/chart'
 
-import CardsEdit from './layout/Account/actions/cardsEdit'
+//form
+import Form from './layout/Form/form'
 import ForgotPassword from './components/forgotPassword'
+
+//home
+import Home from './layout/Home/home'
+import Account from './layout/Account/account'
+
+//account
+import Cards from './layout/Account/cards'
+import CardsAdd from './layout/Account/actions/Cards/cardsAdd'
+import CardsEdit from './layout/Account/actions/Cards/cardsEdit'
+
+import Notes from './layout/Account/notes'    
+import NotesAdd from './layout/Account/actions/Notes/notesAdd'
+import NotesEdit from './layout/Account/actions/Notes/notesEdit'
+
+import Exams from './layout/Account/exams'
+import ExamsAdd from './layout/Account/actions/Exams/examsAdd'
+import ExamEdit from './layout/Account/actions/Exams/examEdit'
+
 
 export default function App() {
   const location = useLocation();
@@ -67,10 +73,14 @@ export default function App() {
 
               <Route path='notes' element={<Notes />}>
                 <Route path='add' element={<NotesAdd />}></Route>
+                <Route path='edit' element={<NotesEdit />}></Route>
+
               </Route>
 
               <Route path='exams' element={<Exams />}>
                 <Route path='add' element={<ExamsAdd />}></Route>
+                <Route path='edit' element={<ExamEdit />}></Route>
+
               </Route>
 
             </Route>

@@ -1,8 +1,8 @@
 import {useState} from 'react'
-import Modal from '../../../components/modal'
+import Modal from '../../../../components/modal'
 import { motion } from 'framer-motion'
 
-import { slideAnimate, slideInitial } from '../../../functions/functions'
+import { slideAnimate, slideInitial } from '../../../../functions/functions'
 
 const colors = [
    {
