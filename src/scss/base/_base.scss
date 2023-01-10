@@ -239,15 +239,15 @@ input:focus, textarea:focus {
        }
 
 
-    input:-webkit-autofill {
-        -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
-        -webkit-text-fill-color: $background-contrast;
-    }
-    
-    input:-webkit-autofill:focus {
-        -webkit-box-shadow: 0 0 0 50px white inset;/*your box-shadow*/
-        -webkit-text-fill-color: $background-contrast;
-    }        
+       input:-webkit-autofill{
+        -webkit-text-fill-color: $primary-text !important;
+        }     
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px $background-contrast inset !important;
+        }
 
 // .z-3 {
 //     z-index: 999;
