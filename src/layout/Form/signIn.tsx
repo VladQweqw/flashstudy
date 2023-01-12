@@ -12,7 +12,7 @@ export default function SignIn() {
     const remeber = useRef<HTMLInputElement>(null)
 
     const [loading, setLoading] = useState<boolean>(false);
-    const [seePassword, setSeePassword] = useState(false);
+    const [seePassword, setSeePassword] = useState(true);
     const [formErrors, setFormErrors] = useState< string[]>([]);
     
     function callApi() {
@@ -30,11 +30,10 @@ export default function SignIn() {
         }).then((response) => {
             encodeAndSave('token', response.data.token)
 
-            navigate('/account/cards')
+            navigate('/account')
         }
         )
            .catch((err) => {
-              console.log(err.response.data);
             setFormErrors([err.response.data.toString()])
             //   if(err?.response?.data?.error) {
             //      setFormErrors([err?.response?.data?.error])

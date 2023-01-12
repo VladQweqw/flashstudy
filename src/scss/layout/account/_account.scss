@@ -32,11 +32,7 @@
 }
 
 .logo {
-    background-color: $background-contrast;
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     grid-row: 1;
     cursor: pointer;
 
@@ -152,6 +148,42 @@
         }
     }
 
+    .group-slide {
+        display: grid;
+        grid-template-rows: 35px auto 30px;
+        padding: .5rem;
+        row-gap: .5rem;
+
+        .slide-title {
+            font-size: 1.5rem;
+            overflow: hidden;
+            grid-row: 1;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            font-weight: 400;            
+
+        }
+
+        .slide-description {
+            font-size: 1rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            color: $secondary-text;
+
+        }
+
+        .slide-last-updated {
+            color: $accent-color;
+            font-size: minmax(.2rem, 2vw);
+
+        }
+    }
+
     .card-slide {
         display: grid;
         grid-template-columns: 60% 40%;
@@ -212,7 +244,7 @@
         }
 
     }
-
+    
     .note-slide {
         display: grid;
         grid-template-rows: 35px auto 30px;

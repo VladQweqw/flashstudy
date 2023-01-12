@@ -241,6 +241,7 @@ input:focus, textarea:focus {
 
        input:-webkit-autofill{
         -webkit-text-fill-color: $primary-text !important;
+        transition: 200ms ease;
         }     
         input:-webkit-autofill,
         input:-webkit-autofill:hover, 

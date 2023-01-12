@@ -3,7 +3,7 @@ import {useState, useEffect, useRef} from 'react'
 import anime from 'animejs'
 import { Outlet, useNavigate } from 'react-router'
 import Context from './actions/context';
-import useFetch from '../../functions/API';
+import useFetch, { ENDPOINT } from '../../functions/API';
 import Loader from '../../components/loader';
 
 export default function Cards() {
@@ -11,9 +11,10 @@ export default function Cards() {
    const [isContextMenu, setIsContextMenu] = useState(false);
    const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
 
-   // const { data, loading, error, reFetch} = useFetch<any>('slide', 'GET');
+   // const { data, loading, error} = useFetch<any>('slide?gid=1', 'GET');
    // console.log(data, error);
-   
+ 
+
    useEffect(() => {
       anime({
          targets: '.slide',
@@ -22,10 +23,12 @@ export default function Cards() {
          opacity: [0, 1],
          duration:  50,
       })
+
    }, [])
    
    // return <Loader />
-
+   // if(error) return <h1>err</h1>
+   // if(loading) return <Loader />
    return(
     <section className="account-slides cards" id='cards'>
       <Outlet />

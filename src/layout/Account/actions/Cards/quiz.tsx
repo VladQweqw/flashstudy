@@ -49,7 +49,6 @@ export default function Quiz() {
             return {correct: prev.correct, wrong: prev.wrong + 1}
          })
       }
-      console.log(answers);
       
       setIsQuestionAnswered(true)
       footer.current?.classList.add('footer-active');

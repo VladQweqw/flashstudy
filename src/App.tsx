@@ -4,7 +4,6 @@ import { getFromLocal, setDarkMode } from './functions/functions'
 
 // universal
 import Navbar from './components/navbar'
-import Footer from './components/footer'
 import Error from './components/error'
 import Practice from './layout/Account/actions/Cards/practice'
 import Quiz from './layout/Account/actions/Cards/quiz'
@@ -20,6 +19,11 @@ import ForgotPassword from './components/forgotPassword'
 import Home from './layout/Home/home'
 import Account from './layout/Account/account'
 
+//group
+import Groups from './layout/Account/groups'
+import GroupAdd from './layout/Account/actions/Group/groupAdd'
+import GroupEdit from './layout/Account/actions/Group/groupEdit'
+
 //account
 import Cards from './layout/Account/cards'
 import CardsAdd from './layout/Account/actions/Cards/cardsAdd'
@@ -32,6 +36,7 @@ import NotesEdit from './layout/Account/actions/Notes/notesEdit'
 import Exams from './layout/Account/exams'
 import ExamsAdd from './layout/Account/actions/Exams/examsAdd'
 import ExamEdit from './layout/Account/actions/Exams/examEdit'
+
 
 
 export default function App() {
@@ -60,7 +65,12 @@ export default function App() {
             <Route path="settings" element={<Settings />} />
 
             <Route path='/account' element={<Account />}>
-              <Route index element={<Cards />}></Route>
+              <Route path='' element={<Groups />}>
+                <Route path='add' element={<GroupAdd />}></Route>
+                <Route path='edit' element={<GroupEdit />}></Route>
+
+              </Route>
+
               <Route path='stats' element={<Chart />}></Route>
               <Route path='cards/practice' element={<Practice />}></Route>
               <Route path='cards/quiz' element={<Quiz />}></Route>

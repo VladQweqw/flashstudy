@@ -150,14 +150,40 @@ export function decodeAndRetrieve(token: string) {
  }
 
 
+export function formatDate(date: Date) {
+    const minutes = date.getMinutes(),
+     hours = date.getHours(),
+     day = date.getDate(),
+     month = date.getMonth(),
+     year = date.getFullYear()
 
-  
+    const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sept',
+        'Oct',
+        'Nov',
+        'Dec',
+    ]
+
+    function dmhmy() {
+        return `${day.toString().padStart(2, '0')} ${months[month]} ${year}, ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
+    }
+
+    return {
+        day, month, year, hours, minutes, dmhmy
+    }
+}
 
 
 // API & utils
-export async function callFormApi(options: any) {    
-    console.log('started');
-    
+export async function callFormApi(options: any) {        
     return axios.request(options)
 } 
 

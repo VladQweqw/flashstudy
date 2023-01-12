@@ -11,6 +11,7 @@ import { togglePopup } from '../../functions/functions'
 import Feed from './feed'
 import Reviews from './reviews'
 import Navbar from '../../components/navbar'
+import Footer from '../../components/footer'
 
 const heroImages = ['Easy to manage', 'Remind of you exams','See your progress','Quiz yourself']
 
@@ -156,7 +157,7 @@ export default function Home() {
 
     <Feed />
     <Reviews />
-      
+    <Footer />
     </>
    )
 }

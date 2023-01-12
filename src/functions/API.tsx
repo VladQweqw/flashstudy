@@ -1,11 +1,12 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
-import { decodeAndRetrieve } from './functions';
+import { decodeAndRetrieve, togglePopup } from './functions';
 
 export const ENDPOINT = 'http://trphost.go.ro:8081/api/';
 const token = decodeAndRetrieve('token');
 
-export default function useFetch<Type>(url: string, method: 'POST' | 'GET' | 'PUT') : {
+
+export default function useFetch<Type>() : {
     data: Type | undefined,
     loading: boolean,
     error: string | null;
@@ -15,65 +16,34 @@ export default function useFetch<Type>(url: string, method: 'POST' | 'GET' | 'PU
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null)
     const [data, setData] = useState<Type | undefined>(undefined);
-    
-    useEffect(() => {        
-        setLoading(true);   
-    
-        axios.interceptors.request.use(
-            config => {
-                config.headers!.authorization = `Bearer ${token}`
-                return config
-            },
-            error => {
-                return Promise.reject(error)
-            }
-        )
 
-        axios.request({
-            method: 'get',
-            url: ENDPOINT + url,
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-            }
-        })
+            
+    function reFetch(
+        options: {
+            method: 'GET' | 'POST' | 'PUT',
+            data: any,
+            url: string,
+            headers: {}
+        }
+        ) {
+                    
+        options.headers = {
+            'Authorization': `Bearer ${token}`
+        }
+        
+        setLoading(true)
+        axios.request(options)
         .then((response) => {            
             setData(response.data)
         })
         .catch((err) => {
             setError(err);
+            togglePopup('Something went wrong', 'ERROR')
         })
-        .finally(() => setLoading(false));
-        setLoading(false)
-    }, [url])
-
-    function reFetch() {
-        // setLoading(true);   
-        
-        // axios.interceptors.request.use(
-        //     config => {
-        //         config.headers!.authorization = `Bearer ${token}`
-        //         return config
-        //     },
-        //     error => {
-        //         return Promise.reject(error)
-        //     }
-        // )
-        
-        // axios.request({
-        //     method,
-        //     url: ENDPOINT + url,
-        // })
-        // .then((response) => {            
-        //     setData(response.data)
-        // })
-        // .catch((err) => {
-        //     setError(err);
-        // })
-        // .finally(() => setLoading(false));
+        .finally(() => {
+            setLoading(false)
+        }); 
     }
     
     return {data, loading, error, reFetch}
 }
-
-

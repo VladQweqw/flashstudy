@@ -31,7 +31,6 @@ export default function SignUp({setFormState}: any) {
       }).then(() => setFormState(<SignIn />)
       )
          .catch((err) => {
-            console.log(err.response.data);
             setFormErrors([err.response.data])
             
             // if(err?.response?.data?.error) {

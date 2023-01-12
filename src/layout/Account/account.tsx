@@ -13,6 +13,14 @@ export default function Account() {
     const option3 = useRef<any>(null)
     const [isModalOpen, setIModalOpen] = useState(false)
 
+    function getGreeding() {
+        const hours = new Date().getHours();
+
+        if(hours >= 5 && hours <= 12) return 'Good morning'
+        if(hours >= 13 && hours <= 18) return 'Good afternoon'
+        
+        return 'Good evening'
+    }
     
     useEffect(() => {
         setBackground(JSON.parse(getFromLocal('backgroundId')) || 0)
@@ -81,7 +89,7 @@ export default function Account() {
         }
 
     }, [window.location.pathname])
-
+    
    return(
     <div className="account" id='account'>
         <SideNavbar />
@@ -138,6 +146,13 @@ export default function Account() {
             </div>
         </div>
         
+        {window.location.pathname === '/account' ? 
+        <header className='account-header'>
+            <span className="">
+                {getGreeding()} 
+            </span>
+        </header>
+        :
         <header className="account-header">
            <span ref={option1} onClick={(e) => {navigate((e.target as HTMLSpanElement).id)}} 
             className="account-option" id='cards'>
@@ -162,7 +177,8 @@ export default function Account() {
                 <path d="M49.7207 14C47.8597 6.3704 25.943 12.5858 38.3891 8.76751C50.9596 4.91106 119.584 5.40032 87.5753 4.32741C55.5665 3.2545 -33.7757 6.90335 15.5402 2.96934C54.993 -0.177872 85.0136 1.43129 92.3955 1.27234" stroke="#D09683" strokeWidth="2"/>
                 </svg>
             </span>
-        </header>
+        </header>   
+        }
 
         <Outlet />
     </div>
