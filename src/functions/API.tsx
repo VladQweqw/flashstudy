@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import axios from 'axios'
 import { decodeAndRetrieve, togglePopup } from './functions';
 
@@ -20,7 +20,7 @@ export default function useFetch<Type>() : {
             
     function reFetch(
         options: {
-            method: 'GET' | 'POST' | 'PUT',
+            method: 'GET' | 'POST' | 'PUT' | 'DELETE',
             data: any,
             url: string,
             headers: {}
@@ -38,6 +38,8 @@ export default function useFetch<Type>() : {
         })
         .catch((err) => {
             setError(err);
+            console.log(err);
+            
             togglePopup('Something went wrong', 'ERROR')
         })
         .finally(() => {

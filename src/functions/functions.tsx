@@ -183,7 +183,7 @@ export function formatDate(date: Date) {
 
 
 // API & utils
-export async function callFormApi(options: any) {        
+export async function callFormApi(options: any) {     
     return axios.request(options)
 } 
 
@@ -208,13 +208,14 @@ export function formValidation(username: string, password: string, email: string
  }
 
 //animation 
+export const STAGGER_DURATION = 10;
 
 export const slideAnimate = {
     translateY: '0%',
     scale: 1,
     opacity:1,
     transition: {
-       duration: .2
+       duration: .05
     }
 }
 

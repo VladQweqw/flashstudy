@@ -931,10 +931,11 @@
     border-radius: 8px;
     background-color: $background-contrast;
     overflow: hidden;
-
+    
     display: flex;
     flex-direction: column;
     text-align: center;
+    box-shadow: 0px 0px 15px #00000040;
 
     .context-option {
         padding: 1rem .5rem;

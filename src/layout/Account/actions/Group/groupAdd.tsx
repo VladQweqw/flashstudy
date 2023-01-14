@@ -1,11 +1,10 @@
 import { useRef } from 'react'
-import Modal from '../../../../components/modal'
 import { motion } from 'framer-motion'
-import { redirect } from "react-router-dom";
 import { slideAnimate, slideInitial, togglePopup } from '../../../../functions/functions'
-import useFetch, { ENDPOINT } from '../../../../functions/API'
-import Loader from '../../../../components/loader'
 import { useNavigate } from 'react-router'
+import useFetch, { ENDPOINT } from '../../../../functions/API'
+import Modal from '../../../../components/modal'
+import Loader from '../../../../components/loader'
 
 export default function GroupAdd() {
     const navigate = useNavigate();
@@ -15,7 +14,6 @@ export default function GroupAdd() {
 
     if(data?.message === 'group created') {   
         togglePopup('Group created', 'SUCCESS')
-        navigate('/account', {state: {reload: true}})
     }
     
     {error != null && togglePopup('Something went wring', 'ERROR')}
@@ -42,17 +40,20 @@ export default function GroupAdd() {
       
          <div className="add-slide-btn-wrapper">
             <button className="add-slide-btn primary-btn"
-            onClick={() => reFetch({
-                method: 'POST',
-                url: ENDPOINT + 'group/create',
-                data: {
-                    name: title.current!.value || ' ',
-                    description: description.current!.value || ' ',
-                    isPublic: true,
-                    color: '#FFFFFF',
-                },
-                headers: {}
-            })}
+            onClick={() => {
+                reFetch({
+                    method: 'POST',
+                    url: ENDPOINT + 'group/create',
+                    data: {
+                        name: title.current!.value || ' ',
+                        description: description.current!.value || ' ',
+                        isPublic: true,
+                        color: '#FFFFFF',
+                    },
+                    headers: {}
+                })
+                navigate('/account?refresh=true')
+            }}
             >Create</button>
          </div>
             </motion.div>

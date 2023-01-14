@@ -1,37 +1,46 @@
 import {useState, useEffect} from 'react'
-import { useLocation } from 'react-router';
-import anime from 'animejs'
 import { Outlet, useNavigate } from 'react-router'
-import Context from './actions/context';
+import { groupType, groupElementType } from '../../functions/types';
+import { formatDate, STAGGER_DURATION } from '../../functions/functions';
+import { useSearchParams } from "react-router-dom";
 import useFetch, { ENDPOINT } from '../../functions/API';
+import anime from 'animejs'
+import Context from './actions/context';
 import Loader from '../../components/loader';
 
-import { groupType, groupElementType } from '../../functions/types';
-import { formatDate } from '../../functions/functions';
-
 export default function Groups() {
-    const navigate = useNavigate();
-    const [isContextMenu, setIsContextMenu] = useState(false);
-    const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
-    const {state} = useLocation();
+   const navigate = useNavigate();
+   const [searchParams] = useSearchParams();   
 
-    const { data, loading, error, reFetch} = useFetch<groupType>();
+   const [isContextMenu, setIsContextMenu] = useState(false);
+   const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
    
-    useEffect(() => {
+   const { data, loading, reFetch} = useFetch<groupType>();
+   useEffect(() => {
+      
+      if(searchParams.get('refresh')) reFetch({
+         method: 'GET',
+         url: ENDPOINT + 'group',
+         data: null,
+         headers: {},
+      })
+      
+      
+   }, [searchParams.get('refresh')])
+   
+   useEffect(() => {
       reFetch({
          method: 'GET',
          url: ENDPOINT + 'group',
          data: null,
          headers: {},
       })
+   }, [])
    
-    }, [state?.reload])
-    
-
-    useEffect(() => {
+   useEffect(() => {
         anime({
            targets: '.slide',
-           delay: anime.stagger(100),
+           delay: anime.stagger(STAGGER_DURATION),
            translateY:['65px', 0],
            opacity: [0, 1],
            duration:  50,
@@ -39,10 +48,10 @@ export default function Groups() {
         
      }, [data?.data])
 
-   if(loading) return <Loader />
 
+   if(loading) return <Loader />
    return(
-    <section className="account-slides groups" id='groups'>
+    <section className="account-slides groups"  id='groups'>
     <Outlet />
     {isContextMenu && <Context {...contextMenuCoords} />}
     <div
@@ -54,7 +63,13 @@ export default function Groups() {
       {
          data?.message === 'success' && data.data.map((item: groupElementType, index: number) => {
             
-            return <Group key={index} navigate={navigate} data={item} setIsContextMenu={setIsContextMenu}  setContextMenuCoords={setContextMenuCoords} />
+            return <Group 
+            key={index} 
+            navigate={navigate} 
+            data={item} 
+            setIsContextMenu={setIsContextMenu}  
+            setContextMenuCoords={setContextMenuCoords} 
+            />
          })
       }
 
@@ -66,12 +81,12 @@ function Group({
    data,
    setIsContextMenu,
    setContextMenuCoords,
-   navigate
+   navigate,
 }: {
    data: groupElementType,
    setIsContextMenu: any,
    setContextMenuCoords: any,
-   navigate: any
+   navigate: any,
 }) {     
    
    
@@ -87,7 +102,7 @@ function Group({
              let x = e.pageX - (e.target as HTMLDivElement).offsetLeft
              let y = e.pageY - (e.target as HTMLDivElement).offsetTop
  
-             setContextMenuCoords({x, y, id: 2}) // change
+             setContextMenuCoords({x, y, id: data?.ID}) // change
  
            }} className="account-slide slide group group-slide">
  

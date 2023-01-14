@@ -65,12 +65,12 @@ export default function App() {
             <Route path="settings" element={<Settings />} />
 
             <Route path='/account' element={<Account />}>
+
               <Route path='' element={<Groups />}>
                 <Route path='add' element={<GroupAdd />}></Route>
                 <Route path='edit' element={<GroupEdit />}></Route>
-
               </Route>
-
+              
               <Route path='stats' element={<Chart />}></Route>
               <Route path='cards/practice' element={<Practice />}></Route>
               <Route path='cards/quiz' element={<Quiz />}></Route>

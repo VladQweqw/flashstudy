@@ -5,20 +5,39 @@ import { Outlet, useNavigate } from 'react-router'
 import Context from './actions/context';
 import useFetch, { ENDPOINT } from '../../functions/API';
 import Loader from '../../components/loader';
-
+import { useSearchParams } from 'react-router-dom';
+import { groupType } from '../../functions/types';
+import { STAGGER_DURATION } from '../../functions/functions';
 export default function Cards() {
    const navigate = useNavigate();
    const [isContextMenu, setIsContextMenu] = useState(false);
    const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
-
-   // const { data, loading, error} = useFetch<any>('slide?gid=1', 'GET');
-   // console.log(data, error);
- 
+   const [params] = useSearchParams();
+   
+   const { data, loading, error, reFetch} = useFetch<groupType>(); 
 
    useEffect(() => {
-      anime({
+   
+      if(params.get('refresh'))  reFetch({
+         method:'GET',
+         url: ENDPOINT + `slide?gid=${params.get('id')}`,
+         data: null,
+         headers: {}
+      })
+      
+   }, [params.get('refresh')])
+
+   useEffect(() => {
+      reFetch({
+         method:'GET',
+         url: ENDPOINT + `slide?gid=${params.get('id')}`,
+         data: null,
+         headers: {}
+      })
+
+         anime({
          targets: '.slide',
-         delay: anime.stagger(100),
+         delay: anime.stagger(STAGGER_DURATION),
          translateY:['65px', 0],
          opacity: [0, 1],
          duration:  50,
@@ -26,9 +45,22 @@ export default function Cards() {
 
    }, [])
    
-   // return <Loader />
-   // if(error) return <h1>err</h1>
-   // if(loading) return <Loader />
+   useEffect(() => {
+      anime({
+         targets: '.slide',
+         delay: anime.stagger(STAGGER_DURATION),
+         translateY:['65px', 0],
+         opacity: [0, 1],
+         duration:  50,
+      })
+
+
+   }, [data?.data])
+   
+
+   console.log(data);
+   
+   if(loading) return <Loader />
    return(
     <section className="account-slides cards" id='cards'>
       <Outlet />
@@ -37,12 +69,10 @@ export default function Cards() {
          <h1>+</h1>
       </div>
 
-      <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      {data?.data.length && data.data.map((item: any, index: number) => {
+         return  <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      })}
 
-      <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      
       <div className="practice-buttons">
          <button onClick={() => navigate('practice')} className="practice-button primary-btn" id='practice-btn'>Practice</button>
          <button onClick={() => navigate('quiz')} className="practice-button primary-btn" id='quiz-btn'>Quiz</button>
