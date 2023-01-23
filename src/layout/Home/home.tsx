@@ -6,7 +6,6 @@ import heroImage1 from '../../assets/images/hero-image-0.png'
 import heroImage2 from '../../assets/images/hero-image-1.png' 
 import heroImage3 from '../../assets/images/hero-image-2.png'   
 import heroImage4 from '../../assets/images/hero-image-3.png'   
-import { togglePopup } from '../../functions/functions'
 
 import Feed from './feed'
 import Reviews from './reviews'
@@ -15,13 +14,12 @@ import Footer from '../../components/footer'
 
 const heroImages = ['Easy to manage', 'Remind of you exams','See your progress','Quiz yourself']
 
-export default function Home() {
+export default function Home() { 
    const [heroIndex, setHeroIndex] = useState(0)
    const dinamicText = useRef<any>(null)
    const navigate = useNavigate()
    
    useEffect(() => {
-      togglePopup('card created', 'SUCCESS')
       
       window.addEventListener('scroll', (e) => {
          (document.querySelector('.hero-wave-svg') as HTMLElement).classList.add('svg-test-hidden')

@@ -1,58 +1,21 @@
-import {useState} from 'react'
+import {useRef, useState} from 'react'
 import Modal from '../../../../components/modal'
 import { motion } from 'framer-motion'
-
+import { useLocation } from 'react-router'
 import { slideAnimate, slideInitial } from '../../../../functions/functions'
-
-const colors = [
-   {
-      colorName: 'Gray',
-      colorHex: '#1C1C1C',
-   },
-   {
-      colorName: 'Yellow',
-      colorHex: '#E8DC87',
-   },
-   {
-      colorName: 'Green',
-      colorHex: '#81DE9B',
-   },
-   {
-      colorName: 'Purple',
-      colorHex: '#C287E8',
-   },
-   {
-      colorName: 'Blue',
-      colorHex: '#92CDDF',
-   },
-   {
-      colorName: 'Orange',
-      colorHex: '#E8BF48',
-   },
-   {
-      colorName: 'Mint',
-      colorHex: '#92E0B3',
-   },
-   {
-      colorName: 'Dark blue',
-      colorHex: '#2C7185',
-   },
-   {
-      colorName: 'Pink',
-      colorHex: '#7858A6',
-   },
-   {
-      colorName: 'Earth',
-      colorHex: '#704F4F',
-   },
-    {
-      colorName: 'Clay',
-      colorHex: '#A13333',
-   },
-]
+import useFetch, { ENDPOINT } from '../../../../functions/useGetAPI'
+import { colors } from '../../../../functions/functions'
 
 export default function CardsAdd() {
    const [colorIndex, setColorIndex] = useState(0)
+   const { reFetch } = useFetch<any>();
+   
+   const { state } = useLocation();
+
+   const question = useRef<HTMLInputElement | null>(null);
+   const answer = useRef<HTMLTextAreaElement | null>(null);
+
+
    document.querySelectorAll('.color').forEach((color) => {
 
       color.addEventListener('click', () => {
@@ -64,7 +27,7 @@ export default function CardsAdd() {
          
       })
    })
-
+    
    return(
         <Modal>
             <motion.div
@@ -80,9 +43,9 @@ export default function CardsAdd() {
 
             <form className="add-slide-content">
 
-               <input type="text" id='add-card-input add-slide-input' className="input" placeholder='Title' name='Title' />
+               <input ref={question} type="text" id='add-card-input add-slide-input' className="input" placeholder='Title' name='Title' />
 
-               <textarea className='input textarea'id='add-card-textarea add-slide-textarea' placeholder='Description (optional)'></textarea>
+               <textarea ref={answer} className='input textarea'id='add-card-textarea add-slide-textarea' placeholder='Description (optional)'></textarea>
 
             </form>
             <div className="color-select">
@@ -98,7 +61,22 @@ export default function CardsAdd() {
                </div>
 
             <div className="add-slide-btn-wrapper">
-               <button className="add-slide-btn primary-btn ">Create</button>
+               <button className="add-slide-btn primary-btn " onClick={() => {
+                  console.log(state?.groupId);
+                  
+                  reFetch({
+                     method: 'POST',
+                     url: ENDPOINT + 'slide/create',
+                     data: {
+                        question: question.current!.value || 'Untitled',
+                        answer: answer.current!.value || 'Untitled',
+                        tags: JSON.stringify([]),
+                        image:null,
+                        groupId:state?.groupId,
+                     },
+                     headers: {}
+                 })
+               }}>Create</button>
             </div>
             </motion.div>
         </Modal>

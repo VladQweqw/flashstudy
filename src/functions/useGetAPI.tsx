@@ -1,10 +1,9 @@
-import {useState} from 'react'
+import {useState, } from 'react'
 import axios from 'axios'
 import { decodeAndRetrieve, togglePopup } from './functions';
 
 export const ENDPOINT = 'http://trphost.go.ro:8081/api/';
 const token = decodeAndRetrieve('token');
-
 
 export default function useFetch<Type>() : {
     data: Type | undefined,

@@ -183,7 +183,7 @@ export function formatDate(date: Date) {
 
 
 // API & utils
-export async function callFormApi(options: any) {     
+export async function callFormApi(options: any) {
     return axios.request(options)
 } 
 
@@ -208,7 +208,7 @@ export function formValidation(username: string, password: string, email: string
  }
 
 //animation 
-export const STAGGER_DURATION = 10;
+export const STAGGER_DURATION = 100;
 
 export const slideAnimate = {
     translateY: '0%',
@@ -253,3 +253,51 @@ export const practiceQuestions = [
     },
 ]
 
+
+//account
+export const colors = [
+    {
+       colorName: 'Gray',
+       colorHex: '#1C1C1C',
+    },
+    {
+       colorName: 'Yellow',
+       colorHex: '#E8DC87',
+    },
+    {
+       colorName: 'Green',
+       colorHex: '#81DE9B',
+    },
+    {
+       colorName: 'Purple',
+       colorHex: '#C287E8',
+    },
+    {
+       colorName: 'Blue',
+       colorHex: '#92CDDF',
+    },
+    {
+       colorName: 'Orange',
+       colorHex: '#E8BF48',
+    },
+    {
+       colorName: 'Mint',
+       colorHex: '#92E0B3',
+    },
+    {
+       colorName: 'Dark blue',
+       colorHex: '#2C7185',
+    },
+    {
+       colorName: 'Pink',
+       colorHex: '#7858A6',
+    },
+    {
+       colorName: 'Earth',
+       colorHex: '#704F4F',
+    },
+     {
+       colorName: 'Clay',
+       colorHex: '#A13333',
+    },
+ ]

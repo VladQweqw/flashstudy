@@ -1,14 +1,13 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router'
-import { ENDPOINT } from '../../../functions/API';
-import useFetch from '../../../functions/API';
+import { useState } from 'react'
+import { ENDPOINT } from '../../../functions/useGetAPI';
 import Loader from '../../../components/loader';
 import { togglePopup } from '../../../functions/functions';
 
 export default function Context(coords: {x: number, y: number, id: number | null}) {
    const navigate = useNavigate();
-
-    const {data, loading, reFetch } = useFetch<any>();
+  const [loading, setLoading] = useState(false)
 
     function removeGroup() {
       let a;
@@ -22,20 +21,22 @@ export default function Context(coords: {x: number, y: number, id: number | null
       }else {
         a = 'group/delete'
       }
+
       
-      reFetch({
+      fetch(ENDPOINT + a + `?id=${coords.id}`, {
         method: 'DELETE',
-        url: ENDPOINT + a + `?id=${coords.id}`,
-        headers: {},
-        data: null,
+        headers: {
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NzQxNjgzMTEsInVzZXJfaWQiOjI2fQ.6-XChx0Hyd1es6X3MWcjuKuy_bVtdP-Cw0tJUxY9Sqw`
+        }
       })
-      
+      .then((resp) => resp.json())
+      .then(() => {
+        togglePopup('Deleted', 'SUCCESS')
+      })
+      .catch(() => togglePopup('Something went wrong', 'ERROR'))
+      .finally(() => setLoading(false))
       
     }   
-
-    if(data?.message === 'Group Deleted') {
-        window.location.reload()        
-    }
 
     return(
         <motion.div
@@ -54,14 +55,15 @@ export default function Context(coords: {x: number, y: number, id: number | null
         top: `${coords.y}px`,
         left: `${coords.x}px`,
     }} className="context-menu">
-        {loading ? <Loader /> : 
-        <>
-        <div className="context-option" onClick={() => navigate(`edit?id=${coords.id}`)}>Edit</div>
-        <div className="context-option" onClick={() => {
-            removeGroup()
-        }}>Remove</div>
-        </>
-    }
+        
+      <div className="context-option" onClick={() => navigate(`edit?id=${coords.id}`)}>Edit</div>
+      {loading ? 
+        <Loader /> : 
+          <div className="context-option" onClick={() => {
+              removeGroup()
+          }}>Remove</div>
+      }
+       
     </motion.div>
    )
 }

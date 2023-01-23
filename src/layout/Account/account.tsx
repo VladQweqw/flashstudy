@@ -5,14 +5,13 @@ import { setBackground, getFromLocal } from '../../functions/functions'
 import SideNavbar from '../../components/sideNavbar'
 import { useNavigate } from 'react-router'
 import { motion, AnimatePresence } from 'framer-motion'
-
+import { useParams } from 'react-router'
 export default function Account() {
     const navigate = useNavigate();
-    const option1 = useRef<any>(null)
-    const option2 = useRef<any>(null)
-    const option3 = useRef<any>(null)
     const [isModalOpen, setIModalOpen] = useState(false)
-
+    
+    const { category, id } = useParams()
+    
     function getGreeding() {
         const hours = new Date().getHours();
 
@@ -25,70 +24,8 @@ export default function Account() {
     useEffect(() => {
         setBackground(JSON.parse(getFromLocal('backgroundId')) || 0)
 
-        option1.current = anime({
-            targets:'#cards > .account-option-svg path',
-            strokeDashoffset: [anime.setDashoffset, 0],
-            easing: 'easeInOutSine',
-            duration: 300,
-            direction: 'initial',
-            autoplay: false,
-            
-        })
-
-        option2.current = anime({
-            targets:'#notes > .account-option-svg path',
-            strokeDashoffset: [anime.setDashoffset, 0],
-            easing: 'easeInOutSine',
-            duration: 300,
-            autoplay: false,
-            
-        })
-
-        option3.current = anime({
-            targets:'#exams > .account-option-svg path',
-            strokeDashoffset: [anime.setDashoffset, 0],
-            easing: 'easeInOutSine',
-            duration: 300,
-            autoplay: false,
-        })
-
-
-        
     }, [])
-    
-    useEffect(() => {
-        
-        document.querySelectorAll('.account-option').forEach((opt) => {
-            opt.classList.remove('account-option-active')
-        })
 
-        if(window.location.pathname.slice(9)  === 'cards' ) {
-            option1.current.restart();
-
-            option2.current.seek(0);
-            option3.current.seek(0);
-
-            document.getElementById('cards')?.classList.add('account-option-active')
-
-        }else if(window.location.pathname.slice(9)  === 'notes'){
-            option2.current.restart();
-
-            option1.current.seek(0);
-            option3.current.seek(0);
-
-            document.getElementById('notes')?.classList.add('account-option-active')
-
-        }else if(window.location.pathname.slice(9) === 'exams'){
-            option3.current.restart();
-        
-            option1.current.seek(0);
-            option2.current.seek(0);
-
-            document.getElementById('exams')?.classList.add('account-option-active')
-
-        }
-
-    }, [window.location.pathname])
     
    return(
     <div className="account" id='account'>
@@ -146,13 +83,90 @@ export default function Account() {
             </div>
         </div>
         
-        {window.location.pathname === '/account' ? 
+        {!category || category === 'edit' || category === 'create' ? 
         <header className='account-header'>
             <span className="">
                 {getGreeding()} 
             </span>
         </header>
         :
+        <AccountHeader navigate={navigate} />
+        }
+    
+        <Outlet />
+    </div>
+   )
+}
+
+
+function AccountHeader({navigate}: any) {
+    const option1 = useRef<any>(null)
+    const option2 = useRef<any>(null)
+    const option3 = useRef<any>(null)
+
+    
+
+    useEffect(() => {
+        option1.current = anime({   
+            targets:'#cards > .account-option-svg path',
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'easeInOutSine',
+            duration: 300,
+            direction: 'initial',
+            autoplay: false,
+            
+        })
+    
+        option2.current = anime({
+            targets:'#notes > .account-option-svg path',
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'easeInOutSine',
+            duration: 300,
+            autoplay: false,
+            
+        })
+    
+        option3.current = anime({
+            targets:'#exams > .account-option-svg path',
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'easeInOutSine',
+            duration: 300,
+            autoplay: false,
+        })
+
+        document.querySelectorAll('.account-option').forEach((opt) => {
+            opt.classList.remove('account-option-active')
+        })
+        
+        if(window.location.pathname.slice(9, 14)  === 'cards' ) {
+            option1.current.restart();
+
+            option2.current.seek(0);
+            option3.current.seek(0);
+
+            document.getElementById('cards')?.classList.add('account-option-active')
+
+        }else if(window.location.pathname.slice(9, 14)  === 'notes'){
+            option2.current.restart();
+
+            option1.current.seek(0);
+            option3.current.seek(0);
+
+            document.getElementById('notes')?.classList.add('account-option-active')
+
+        }else if(window.location.pathname.slice(9, 14) === 'exams'){
+            option3.current.restart();
+        
+            option1.current.seek(0);
+            option2.current.seek(0);
+
+            document.getElementById('exams')?.classList.add('account-option-active')
+        }
+        
+
+    }, [window.location.pathname])
+
+    return(
         <header className="account-header">
            <span ref={option1} onClick={(e) => {navigate((e.target as HTMLSpanElement).id)}} 
             className="account-option" id='cards'>
@@ -178,9 +192,6 @@ export default function Account() {
                 </svg>
             </span>
         </header>   
-        }
+    )
 
-        <Outlet />
-    </div>
-   )
 }

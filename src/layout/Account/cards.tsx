@@ -1,9 +1,9 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect} from 'react'
 
 import anime from 'animejs'
 import { Outlet, useNavigate } from 'react-router'
 import Context from './actions/context';
-import useFetch, { ENDPOINT } from '../../functions/API';
+import useFetch, { ENDPOINT } from '../../functions/useGetAPI';
 import Loader from '../../components/loader';
 import { useSearchParams } from 'react-router-dom';
 import { groupType } from '../../functions/types';
@@ -51,21 +51,22 @@ export default function Cards() {
          delay: anime.stagger(STAGGER_DURATION),
          translateY:['65px', 0],
          opacity: [0, 1],
-         duration:  50,
+         duration:  STAGGER_DURATION,
       })
 
 
    }, [data?.data])
-   
-
-   console.log(data);
-   
+      
    if(loading) return <Loader />
    return(
     <section className="account-slides cards" id='cards'>
       <Outlet />
       {isContextMenu && <Context {...contextMenuCoords} />}
-      <div onClick={() => navigate('/account/cards/add')} className="account-slide slide add-slide" id='add-card'>
+      <div onClick={() => navigate('/account/cards/add', {
+         state: {
+            groupId: params.get('id')
+         }
+      })} className="account-slide slide add-slide" id='add-card'>
          <h1>+</h1>
       </div>
 

@@ -36,6 +36,7 @@ import NotesEdit from './layout/Account/actions/Notes/notesEdit'
 import Exams from './layout/Account/exams'
 import ExamsAdd from './layout/Account/actions/Exams/examsAdd'
 import ExamEdit from './layout/Account/actions/Exams/examEdit'
+import Category from './layout/Account/category'
 
 
 
@@ -57,49 +58,27 @@ export default function App() {
     <>
      <Popup />
       <Routes location={background || location}>
-          <Route path='/'>
-            <Route index element={<Home />}></Route>
-            <Route path='/form' element={<Form />}>
-              <Route path='forgot' element={<ForgotPassword />}></Route>
-            </Route>
-            <Route path="settings" element={<Settings />} />
+          <Route path='/' element={<Home />}></Route>
 
-            <Route path='/account' element={<Account />}>
-
-              <Route path='' element={<Groups />}>
-                <Route path='add' element={<GroupAdd />}></Route>
-                <Route path='edit' element={<GroupEdit />}></Route>
-              </Route>
-              
-              <Route path='stats' element={<Chart />}></Route>
-              <Route path='cards/practice' element={<Practice />}></Route>
-              <Route path='cards/quiz' element={<Quiz />}></Route>
-
-
-              <Route path='cards' element={<Cards />}>
-                <Route path='add' element={<CardsAdd />}></Route>
-                <Route path='edit' element={<CardsEdit />}></Route>
-              </Route>
-
-              <Route path='notes' element={<Notes />}>
-                <Route path='add' element={<NotesAdd />}></Route>
-                <Route path='edit' element={<NotesEdit />}></Route>
-
-              </Route>
-
-              <Route path='exams' element={<Exams />}>
-                <Route path='add' element={<ExamsAdd />}></Route>
-                <Route path='edit' element={<ExamEdit />}></Route>
-
-              </Route>
-
-            </Route>
-
+          <Route path='/form' element={<Form />}>
+            <Route path='forgot' element={<ForgotPassword />}></Route>
           </Route>
-          
+
+          <Route path='/account' element={<Account />}>
+            <Route path='' element={<Groups />}>
+              <Route path='create' element={<GroupAdd />}></Route>
+              <Route path='edit' element={<GroupEdit />}></Route>  
+            </Route>
+
+            <Route path=':category/:id' element={<Category />}>
+              <Route path='create'></Route>
+              <Route path='edit'></Route>
+            </Route>
+          </Route>      
+
           <Route path='*' element={<Error />}></Route>
       </Routes>
-      {background && (
+          {background && (
             <Routes>
               <Route path="settings" element={<Settings />} />
             </Routes>

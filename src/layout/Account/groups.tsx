@@ -1,42 +1,20 @@
 import {useState, useEffect} from 'react'
-import { Outlet, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { groupType, groupElementType } from '../../functions/types';
 import { formatDate, STAGGER_DURATION } from '../../functions/functions';
-import { useSearchParams } from "react-router-dom";
-import useFetch, { ENDPOINT } from '../../functions/API';
 import anime from 'animejs'
 import Context from './actions/context';
 import Loader from '../../components/loader';
+import { useGetAPI } from '../../functions/getTest';
+import { Outlet } from 'react-router';
 
 export default function Groups() {
    const navigate = useNavigate();
-   const [searchParams] = useSearchParams();   
-
    const [isContextMenu, setIsContextMenu] = useState(false);
    const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
-   
-   const { data, loading, reFetch} = useFetch<groupType>();
-   useEffect(() => {
-      
-      if(searchParams.get('refresh')) reFetch({
-         method: 'GET',
-         url: ENDPOINT + 'group',
-         data: null,
-         headers: {},
-      })
-      
-      
-   }, [searchParams.get('refresh')])
-   
-   useEffect(() => {
-      reFetch({
-         method: 'GET',
-         url: ENDPOINT + 'group',
-         data: null,
-         headers: {},
-      })
-   }, [])
-   
+
+   const { data, loading, error} = useGetAPI<groupType>('group')
+
    useEffect(() => {
         anime({
            targets: '.slide',
@@ -45,17 +23,16 @@ export default function Groups() {
            opacity: [0, 1],
            duration:  50,
         })
-        
-     }, [data?.data])
-
+                
+     }, [data])
 
    if(loading) return <Loader />
    return(
     <section className="account-slides groups"  id='groups'>
-    <Outlet />
+      <Outlet />
     {isContextMenu && <Context {...contextMenuCoords} />}
     <div
-    onClick={() => navigate('add')}
+    onClick={() => navigate('create')}
     className="account-slide slide add-slide" id='add-group'>
        <h1>+</h1>
     </div>
@@ -92,7 +69,7 @@ function Group({
    
     return(
            <div onClickCapture={() => {
-            navigate(`cards?id=${data.ID}`)
+            navigate(`cards/${data.ID}`)
            }} onClick={() => {
             setIsContextMenu(false)
 
@@ -102,7 +79,7 @@ function Group({
              let x = e.pageX - (e.target as HTMLDivElement).offsetLeft
              let y = e.pageY - (e.target as HTMLDivElement).offsetTop
  
-             setContextMenuCoords({x, y, id: data?.ID}) // change
+             setContextMenuCoords({x, y, id: data?.ID})
  
            }} className="account-slide slide group group-slide">
  

@@ -1358,7 +1358,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1vw;
 }
 .modal-wrapper textarea {
   min-height: 150px;
@@ -1371,7 +1370,7 @@ button {
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 .modal-wrapper .add-slide-btn-wrapper {
   padding: 1vw;
@@ -1395,7 +1394,6 @@ button {
   grid-template-rows: 200px auto 75px;
   transition: 200ms ease;
   justify-items: center;
-  padding: 1vw;
 }
 .modal-wrapper .settings {
   max-width: 900px;
