@@ -1,8 +1,9 @@
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
 import anime from 'animejs'
 import { Outlet } from 'react-router'
 import { useNavigate } from 'react-router'
 import Context from './actions/context';
+import { STAGGER_DURATION } from '../../functions/functions';
 
 export default function Notes() {
    const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Notes() {
          delay: anime.stagger(100),
          translateY:['50px', 0],
          opacity: [0, 1],
-         duration:  50,
+         duration:  STAGGER_DURATION,
       })
 
    }, [])
@@ -26,14 +27,15 @@ export default function Notes() {
       <Outlet />
       {isContextMenu && <Context {...contextMenuCoords} />}
       
-      <div onClick={() => navigate('add')} className="account-slide slide add-slide" id='add-note'>
+      <div onClick={() => navigate('create')} className="account-slide slide add-slide" id='add-note'>
          <h1>+</h1>
       </div>
 
-      <Note setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Note setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Note setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Note setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Note data={[setIsContextMenu, setContextMenuCoords]} />
+      <Note data={[setIsContextMenu, setContextMenuCoords]} />
+      <Note data={[setIsContextMenu, setContextMenuCoords]} />
+      <Note data={[setIsContextMenu, setContextMenuCoords]} />
+      <Note data={[setIsContextMenu, setContextMenuCoords]} />
 
 
     </section>

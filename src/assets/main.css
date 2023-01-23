@@ -508,6 +508,20 @@ button {
   width: 100%;
 }
 
+.no-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  grid-column: 2/3;
+  height: 100%;
+}
+.no-content img {
+  width: clamp(200px, 50%, 500px);
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .hero {
   height: calc(100vh - 80px);
   display: grid;
@@ -1252,11 +1266,8 @@ button {
 }
 .account-slides .note-slide .note-description {
   font-size: 1rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
+  max-height: 100%;
+  overflow-y: auto;
   color: var(--secondary-text, rgba(255, 255, 255, 0.5019607843));
 }
 .account-slides .note-slide .slide-last-updated {

@@ -1,32 +1,23 @@
 import { useRef, useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
 import anime from 'animejs'
-import { setBackground, getFromLocal } from '../../functions/functions'
+import { setBackground, getFromLocal, getGreeding } from '../../functions/functions'
 import SideNavbar from '../../components/sideNavbar'
 import { useNavigate } from 'react-router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useParams } from 'react-router'
+
+
 export default function Account() {
     const navigate = useNavigate();
     const [isModalOpen, setIModalOpen] = useState(false)
     
     const { category, id } = useParams()
     
-    function getGreeding() {
-        const hours = new Date().getHours();
-
-        if(hours >= 5 && hours <= 12) return 'Good morning'
-        if(hours >= 13 && hours <= 18) return 'Good afternoon'
-        
-        return 'Good evening'
-    }
-    
     useEffect(() => {
         setBackground(JSON.parse(getFromLocal('backgroundId')) || 0)
-
     }, [])
 
-    
    return(
     <div className="account" id='account'>
         <SideNavbar />
@@ -90,7 +81,7 @@ export default function Account() {
             </span>
         </header>
         :
-        <AccountHeader navigate={navigate} />
+        <AccountHeader navigate={navigate} id={id} />
         }
     
         <Outlet />
@@ -99,12 +90,10 @@ export default function Account() {
 }
 
 
-function AccountHeader({navigate}: any) {
+function AccountHeader({navigate, id}: any) {
     const option1 = useRef<any>(null)
     const option2 = useRef<any>(null)
     const option3 = useRef<any>(null)
-
-    
 
     useEffect(() => {
         option1.current = anime({   
@@ -166,9 +155,13 @@ function AccountHeader({navigate}: any) {
 
     }, [window.location.pathname])
 
+    function changeCategory(category: string) {
+        return navigate(`${category}/${id}`)
+    }
+
     return(
         <header className="account-header">
-           <span ref={option1} onClick={(e) => {navigate((e.target as HTMLSpanElement).id)}} 
+           <span ref={option1} onClick={(e) => changeCategory('cards')} 
             className="account-option" id='cards'>
                 Cards  
                 <svg className='account-option-svg' viewBox="0 0 98 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -176,7 +169,7 @@ function AccountHeader({navigate}: any) {
                 </svg>
 
             </span> / 
-           <span ref={option2} onClick={(e) => {navigate((e.target as HTMLSpanElement).id)}} 
+           <span ref={option2} onClick={(e) => changeCategory('notes')}
            className="account-option" id='notes'>
             Notes
             <svg className='account-option-svg' viewBox="0 0 98 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +177,7 @@ function AccountHeader({navigate}: any) {
             </svg>
             
             </span> / 
-           <span ref={option3} onClick={(e) => {navigate((e.target as HTMLSpanElement).id)}} 
+           <span ref={option3} onClick={(e) => {changeCategory('exams')}} 
            className="account-option" id='exams'>
             Exams
             <svg className='account-option-svg' viewBox="0 0 98 15" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -187,6 +187,15 @@ export async function callFormApi(options: any) {
     return axios.request(options)
 } 
 
+export function getGreeding() {
+    const hours = new Date().getHours();
+
+    if(hours >= 5 && hours <= 12) return 'Good morning'
+    if(hours >= 13 && hours <= 18) return 'Good afternoon'
+    
+    return 'Good evening'
+}
+
 export function formValidation(username: string, password: string, email: string): string[] {
     let errors = [];
     console.log('a');

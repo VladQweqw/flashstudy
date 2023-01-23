@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router'
 import { useState } from 'react'
+
 import { ENDPOINT } from '../../../functions/useGetAPI';
 import Loader from '../../../components/loader';
 import { togglePopup } from '../../../functions/functions';
@@ -56,7 +57,7 @@ export default function Context(coords: {x: number, y: number, id: number | null
         left: `${coords.x}px`,
     }} className="context-menu">
         
-      <div className="context-option" onClick={() => navigate(`edit?id=${coords.id}`)}>Edit</div>
+      <div className="context-option" onClick={() => navigate(`edit`)}>Edit</div>
       {loading ? 
         <Loader /> : 
           <div className="context-option" onClick={() => {

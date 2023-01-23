@@ -5,32 +5,34 @@ import { Outlet, useNavigate } from 'react-router'
 import Context from './actions/context';
 import useFetch, { ENDPOINT } from '../../functions/useGetAPI';
 import Loader from '../../components/loader';
-import { useSearchParams } from 'react-router-dom';
 import { groupType } from '../../functions/types';
 import { STAGGER_DURATION } from '../../functions/functions';
+import { useParams } from 'react-router';
+import NoContent from '../../components/noContext';
+
 export default function Cards() {
    const navigate = useNavigate();
    const [isContextMenu, setIsContextMenu] = useState(false);
    const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
-   const [params] = useSearchParams();
-   
+   const { id } = useParams();
+
    const { data, loading, error, reFetch} = useFetch<groupType>(); 
 
    useEffect(() => {
    
-      if(params.get('refresh'))  reFetch({
+      if(id)  reFetch({
          method:'GET',
-         url: ENDPOINT + `slide?gid=${params.get('id')}`,
+         url: ENDPOINT + `slide?gid=${id}`,
          data: null,
          headers: {}
       })
       
-   }, [params.get('refresh')])
+   }, [id])
 
    useEffect(() => {
       reFetch({
          method:'GET',
-         url: ENDPOINT + `slide?gid=${params.get('id')}`,
+         url: ENDPOINT + `slide?gid=${id}`,
          data: null,
          headers: {}
       })
@@ -58,20 +60,21 @@ export default function Cards() {
    }, [data?.data])
       
    if(loading) return <Loader />
+   if(error) return <NoContent />
    return(
     <section className="account-slides cards" id='cards'>
       <Outlet />
       {isContextMenu && <Context {...contextMenuCoords} />}
-      <div onClick={() => navigate('/account/cards/add', {
-         state: {
-            groupId: params.get('id')
-         }
-      })} className="account-slide slide add-slide" id='add-card'>
+      <div onClick={() => navigate('create')} className="account-slide slide add-slide" id='add-card'>
          <h1>+</h1>
       </div>
 
       {data?.data.length && data.data.map((item: any, index: number) => {
-         return  <Card setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+         return  <Card 
+         data = {[...item, setIsContextMenu, setContextMenuCoords]}
+        
+         key={index}
+         />
       })}
 
       <div className="practice-buttons">
@@ -87,8 +90,8 @@ export default function Cards() {
 
 
 function Card(data: any) {
-   const {setIsContextMenu, setContextMenuCoords} = data;
-
+   const {setIsContextMenu, setContextMenuCoords, item } = data;
+   
    return(
           <div onClick={() => setIsContextMenu(false)} onContextMenu={(e) => {
             setIsContextMenu(true)

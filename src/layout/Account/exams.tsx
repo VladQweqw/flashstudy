@@ -1,24 +1,23 @@
-import {useEffect, useState, useRef} from 'react'
+import {useEffect, useState} from 'react'
 import anime from 'animejs'
 import { Outlet } from 'react-router'
 import { useNavigate } from 'react-router';
 import Context from './actions/context';
+import { STAGGER_DURATION } from '../../functions/functions';
 
 export default function Exams() {
 const navigate = useNavigate();
 const [isContextMenu, setIsContextMenu] = useState(false);
 const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
 
-   useEffect(() => {
-      
+   useEffect(() => { 
       anime({
          targets: '.slide',
          delay: anime.stagger(100),
          translateY:['50px', 0],
          opacity: [0, 1],
-         duration:  50,
+         duration:  STAGGER_DURATION,
       })
-
    }, [])
 
    return(
@@ -26,17 +25,14 @@ const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number
       <Outlet />
       {isContextMenu && <Context {...contextMenuCoords} />}
       
-      <div onClick={() => navigate('add')} className="account-slide slide add-slide" id='add-exam'>
+      <div onClick={() => navigate('create')} className="account-slide slide add-slide" id='add-exam'>
          <h1>+</h1>
       </div>
 
-      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
-      <Exam setIsContextMenu={setIsContextMenu} isContextMenu={isContextMenu} setContextMenuCoords={setContextMenuCoords} />
+      <Exam data={[setIsContextMenu, setContextMenuCoords]} />
+      <Exam data={[setIsContextMenu, setContextMenuCoords]} />
+      <Exam data={[setIsContextMenu, setContextMenuCoords]} />
+      <Exam data={[setIsContextMenu, setContextMenuCoords]} />
 
     </section>
    )

@@ -265,11 +265,13 @@
 
         .note-description {
             font-size: 1rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 6;
-            -webkit-box-orient: vertical;
+            // overflow: hidden;
+            // text-overflow: ellipsis;
+            // display: -webkit-box;
+            // -webkit-line-clamp: 6;
+            max-height: 100%;
+            overflow-y: auto;
+            // -webkit-box-orient: vertical;
             color: $secondary-text;
 
         }

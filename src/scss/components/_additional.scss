@@ -59,11 +59,12 @@
 
 .popup-success {
     background-color: green;
-
 }
+
 .popup-warning {
     background-color: orange;
 }
+
 .popup-error {
     background-color: red;
 }
@@ -121,4 +122,19 @@
     }
 
     
+}
+
+.no-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    grid-column: 2/3;
+    height: 100%;
+
+    img {
+        width: clamp(200px, 50%, 500px);
+        
+        object-fit: contain;
+    }
 }

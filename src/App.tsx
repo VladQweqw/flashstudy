@@ -25,20 +25,9 @@ import GroupAdd from './layout/Account/actions/Group/groupAdd'
 import GroupEdit from './layout/Account/actions/Group/groupEdit'
 
 //account
-import Cards from './layout/Account/cards'
-import CardsAdd from './layout/Account/actions/Cards/cardsAdd'
-import CardsEdit from './layout/Account/actions/Cards/cardsEdit'
-
-import Notes from './layout/Account/notes'    
-import NotesAdd from './layout/Account/actions/Notes/notesAdd'
-import NotesEdit from './layout/Account/actions/Notes/notesEdit'
-
-import Exams from './layout/Account/exams'
-import ExamsAdd from './layout/Account/actions/Exams/examsAdd'
-import ExamEdit from './layout/Account/actions/Exams/examEdit'
+import Create from './layout/Account/create'
+import Edit from './layout/Account/edit'
 import Category from './layout/Account/category'
-
-
 
 export default function App() {
   const location = useLocation();
@@ -65,17 +54,22 @@ export default function App() {
           </Route>
 
           <Route path='/account' element={<Account />}>
+            <Route path='stats' element={<Chart />}></Route>
+            <Route path='cards/:id/practice' element={<Practice />}></Route>
+            <Route path='cards/:id/quiz' element={<Quiz />}></Route>
+
             <Route path='' element={<Groups />}>
               <Route path='create' element={<GroupAdd />}></Route>
               <Route path='edit' element={<GroupEdit />}></Route>  
             </Route>
-
+            
             <Route path=':category/:id' element={<Category />}>
-              <Route path='create'></Route>
-              <Route path='edit'></Route>
+              <Route path='create' element={<Create />}></Route>
+              <Route path='edit' element={<Edit />}></Route>
             </Route>
           </Route>      
-
+          
+          
           <Route path='*' element={<Error />}></Route>
       </Routes>
           {background && (
