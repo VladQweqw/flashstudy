@@ -1,14 +1,14 @@
 import {useState, useEffect} from 'react'
-
-import anime from 'animejs'
 import { Outlet, useNavigate } from 'react-router'
-import Context from './actions/context';
-import useFetch, { ENDPOINT } from '../../functions/useGetAPI';
-import Loader from '../../components/loader';
-import { groupType } from '../../functions/types';
-import { STAGGER_DURATION } from '../../functions/functions';
 import { useParams } from 'react-router';
-import NoContent from '../../components/noContext';
+import { useQuery } from 'react-query';
+import anime from 'animejs'
+
+import Context from './actions/context';
+import { STAGGER_DURATION } from '../../functions/functions';
+import NoContent from '../../components/noContent';
+import Loader from '../../components/loader';
+import { API } from '../../functions/API';
 
 export default function Cards() {
    const navigate = useNavigate();
@@ -16,27 +16,22 @@ export default function Cards() {
    const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
    const { id } = useParams();
 
-   const { data, loading, error, reFetch} = useFetch<groupType>(); 
-
-   useEffect(() => {
+   const {
+      status,
+      data,
+   } = useQuery({
+      queryKey: ['account', 'cards', parseInt(id!)],
+      queryFn: () => API({
+         url:`slide?gid=${id}`,
+         method: 'GET',
+         data: null,
+         headers: {
+            authorization: ''
+         }
+      })
+   })
    
-      if(id)  reFetch({
-         method:'GET',
-         url: ENDPOINT + `slide?gid=${id}`,
-         data: null,
-         headers: {}
-      })
-      
-   }, [id])
-
    useEffect(() => {
-      reFetch({
-         method:'GET',
-         url: ENDPOINT + `slide?gid=${id}`,
-         data: null,
-         headers: {}
-      })
-
          anime({
          targets: '.slide',
          delay: anime.stagger(STAGGER_DURATION),
@@ -47,20 +42,10 @@ export default function Cards() {
 
    }, [])
    
-   useEffect(() => {
-      anime({
-         targets: '.slide',
-         delay: anime.stagger(STAGGER_DURATION),
-         translateY:['65px', 0],
-         opacity: [0, 1],
-         duration:  STAGGER_DURATION,
-      })
+   if(status === 'loading') return <Loader />
+   if(status === 'error') return <NoContent />
 
 
-   }, [data?.data])
-      
-   if(loading) return <Loader />
-   if(error) return <NoContent />
    return(
     <section className="account-slides cards" id='cards'>
       <Outlet />

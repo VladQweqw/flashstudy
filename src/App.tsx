@@ -32,52 +32,52 @@ import Category from './layout/Account/category'
 export default function App() {
   const location = useLocation();
   const background = location.state && location.state.background;  
+
   let theme = getFromLocal('darkMode');
 
-    
-    if(theme !== false && theme !== true) {
-      setDarkMode('DARK')
-    }else {
-      setDarkMode(getFromLocal('darkMode') ? 'DARK' : 'LIGHT')
-    }
+  if(theme !== false && theme !== true) {
+    setDarkMode('DARK')
+  }else {
+    setDarkMode(getFromLocal('darkMode') ? 'DARK' : 'LIGHT')
+  }
 
-    document.body.addEventListener('contextmenu', (e) => e.preventDefault())
+  document.body.addEventListener('contextmenu', (e) => e.preventDefault())
 
-   return(
-    <>
-     <Popup />
-      <Routes location={background || location}>
-          <Route path='/' element={<Home />}></Route>
+  return(
+  <>
+    <Popup />
+    <Routes location={background || location}>
+        <Route path='/' element={<Home />}></Route>
 
-          <Route path='/form' element={<Form />}>
-            <Route path='forgot' element={<ForgotPassword />}></Route>
+        <Route path='/form' element={<Form />}>
+          <Route path='forgot' element={<ForgotPassword />}></Route>
+        </Route>
+
+        <Route path='/account' element={<Account />}>
+          <Route path='stats' element={<Chart />}></Route>
+          <Route path='cards/:id/practice' element={<Practice />}></Route>
+          <Route path='cards/:id/quiz' element={<Quiz />}></Route>
+
+          <Route path='' element={<Groups />}>
+            <Route path='create' element={<GroupAdd />}></Route>
+            <Route path='edit' element={<GroupEdit />}></Route>  
           </Route>
-
-          <Route path='/account' element={<Account />}>
-            <Route path='stats' element={<Chart />}></Route>
-            <Route path='cards/:id/practice' element={<Practice />}></Route>
-            <Route path='cards/:id/quiz' element={<Quiz />}></Route>
-
-            <Route path='' element={<Groups />}>
-              <Route path='create' element={<GroupAdd />}></Route>
-              <Route path='edit' element={<GroupEdit />}></Route>  
-            </Route>
-            
-            <Route path=':category/:id' element={<Category />}>
-              <Route path='create' element={<Create />}></Route>
-              <Route path='edit' element={<Edit />}></Route>
-            </Route>
-          </Route>      
           
-          
-          <Route path='*' element={<Error />}></Route>
-      </Routes>
-          {background && (
-            <Routes>
-              <Route path="settings" element={<Settings />} />
-            </Routes>
-          )}
-      {/* <Footer /> */}
+          <Route path=':category/:id' element={<Category />}>
+            <Route path='create' element={<Create />}></Route>
+            <Route path='edit' element={<Edit />}></Route>
+          </Route>
+        </Route>      
+        
+        
+        <Route path='*' element={<Error />}></Route>
+    </Routes>
+        {background && (
+          <Routes>
+            <Route path="settings" element={<Settings />} />
+          </Routes>
+        )}
+    {/* <Footer /> */}
     </>
-   )
+  )
 }

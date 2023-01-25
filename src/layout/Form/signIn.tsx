@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import { ENDPOINT } from '../../functions/useGetAPI';
 import { useNavigate } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
 import { formValidation, callFormApi, encodeAndSave, decodeAndRetrieve } from '../../functions/functions';
@@ -22,26 +21,6 @@ export default function SignIn() {
            email:    email.current!.value,
            password: password.current!.value,
         }
-        
-        callFormApi({
-           method: 'post',
-           url: ENDPOINT + 'login',
-           data: userData
-        }).then((response) => {
-            encodeAndSave('token', response.data.token)
-
-            navigate('/account')
-        }
-        )
-           .catch((err) => {
-            setFormErrors([err.response.data.toString()])
-            //   if(err?.response?.data?.error) {
-            //      setFormErrors([err?.response?.data?.error])
-            //   }
-              
-           }
-        )
-        .finally(() => setLoading(false))
         
      }
 

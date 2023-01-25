@@ -5,15 +5,31 @@ import { formatDate, STAGGER_DURATION } from '../../functions/functions';
 import anime from 'animejs'
 import Context from './actions/context';
 import Loader from '../../components/loader';
-import { useGetAPI } from '../../functions/getTest';
+import { API } from '../../functions/API';
 import { Outlet } from 'react-router';
+
+import { useQuery } from 'react-query';
+import NoContent from '../../components/noContent';
 
 export default function Groups() {
    const navigate = useNavigate();
    const [isContextMenu, setIsContextMenu] = useState(false);
    const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
 
-   const { data, loading, error} = useGetAPI<groupType>('group')
+   const {
+      status,
+      data,
+   } = useQuery({
+      queryKey: ['account'],
+      queryFn: () => API({
+         method: 'GET',
+         url: 'group',
+         data: null,
+         headers: {
+            authorization: '',
+         }
+      }),
+   })
 
    useEffect(() => {
         anime({
@@ -26,7 +42,9 @@ export default function Groups() {
                 
      }, [data])
 
-   if(loading) return <Loader />
+   if(status === 'error') return <NoContent />
+   if(status === 'loading') return <Loader />
+
    return(
     <section className="account-slides groups"  id='groups'>
       <Outlet />

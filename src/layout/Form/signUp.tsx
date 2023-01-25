@@ -1,5 +1,4 @@
 import {useRef, useState} from 'react'
-import { ENDPOINT } from '../../functions/useGetAPI';
 import { AnimatePresence, motion } from 'framer-motion';
 import { callFormApi, formValidation } from '../../functions/functions';
 import SignIn from './signIn';
@@ -24,22 +23,6 @@ export default function SignUp({setFormState}: any) {
          email:  email.current!.value,
       }
       
-      callFormApi({
-         method: 'post',
-         url: ENDPOINT + 'register',
-         data: userData
-      }).then(() => setFormState(<SignIn />)
-      )
-         .catch((err) => {
-            setFormErrors([err.response.data])
-            
-            // if(err?.response?.data?.error) {
-            //    setFormErrors([ err?.response?.data?.error])
-            // }
-            
-         }
-      )
-      .finally(() => setLoading(false))
       
    }
 

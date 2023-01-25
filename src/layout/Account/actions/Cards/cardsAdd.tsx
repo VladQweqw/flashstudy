@@ -3,12 +3,10 @@ import Modal from '../../../../components/modal'
 import { motion } from 'framer-motion'
 import { useLocation } from 'react-router'
 import { slideAnimate, slideInitial } from '../../../../functions/functions'
-import useFetch, { ENDPOINT } from '../../../../functions/useGetAPI'
 import { colors } from '../../../../functions/functions'
 
 export default function CardsAdd() {
    const [colorIndex, setColorIndex] = useState(0)
-   const { reFetch } = useFetch<any>();
    
    const { state } = useLocation();
 
@@ -61,21 +59,8 @@ export default function CardsAdd() {
                </div>
 
             <div className="add-slide-btn-wrapper">
-               <button className="add-slide-btn primary-btn " onClick={() => {
-                  console.log(state?.groupId);
-                  
-                  reFetch({
-                     method: 'POST',
-                     url: ENDPOINT + 'slide/create',
-                     data: {
-                        question: question.current!.value || 'Untitled',
-                        answer: answer.current!.value || 'Untitled',
-                        tags: JSON.stringify([]),
-                        image:null,
-                        groupId:state?.groupId,
-                     },
-                     headers: {}
-                 })
+               <button className="add-slide-btn primary-btn " onClick={() => {                  
+               
                }}>Create</button>
             </div>
             </motion.div>
