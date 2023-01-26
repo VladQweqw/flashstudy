@@ -12,7 +12,7 @@ export default function GroupEdit() {
    const description = useRef<HTMLTextAreaElement | null>(null)
 
    const [ params ] = useSearchParams();   
-
+   
     return(
     <Modal>
         <motion.div

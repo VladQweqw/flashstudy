@@ -9,6 +9,7 @@ import { STAGGER_DURATION } from '../../functions/functions';
 import NoContent from '../../components/noContent';
 import Loader from '../../components/loader';
 import { API } from '../../functions/API';
+import { groupElementType } from '../../functions/types';
 
 export default function Cards() {
    const navigate = useNavigate();
@@ -20,13 +21,13 @@ export default function Cards() {
       status,
       data,
    } = useQuery({
-      queryKey: ['account', 'cards', parseInt(id!)],
+      queryKey: ['cards', parseInt(id!)],
       queryFn: () => API({
          url:`slide?gid=${id}`,
          method: 'GET',
          data: null,
          headers: {
-            authorization: ''
+            authorization: '' 
          }
       })
    })
@@ -40,12 +41,12 @@ export default function Cards() {
          duration:  50,
       })
 
-   }, [])
+   }, [data])
    
    if(status === 'loading') return <Loader />
    if(status === 'error') return <NoContent />
 
-
+   
    return(
     <section className="account-slides cards" id='cards'>
       <Outlet />
@@ -54,9 +55,11 @@ export default function Cards() {
          <h1>+</h1>
       </div>
 
-      {data?.data.length && data.data.map((item: any, index: number) => {
+      {data?.data && data.data.map((item: any, index: number) => {
          return  <Card 
-         data = {[...item, setIsContextMenu, setContextMenuCoords]}
+         item={item}
+         setIsContextMenu={setIsContextMenu}
+         setContextMenuCoords={setContextMenuCoords}
         
          key={index}
          />
@@ -74,8 +77,12 @@ export default function Cards() {
 
 
 
-function Card(data: any) {
-   const {setIsContextMenu, setContextMenuCoords, item } = data;
+function Card(data: {
+   item: any,
+   setIsContextMenu: (arg0: boolean) => void,
+   setContextMenuCoords: any
+}) {
+   const {item, setIsContextMenu, setContextMenuCoords} = data;
    
    return(
           <div onClick={() => setIsContextMenu(false)} onContextMenu={(e) => {
@@ -89,10 +96,8 @@ function Card(data: any) {
           }} className="account-slide slide card-slide">
 
          <div className="slide-text">
-            <h1 className="slide-title">Lorem ipsum dolor awdaw  </h1>
-            <p className="slide-description">
-               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem, eveniet reprehenderit. Quibusdam perspiciatis cawdwdad wdwaa d a dwa     wad
-            </p>
+            <h1 className="slide-title">{item.question}</h1>
+            <p className="slide-description">{item.answer}</p>
             <p className="slide-last-updated">last edited: 3 hours ago</p>
          </div>
 

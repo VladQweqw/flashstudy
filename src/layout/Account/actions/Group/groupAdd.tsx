@@ -4,40 +4,68 @@ import { slideAnimate, slideInitial, togglePopup } from '../../../../functions/f
 import { useNavigate } from 'react-router'
 import Modal from '../../../../components/modal'
 import Loader from '../../../../components/loader'
-import { groupType } from '../../../../functions/types'
+import { useMutation } from 'react-query'
+import { API } from '../../../../functions/API'
+import { useQueryClient } from 'react-query'
 
 export default function GroupAdd() {
-    const navigate = useNavigate();
-    const title = useRef<HTMLInputElement | null>(null)
-    const description = useRef<HTMLTextAreaElement | null>(null)
+  const navigate = useNavigate();
+  const title = useRef<HTMLInputElement | null>(null)
+  const description = useRef<HTMLTextAreaElement | null>(null)
+
+  const queryClient = useQueryClient();
+
+    const {
+      status,
+      mutate
+    } = useMutation({
+      mutationFn: API,
+      
+      onError: () => {
+        togglePopup('Something went wring', 'ERROR');
+      },
+      onSuccess: newGroup => {
+        queryClient.setQueryData(['groups'], newGroup);
+        togglePopup('Group created', 'SUCCESS');
+        navigate('/account')
+        queryClient.refetchQueries({
+            queryKey: ['account']
+        });
+      }
+    })
 
 
-    // if(responseData?.message === 'group created') {   
-    //     togglePopup('Group created', 'SUCCESS');
-    //     navigate('/account')
-    // }
-    
-    // {error != null && togglePopup('Something went wring', 'ERROR')}
     return(
     <Modal>
         <motion.div
-      
-      initial={slideInitial}
-      animate={slideAnimate}
-      className="notes-modal modal--wrapper">
+        initial={slideInitial}
+        animate={slideAnimate}
+        className="notes-modal modal--wrapper">
     
-    <form className="add-slide-content">
-
-        <input ref={title} type="text" id='add-notes-input' className="input add-slide-input" placeholder='Title' name='Title' />
-
-        <textarea ref={description} className='input textarea add-slide-textarea'id='add-notes-textarea ' placeholder='Description (optional)'></textarea>
-
-        </form>
+          {status === 'loading' ? <Loader /> : 
+          <form className="add-slide-content">
+              <input ref={title} type="text" id='add-notes-input' className="input add-slide-input" placeholder='Title' name='Title' />
+              <textarea ref={description} className='input textarea add-slide-textarea'id='add-notes-textarea ' placeholder='Description (optional)'></textarea>
+          </form>
+          }
         
-      
-         <div className="add-slide-btn-wrapper">
-            <button className="add-slide-btn primary-btn">Create</button>
-         </div>
+          <div className="add-slide-btn-wrapper">
+              <button className="add-slide-btn primary-btn" onClick={() => {
+                mutate({
+                  url: 'group/create',
+                  method: 'POST',
+                  data: {
+                    color: '#FFFFFF',
+                    description: title.current!.value || 'Untitled',
+                    isPublic: true,
+                    name: title.current!.value || 'Untitled'
+                  },
+                  headers: {
+                    authorization: ''
+                  }
+                })
+              }}>Create</button>
+          </div>
             </motion.div>
         </Modal>
    )

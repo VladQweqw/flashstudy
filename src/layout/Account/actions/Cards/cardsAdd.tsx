@@ -1,18 +1,40 @@
 import {useRef, useState} from 'react'
 import Modal from '../../../../components/modal'
 import { motion } from 'framer-motion'
-import { useLocation } from 'react-router'
-import { slideAnimate, slideInitial } from '../../../../functions/functions'
+import { useParams } from 'react-router'
+import { slideAnimate, slideInitial, togglePopup } from '../../../../functions/functions'
 import { colors } from '../../../../functions/functions'
+import { useQueryClient, useMutation } from 'react-query'
+import { API } from '../../../../functions/API'
+import Loader from '../../../../components/loader'
 
 export default function CardsAdd() {
    const [colorIndex, setColorIndex] = useState(0)
-   
-   const { state } = useLocation();
+   const { id } = useParams();
 
    const question = useRef<HTMLInputElement | null>(null);
    const answer = useRef<HTMLTextAreaElement | null>(null);
 
+   const queryClient = useQueryClient();
+
+   const {
+      status,
+      mutate
+    } = useMutation({
+      mutationFn: API,
+      
+      onError: () => {
+        togglePopup('Something went wring', 'ERROR');
+      },
+      onSuccess: newSlide => {
+        queryClient.setQueryData(['cards', id], newSlide);
+        togglePopup('Card created', 'SUCCESS');
+
+        queryClient.refetchQueries({
+            queryKey: ['cards'],
+        });
+      }
+    })
 
    document.querySelectorAll('.color').forEach((color) => {
 
@@ -25,9 +47,10 @@ export default function CardsAdd() {
          
       })
    })
-    
+   
    return(
         <Modal>
+            {status === 'loading' ? <Loader /> :
             <motion.div
          
          initial={slideInitial}
@@ -60,10 +83,25 @@ export default function CardsAdd() {
 
             <div className="add-slide-btn-wrapper">
                <button className="add-slide-btn primary-btn " onClick={() => {                  
-               
+                  mutate({
+                     url:`slide/create`,
+                     method: 'POST',
+                     data: {
+                        answer: answer.current!.value || 'Untitled',
+                        question: question.current!.value || 'Untitled',
+                        tags: JSON.stringify([]),
+                        image: undefined,
+                        groupId: id
+                     },
+                     headers: {
+                        authorization: ''
+                     }
+                  })
                }}>Create</button>
             </div>
             </motion.div>
+            }
+
         </Modal>
    )
 }

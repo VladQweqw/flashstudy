@@ -1,10 +1,11 @@
 import {useRef, useState} from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
-import { callFormApi, formValidation } from '../../functions/functions';
-import SignIn from './signIn';
+import { formValidation, togglePopup } from '../../functions/functions';
 import Loader from '../../components/loader';
+import { API } from '../../functions/API';
+import { useQuery } from 'react-query';
 
-export default function SignUp({setFormState}: any) {
+export default function SignUp({setFormState}: {setFormState: (state: boolean) => void}) {
 
    const name = useRef<HTMLInputElement>(null);
    const email = useRef<HTMLInputElement>(null);
@@ -12,22 +13,33 @@ export default function SignUp({setFormState}: any) {
 
    const [formErrors, setFormErrors] = useState< string[]>([]);
    const [seePassword, setSeePassword] = useState(true);
-   const [loading, setLoading] = useState<boolean>(false);
 
-   function callApi() {
-      setLoading(true)
-      
-      const userData = {
-         username:    name.current!.value,
-         password: password.current!.value,
-         email:  email.current!.value,
-      }
-      
-      
-   }
-
-   if(loading) return <Loader />
-
+   const {
+      status,
+      refetch,
+   } = useQuery({
+      enabled: false,
+      onError: () => togglePopup('Something went wrong', 'ERROR'),
+      onSuccess: () => {
+         setFormState(true)
+         togglePopup('Account created!', 'SUCCESS');
+      },
+      queryFn: () => API({
+         method: 'POST',
+         url: 'register',
+         data: {
+            username:   name.current!.value,
+            password:   password.current!.value,
+            email:      email.current!.value,
+         },
+         headers: {
+            authorization: ''
+         }
+      }),   
+      queryKey: ['register']
+   })
+   
+   if(status === 'loading') return <Loader />
    return(
     <form action="submit" id="signup-form" className='login-form'>
 
@@ -38,7 +50,7 @@ export default function SignUp({setFormState}: any) {
          <input type="email"    ref={email} id='signup-email' className='email' placeholder='Email' />
       </div>
       <div className="input">
-         <input type={seePassword ? 'password': 'text'} ref={password} id='signup-pwd' className='pwd' placeholder='Password' />
+         <input autoComplete="on" type={seePassword ? 'password': 'text'} ref={password} id='signup-pwd' className='pwd' placeholder='Password' />
          <span className="see-password" onClick={() => setSeePassword(!seePassword)}>
             {seePassword ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
          </span>
@@ -56,7 +68,7 @@ export default function SignUp({setFormState}: any) {
          if(resp.length) {
             setFormErrors(resp)
          }else {
-            callApi()
+            refetch()
          }
              
 

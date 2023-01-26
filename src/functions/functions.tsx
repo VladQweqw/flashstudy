@@ -143,6 +143,8 @@ export function encodeAndSave(key: string, token: string) {
     saveToLocal(
         key, window.btoa(token)
     )
+    
+    return true
 }
 
 export function decodeAndRetrieve(token: string) {
@@ -198,8 +200,6 @@ export function getGreeding() {
 
 export function formValidation(username: string, password: string, email: string): string[] {
     let errors = [];
-    console.log('a');
-    
     
     if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         errors.push("Email not valid");
