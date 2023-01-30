@@ -14,6 +14,8 @@ export default function CardsAdd() {
 
    const question = useRef<HTMLInputElement | null>(null);
    const answer = useRef<HTMLTextAreaElement | null>(null);
+   const imageInput = useRef<HTMLInputElement | null>(null);
+   const image = useRef<HTMLImageElement | null>(null);
 
    const queryClient = useQueryClient();
 
@@ -47,6 +49,16 @@ export default function CardsAdd() {
          
       })
    })
+
+   function createImagePreview(e: HTMLInputElement) {
+      if(e.files!.length > 0) {
+         const src = URL.createObjectURL(e.files![0]);
+         image.current!.src = src;
+      }else {
+         image.current!.src = 'https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=PM_optEhHBTZkuJQLlCjLz-v3zzxp-1mpNQZsdjrbns=';
+      }
+   
+   }
    
    return(
         <Modal>
@@ -59,7 +71,14 @@ export default function CardsAdd() {
             backgroundColor: colors[colorIndex].colorHex
          }} className="slide-modal modal--wrapper">
             <div className="thumbnail-image-wrapper">
-               <img src="https://images.unsplash.com/photo-1458222960031-58c2a8f3ae50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="slide-thumbnail-image" className="thumbnail-image" />
+               <input ref={imageInput} onChange={(e) => {                  
+                  createImagePreview((e.target as HTMLInputElement))
+                
+                  
+               }} type="file" id="card-upload" hidden/>
+               <label htmlFor="card-upload" className='card-upload'>Choose File</label>
+
+               <img ref={image} src="https://images.unsplash.com/photo-1458222960031-58c2a8f3ae50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="slide-thumbnail-image" className="thumbnail-image" />
             </div>
 
             <form className="add-slide-content">
@@ -90,7 +109,7 @@ export default function CardsAdd() {
                         answer: answer.current!.value || 'Untitled',
                         question: question.current!.value || 'Untitled',
                         tags: JSON.stringify([]),
-                        image: undefined,
+                        image: imageInput.current!.files![0],
                         groupId: id
                      },
                      headers: {

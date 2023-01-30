@@ -22,6 +22,8 @@ export interface practiceQuestion {
    answer: string,
 }
 
+// cards
+
 export type groupElementArray = groupElementType[]
 export type groupType = {
    message: string,
@@ -50,4 +52,29 @@ export type groupElementType = {
    isPublic: boolean,
    likes: number,
    name: string
+}
+
+
+export type cardType = {
+   CreatedAt: string | null,
+   DeletedAt: string | null,
+   UpdatedAt: string | null,
+   Group: groupType,
+   GroupId: number,
+   ID: number,
+   answer: string,
+   image: string,
+   question: string,
+   tags: string[]
+}
+
+
+
+export type slideCategories = 'slide' | 'exam' | 'note';
+
+// contextMenu
+export type contextMenuType = {
+   x: number, 
+   y: number, 
+   id: number | null
 }

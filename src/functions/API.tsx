@@ -6,7 +6,7 @@ export type MethodsType = 'POST' | 'GET' | 'PUT' | 'DELETE';
 
 const token = decodeAndRetrieve('token');
 
-export function API(options: {
+export async function API(options: {
   method: MethodsType,
   url: string,
   data: any,
@@ -17,5 +17,6 @@ export function API(options: {
   options.headers.authorization = `Bearer ${token}`;
   options.url = ENDPOINT + options.url;
   
-  return axios.request(options).then((res) => res.data)
+  const res = await axios.request(options);
+  return res.data;
 };
