@@ -1,4 +1,4 @@
-import { colorThemes } from "./types";
+import { colorThemes, slideCategories } from "./types";
 import axios from "axios";
 
 //QUIZ
@@ -311,3 +311,11 @@ export const colors = [
     },
  ]
 
+export function singularURLNames(name: string): string {
+    
+    if(name === 'cards') return 'slide'
+    if(name === 'notes') return 'note'
+    if(name === 'exams') return 'exam'
+   
+    return ''
+}

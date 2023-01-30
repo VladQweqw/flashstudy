@@ -1,19 +1,12 @@
 import { decodeAndRetrieve } from "./functions";
 import axios from "axios";
+import { APIdefaultTypes } from "./types";
 
 export const ENDPOINT = 'http://trphost.go.ro:8081/api/';
-export type MethodsType = 'POST' | 'GET' | 'PUT' | 'DELETE';
 
 const token = decodeAndRetrieve('token');
 
-export async function API(options: {
-  method: MethodsType,
-  url: string,
-  data: any,
-  headers: {
-    authorization: string,
-  }
-}) {
+export async function API(options: APIdefaultTypes) {
   options.headers.authorization = `Bearer ${token}`;
   options.url = ENDPOINT + options.url;
   

@@ -3,7 +3,7 @@ import { Outlet, useNavigate, useParams } from 'react-router'
 import { useQuery } from 'react-query';
 import anime from 'animejs'
 
-import { STAGGER_DURATION } from '../../functions/functions';
+import { singularURLNames, STAGGER_DURATION } from '../../functions/functions';
 import { API } from '../../functions/API';
 import { cardType, contextMenuType, slideCategories } from '../../functions/types';
 import Context from './actions/context';
@@ -21,18 +21,9 @@ export default function Category() {
    const [contextMenuCoords, setContextMenuCoords] = useState<contextMenuType>({x: 0, y: 0, id: null})
    
     useEffect(() => {
-      
-        if(category === 'cards') {
-            setCurrentCategory('slide')
-        }else if(category === 'notes') {
-            setCurrentCategory('note') 
-        }else if(category === 'exams') {
-            setCurrentCategory('exam')
-        }
-
+        setCurrentCategory(singularURLNames(category!))
     }, [category])
     
-
     const {
         status,
         data,

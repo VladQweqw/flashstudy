@@ -19,7 +19,7 @@ export type response = {
 
 export interface practiceQuestion {
    question: string,
-   answer: string,
+   answer: string, 
 }
 
 // cards
@@ -70,11 +70,23 @@ export type cardType = {
 
 
 
-export type slideCategories = 'slide' | 'exam' | 'note';
+export type slideCategories = string | 'slide' | 'exam' | 'note';
 
 // contextMenu
 export type contextMenuType = {
    x: number, 
    y: number, 
    id: number | null
+}
+
+//API
+export type MethodsType = 'POST' | 'GET' | 'PUT' | 'DELETE';
+
+export type APIdefaultTypes = {
+   method: MethodsType,
+   url: string,
+   data: any,
+   headers: {
+     authorization: string,
+   }
 }

@@ -1588,12 +1588,12 @@ button {
 .modal-wrapper .slide-modal .color-select .color-select-active {
   outline: 2px solid white;
 }
-.modal-wrapper .notes-modal {
+.modal-wrapper .note-modal {
   display: grid;
   grid-template-rows: auto 75px;
   padding: 1vw;
 }
-.modal-wrapper .notes-modal textarea {
+.modal-wrapper .note-modal textarea {
   height: 100%;
 }
 .modal-wrapper .exam-modal .slide-header {

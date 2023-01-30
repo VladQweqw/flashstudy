@@ -1,8 +1,10 @@
-import  { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion';
-import Modal from './modal';
 import { saveToLocal, getFromLocal, setDarkMode, togglePopup } from '../functions/functions';
 import { setBackground, backgroundImages } from '../functions/functions';
+import { slideInitial, slideAnimate } from '../functions/functions';
+
+import Modal from './modal';
 
 export default function Settings() {
    const [settingsPanel, setSettingsPanel] = useState(<Account />)
@@ -24,18 +26,8 @@ export default function Settings() {
    return(
     <Modal>
         <motion.div
-        initial={{
-          translateY: '100%',
-          scale: 0,
-
-       }}
-       animate={{
-          translateY: '0%',
-          scale: 1,
-          transition: {
-             duration: .4
-          }
-       }}
+        initial={slideInitial}
+        animate={slideAnimate}
         className="settings">
             <ul className="settings-navbar">
                 <li className="navbar-item navbar-item-active" onClick={() => setSettingsPanel(<Account />)}>Account</li>

@@ -1,9 +1,7 @@
 import { useParams } from 'react-router'
 import { useState, useEffect } from 'react';
 
-import CardsAdd from './actions/Cards/cardsAdd';
-import NotesAdd from './actions/Notes/notesAdd';
-import ExamsAdd from './actions/Exams/examsAdd';
+import { ExamsAdd, CardsAdd, NotesAdd } from './createCategories';
 
 export default function Create() {
    const {category} = useParams();
