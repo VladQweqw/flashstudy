@@ -1,20 +1,17 @@
 import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router'
-import { groupType, groupElementType } from '../../functions/types';
-import { formatDate, STAGGER_DURATION } from '../../functions/functions';
+import { groupType, groupElementType } from '../../../functions/types';
+import { formatDate, STAGGER_DURATION } from '../../../functions/functions';
 import anime from 'animejs'
-import Context from './actions/context';
-import Loader from '../../components/loader';
-import { API } from '../../functions/API';
+import Loader from '../../../components/loader';
+import { API } from '../../../functions/API';
 import { Outlet } from 'react-router';
 
 import { useQuery } from 'react-query';
-import NoContent from '../../components/noContent';
+import NoContent from '../../../components/noContent';
 
 export default function Groups() {
    const navigate = useNavigate();
-   const [isContextMenu, setIsContextMenu] = useState(false);
-   const [contextMenuCoords, setContextMenuCoords] = useState<{x: number, y: number, id: number | null}>({x: 0, y: 0, id: null})
 
    const {
       status,
@@ -48,7 +45,7 @@ export default function Groups() {
    return(
     <section className="account-slides groups"  id='groups'>
       <Outlet />
-    {isContextMenu && <Context {...contextMenuCoords} />}
+
     <div
     onClick={() => navigate('create')}
     className="account-slide slide add-slide" id='add-group'>
@@ -62,8 +59,6 @@ export default function Groups() {
             key={index} 
             navigate={navigate} 
             data={item} 
-            setIsContextMenu={setIsContextMenu}  
-            setContextMenuCoords={setContextMenuCoords} 
             />
          })
       }
@@ -74,13 +69,9 @@ export default function Groups() {
 
 function Group({
    data,
-   setIsContextMenu,
-   setContextMenuCoords,
    navigate,
 }: {
    data: groupElementType,
-   setIsContextMenu: any,
-   setContextMenuCoords: any,
    navigate: any,
 }) {     
    
@@ -88,18 +79,7 @@ function Group({
     return(
            <div onClickCapture={() => {
             navigate(`cards/${data.ID}`)
-           }} onClick={() => {
-            setIsContextMenu(false)
-
-           }} onContextMenu={(e) => {
-             setIsContextMenu(true)
- 
-             let x = e.pageX - (e.target as HTMLDivElement).offsetLeft
-             let y = e.pageY - (e.target as HTMLDivElement).offsetTop
- 
-             setContextMenuCoords({x, y, id: data?.ID})
- 
-           }} className="account-slide slide group group-slide">
+           }} onClick={() => navigate('edit') } className="account-slide slide group group-slide">
  
              <h1 className="slide-title">{data?.name} </h1>
              <p className="slide-description">{data?.description}</p>

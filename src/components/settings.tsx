@@ -20,9 +20,10 @@ export default function Settings() {
         item.classList.add('navbar-item-active')
       })
    })
-   }, [])
-   
 
+   slideAnimate.transition.duration = .2
+   }, [])
+     
    return(
     <Modal>
         <motion.div

@@ -5,8 +5,8 @@ import { getFromLocal, setDarkMode } from './functions/functions'
 // universal
 import Navbar from './components/navbar'
 import Error from './components/error'
-import Practice from './layout/Account/actions/Cards/practice'
-import Quiz from './layout/Account/actions/Cards/quiz'
+import Practice from './layout/Account/practice'
+import Quiz from './layout/Account/quiz'
 import Settings from './components/settings'
 import Popup from './components/popup'
 import Chart from './layout/Account/chart'
@@ -20,14 +20,14 @@ import Home from './layout/Home/home'
 import Account from './layout/Account/account'
 
 //group
-import Groups from './layout/Account/groups'
-import GroupAdd from './layout/Account/actions/Group/groupAdd'
-import GroupEdit from './layout/Account/actions/Group/groupEdit'
+import Groups from './layout/Account/Slides/groups'
+import GroupAdd from './layout/Account/Create/groupAdd'
+import GroupEdit from './layout/Account/Edit/groupEdit'
 
 //account
-import Create from './layout/Account/create'
-import Edit from './layout/Account/edit'
-import Category from './layout/Account/category'
+import Create from './layout/Account/Create/create'
+import Edit from './layout/Account/Edit/edit'
+import Category from './layout/Account/Create/category'
 
 export default function App() {
   const location = useLocation();
@@ -65,7 +65,7 @@ export default function App() {
           
           <Route path=':category/:id' element={<Category />}>
             <Route path='create' element={<Create />}></Route>
-            <Route path='edit' element={<Edit />}></Route>
+            <Route path='edit/:slideId' element={<Edit />}></Route>
           </Route>
         </Route>      
         

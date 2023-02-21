@@ -2,23 +2,18 @@ import {useState, useEffect} from 'react'
 import { Outlet, useNavigate, useParams } from 'react-router'
 import { useQuery } from 'react-query';
 import anime from 'animejs'
+import { singularURLNames, STAGGER_DURATION } from '../../../functions/functions';
+import { API } from '../../../functions/API';
+import { contextMenuType, slideCategories } from '../../../functions/types';
+import NoContent from '../../../components/noContent';
+import Loader from '../../../components/loader';
 
-import { singularURLNames, STAGGER_DURATION } from '../../functions/functions';
-import { API } from '../../functions/API';
-import { cardType, contextMenuType, slideCategories } from '../../functions/types';
-import Context from './actions/context';
-import NoContent from '../../components/noContent';
-import Loader from '../../components/loader';
-
-import { Card, Exam, Note } from './categories';
+import { Card, Exam, Note } from '../Slides/categories';
 
 export default function Category() {
    const {category, id} = useParams();
    const navigate = useNavigate();
-
-   const [currentCategory, setCurrentCategory] = useState<slideCategories>('slide')
-   const [isContextMenu, setIsContextMenu] = useState(false);
-   const [contextMenuCoords, setContextMenuCoords] = useState<contextMenuType>({x: 0, y: 0, id: null})
+   const [currentCategory, setCurrentCategory] = useState<slideCategories>('card')
    
     useEffect(() => {
         setCurrentCategory(singularURLNames(category!))
@@ -30,7 +25,7 @@ export default function Category() {
     } = useQuery({
         queryKey: [currentCategory, parseInt(id!)],
         queryFn: () => API({
-        url:`${currentCategory}?${currentCategory === 'slide' ? 'gid': 'id'}=${id}`,
+        url:`${currentCategory === 'card' ? 'slide' : currentCategory}?id=${id}`,
         method: 'GET',
         data: null,
         headers: {
@@ -56,7 +51,7 @@ export default function Category() {
     return(
         <section className="account-slides cards" id='cards'>
         <Outlet />
-        {isContextMenu && <Context {...contextMenuCoords} />}
+
         <div onClick={() => navigate('create')} className="account-slide slide add-slide">
             <h1>+</h1>
         </div>
@@ -64,14 +59,12 @@ export default function Category() {
          {data?.data && data.data.map((item: any, index: number) => {
             return  <Slide 
             item={item}
-            setIsContextMenu={setIsContextMenu}
-            setContextMenuCoords={setContextMenuCoords}
             key={index}
             type={currentCategory}
             />
         })}
 
-        {currentCategory === 'slide' && 
+        {currentCategory === 'card' && 
         <div className="practice-buttons">
             <button onClick={() => navigate('practice')} className="practice-button primary-btn" id='practice-btn'>Practice</button>
             <button onClick={() => navigate('quiz')} className="practice-button primary-btn" id='quiz-btn'>Quiz</button>
@@ -83,13 +76,11 @@ export default function Category() {
 }
 
 function Slide(data: {
-    item: cardType,
-    setIsContextMenu: (arg0: boolean) => void,
-    setContextMenuCoords: any,
+    item: any,
     type: slideCategories
  }): JSX.Element {
 
-    if(data.type === 'slide') return  <Card  {...data} />
+    if(data.type === 'card') return  <Card  {...data} />
     if(data.type === 'note')  return  <Note  {...data} />
     if(data.type === 'exam')  return  <Exam  {...data} />
     

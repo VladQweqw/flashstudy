@@ -1,16 +1,35 @@
-import {useState} from 'react'
-import { practiceQuestion } from '../../../../functions/types';
+import {useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
-import { practiceQuestions } from '../../../../functions/functions';
-import { slowSlideAniamte, slowSlideInitial } from '../../../../functions/functions';
+import { slowSlideAniamte, slowSlideInitial } from '../../functions/functions';
+import { useParams } from 'react-router';
+import { cardType } from '../../functions/types';
+import Loader from '../../components/loader';
+import { useQuery } from 'react-query';
+import { API } from '../../functions/API';
+import NoContent from '../../components/noContent';
 
 export default function Practice() {
-    const [slideIndex, setSlideIndex] = useState(0);
+    const [slideIndex, setSlideIndex] = useState(0);    
+    const { id } = useParams();
+
+    const {
+        status,
+        data,
+    } = useQuery({
+        queryFn: () => API({
+            method: 'GET',
+            url: `slide?id=${id}`,
+            data: null,
+            headers: {
+                authorization: ''
+            }
+        }),
+        queryKey: ['card', parseInt(id!)]
+    })
 
     function prev() {
-
         if(slideIndex <= 0) {
-            return setSlideIndex(practiceQuestions.length -1);
+            return setSlideIndex(data!.data.length - 1);
         }
 
         setSlideIndex((slideIdx) => slideIdx - 1);
@@ -18,13 +37,15 @@ export default function Practice() {
 
     function next() {
 
-        if(slideIndex > practiceQuestions.length - 2) {
+        if(slideIndex > data!.data.length - 2) {
             return setSlideIndex(0);
         }
         
         setSlideIndex((slideIdx) => slideIdx + 1);
     }
-
+    
+   if(status === 'loading') return <Loader />
+   if(status === 'error') return <NoContent />
    return(
     <motion.div
     initial={slowSlideInitial}
@@ -33,7 +54,7 @@ export default function Practice() {
     className="practice">
 
         <div className="cards">
-            {practiceQuestions.map((practiceQuestion: practiceQuestion, index: number) => {
+            {data?.data && data.data.map((practiceQuestion: cardType, index: number) => {
                 return <Question data={practiceQuestion} translateIndex={slideIndex} key={index} />
             })}
         </div>
@@ -54,14 +75,12 @@ export default function Practice() {
 }
 
 const Question = (props:{
-    data:  practiceQuestion,
+    data:  cardType,
     translateIndex: number,
     key: number
 }): JSX.Element => {
     const [seeAnswer, setSeeAnswer] = useState<boolean>(false)
         
-    const {question, answer} = props.data;
-    
     return(
         <div 
         style={{
@@ -78,13 +97,13 @@ const Question = (props:{
 
                 <div className="practice-card-front practice-card-side">
                     <h3 className="card-title">Question {props.translateIndex + 1}:</h3>
-                    <h1 id="practice-question" className='practice-question'>{question}</h1>
+                    <h1 id="practice-question" className='practice-question'>{props.data.question}</h1>
                 </div>
 
                 <div className="practice-card-back practice-card-side">
                     <h3 className="card-title">Answer:</h3>
 
-                    <h1 id="practice-question" className='practice-question'>{answer}</h1>
+                    <h1 id="practice-question" className='practice-question'>{props.data.answer}</h1>
                 </div>
 
             </div>

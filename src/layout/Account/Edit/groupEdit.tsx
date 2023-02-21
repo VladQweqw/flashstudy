@@ -1,9 +1,8 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { slideAnimate, slideInitial, togglePopup } from '../../../../functions/functions'
+import { slideAnimate, slideInitial, togglePopup } from '../../../functions/functions'
 import { useNavigate } from 'react-router'
-import Modal from '../../../../components/modal'
-import Loader from '../../../../components/loader'
+import Modal from '../../../components/modal'
 import { useSearchParams } from 'react-router-dom'
 
 export default function GroupEdit() {

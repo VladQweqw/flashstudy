@@ -2,7 +2,7 @@ import { decodeAndRetrieve } from "./functions";
 import axios from "axios";
 import { APIdefaultTypes } from "./types";
 
-export const ENDPOINT = 'http://trphost.go.ro:8081/api/';
+export const ENDPOINT = 'https://flashstudy.razvanpoienariu.net/api/';
 
 const token = decodeAndRetrieve('token');
 

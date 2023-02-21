@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { slideAnimate, slideInitial, togglePopup } from '../../../../functions/functions'
+import { slideAnimate, slideInitial, togglePopup } from '../../../functions/functions'
 import { useNavigate } from 'react-router'
-import Modal from '../../../../components/modal'
-import Loader from '../../../../components/loader'
+import Modal from '../../../components/modal'
+import Loader from '../../../components/loader'
 import { useMutation } from 'react-query'
-import { API } from '../../../../functions/API'
+import { API } from '../../../functions/API'
 import { useQueryClient } from 'react-query'
 
 export default function GroupAdd() {

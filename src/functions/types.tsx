@@ -27,7 +27,7 @@ export interface practiceQuestion {
 export type groupElementArray = groupElementType[]
 export type groupType = {
    message: string,
-   data: groupElementArray
+   data: groupElementArray | any
 }
 
 
@@ -68,9 +68,20 @@ export type cardType = {
    tags: string[]
 }
 
+export type noteType = {
+   CreatedAt: string | null,
+   DeletedAt: string | null,
+   UpdatedAt: string | null,
+   Group: groupType,
+   GroupId: number,
+   ID: number,
+   title: string,
+   text: string,
+   userId: number,
+}
 
 
-export type slideCategories = string | 'slide' | 'exam' | 'note';
+export type slideCategories = string | 'card' | 'exam' | 'note';
 
 // contextMenu
 export type contextMenuType = {

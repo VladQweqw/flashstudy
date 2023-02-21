@@ -1,13 +1,13 @@
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { slideAnimate, slideInitial, togglePopup, singularURLNames } from '../../functions/functions'
+import { slideAnimate, slideInitial, togglePopup, singularURLNames } from '../../../functions/functions'
 import { useParams } from 'react-router'
-import { API } from '../../functions/API'
+import { API } from '../../../functions/API'
 import { useQueryClient, useMutation } from 'react-query'
-import { slideCategories } from '../../functions/types'
+import { slideCategories } from '../../../functions/types'
 
-import Modal from '../../components/modal'
-import Loader from '../../components/loader'
+import Modal from '../../../components/modal'
+import Loader from '../../../components/loader'
 
 export function CardsAdd() {
     const { id, category } = useParams(); 
@@ -119,7 +119,6 @@ export function NotesAdd() {
     const title = useRef<HTMLInputElement | null>(null)
     const text = useRef<HTMLTextAreaElement | null>(null)
 
-
     const { 
      status,
      mutate
@@ -157,7 +156,7 @@ export function NotesAdd() {
                 </form>
 
                 <div className="add-slide-btn-wrapper">
-                    <button className="add-slide-btn primary-btn " onClick={() => {
+                    <button className="add-slide-btn primary-btn " onClick-={() => {
                       
                          mutate({
                             url:`note/create`,
@@ -165,7 +164,7 @@ export function NotesAdd() {
                             data: {
                                 title: title.current!.value || 'Untitled',
                                 text: text.current!.value || 'Untitled',
-                                groupId: id
+                                GroupId: parseInt(id!)
                              },
                             headers: {
                                 authorization: ''
@@ -177,7 +176,7 @@ export function NotesAdd() {
              </CreateOption>}
          </Modal>
     )
- }
+}
 
 export function ExamsAdd() {
    const { id, category } = useParams(); 
@@ -241,10 +240,6 @@ export function ExamsAdd() {
                     }else {
                         setDaysUntilExam(0)
                     }
-                    
-                        
-                    
-
                     }}
                     type="date" name="Add exam date" className='exam-date' id="exam-date" />
                     <p id="slide-days-left">{
@@ -282,6 +277,7 @@ export function ExamsAdd() {
         </Modal>
    )
 }
+
 
 function CreateOption(props: {
     children: any,

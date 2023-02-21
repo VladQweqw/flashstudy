@@ -313,7 +313,7 @@ export const colors = [
 
 export function singularURLNames(name: string): string {
     
-    if(name === 'cards') return 'slide'
+    if(name === 'cards') return 'card'
     if(name === 'notes') return 'note'
     if(name === 'exams') return 'exam'
    
