@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import anime from 'animejs'
 import { singularURLNames, STAGGER_DURATION } from '../../../functions/functions';
 import { API } from '../../../functions/API';
-import { contextMenuType, slideCategories } from '../../../functions/types';
+import { slideCategories } from '../../../functions/types';
 import NoContent from '../../../components/noContent';
 import Loader from '../../../components/loader';
 

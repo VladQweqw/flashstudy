@@ -115,7 +115,7 @@ export function CardsAdd() {
 export function NotesAdd() {
     const { id, category } = useParams(); 
     const queryClient = useQueryClient();
- 
+    
     const title = useRef<HTMLInputElement | null>(null)
     const text = useRef<HTMLTextAreaElement | null>(null)
 
@@ -146,7 +146,6 @@ export function NotesAdd() {
              <CreateOption
                  type={'note'}
              >
- 
                 <form className="add-slide-content">
 
                     <input ref={title} type="text" id='add-notes-input' className="input add-slide-input" placeholder='Title' name='Title' />
@@ -156,8 +155,8 @@ export function NotesAdd() {
                 </form>
 
                 <div className="add-slide-btn-wrapper">
-                    <button className="add-slide-btn primary-btn " onClick-={() => {
-                      
+                    <button className="add-slide-btn primary-btn " onClick={() => {
+                        
                          mutate({
                             url:`note/create`,
                             method: 'POST',

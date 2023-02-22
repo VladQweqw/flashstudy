@@ -1,18 +1,17 @@
 import { motion } from 'framer-motion'
-import { slideAnimate, slideInitial } from '../../../functions/functions'
-import { cardType, slideCategories } from '../../../functions/types'
-import Modal from '../../../components/modal'
-import { useLocation, useNavigate } from 'react-router'
-import { API } from '../../../functions/API'
-import { useMutation } from 'react-query'
-import { togglePopup } from '../../../functions/functions'
-import { useQueryClient } from 'react-query'
-import Loader from '../../../components/loader'
 import { useRef } from 'react'
+import { useMutation } from 'react-query'
+import { useLocation, useNavigate } from 'react-router'
+
+import { slideAnimate, slideInitial } from '../../../functions/functions'
+import { cardType, slideCategories, noteType } from '../../../functions/types'
+import { API } from '../../../functions/API'
+import { togglePopup } from '../../../functions/functions'
+import Modal from '../../../components/modal'
+import Loader from '../../../components/loader'
 
 export function CardsEdit() {
     const navigate = useNavigate();
-    const queryClient = useQueryClient()
 
     const question = useRef<HTMLInputElement | null>(null);
     const answer = useRef<HTMLTextAreaElement | null>(null);
@@ -74,11 +73,11 @@ export function CardsEdit() {
         <div className="add-slide-btn-wrapper">
             <button className="add-slide-btn primary-btn" onClick={() => {
                 mutate({
-                    url:`slide/create`,
+                    url:`slide/update`,
                     method: 'POST',
                     data: {
-                        answer: answer.current!.value || 'Untitled',
-                        question: question.current!.value || 'Untitled',
+                        answer: answer.current!.value,
+                        question: question.current!.value,
                         tags: JSON.stringify([]),
                         image: imageInput.current!.files![0],
                         id: state.ID
@@ -97,13 +96,16 @@ export function CardsEdit() {
 }
 
 export function NotesEdit() {
+    const { state }: {
+        state: noteType
+    } = useLocation();
 
     return(
         <EditOption type='note'>
 
         <form className="add-slide-content">
-            <input type="text" id='add-notes-input' className="input add-slide-input" placeholder='Title' name='Title' />
-            <textarea className='input textarea add-slide-textarea'id='add-notes-textarea ' placeholder='Description (optional)'></textarea>
+            <input type="text" defaultValue={state?.title}  id='add-notes-input' className="input add-slide-input" placeholder='Title'  name='Title' />
+            <textarea defaultValue={state?.text} className='input textarea add-slide-textarea'id='add-notes-textarea ' placeholder='Description (optional)'></textarea>
         </form>
 
         <div className="add-slide-btn-wrapper">
@@ -115,7 +117,9 @@ export function NotesEdit() {
 }
 
 export function ExamsEdit() {
+    const { state } = useLocation();
     let daysUntilExam = 0;
+
 
     function convertTime(timeInMs: number) {
         let examDate = new Date(
