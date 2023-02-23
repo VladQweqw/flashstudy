@@ -1,23 +1,45 @@
 import {useState, useEffect, useRef} from 'react'
 import { questionType } from '../../functions/types';
-import { correctPhrases, wrongPhrases, quizArr } from '../../functions/functions';
+import { correctPhrases, wrongPhrases, slowSlideAniamte, slowSlideInitial, togglePopup } from '../../functions/functions';
 import { motion } from 'framer-motion';
-import { slowSlideAniamte, slowSlideInitial } from '../../functions/functions';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import { useQuery } from 'react-query';
+import { API } from '../../functions/API';
+import Loader from '../../components/loader';
+import { log } from 'console';
 
 export default function Quiz() {
    const [questionIndex, setQuestionIndex] = useState(0);
-   const [shuffledAnswers, setShuffledAnswers] = useState<any>([])
-   const [statusMessage, setStatusMessage] = useState('')
-   const [isQuestionAnswered, setIsQuestionAnswered] = useState(false)
+   const [shuffledAnswers, setShuffledAnswers] = useState<{answer: string, isCorrect: boolean}[]>([])
+   const [statusMessage, setStatusMessage] = useState<string>('')
+   const [isQuestionAnswered, setIsQuestionAnswered] = useState<boolean>(false)
+   const [answers, setAnswers] = useState<{correct: number, wrong: number}>({correct: 0, wrong: 0})
+
    const footer = useRef<HTMLDivElement | null>(null);
-   const [answers, setAnswers] = useState({correct: 0, wrong: 0})
- 
+   const navigate = useNavigate();
+   const { id } = useParams();
+   
+   const {
+      status,
+      data,
+  } = useQuery({
+      queryFn: () => API({
+          method: 'GET',
+          url: `slide?id=${id}`,
+          data: null,
+          headers: {
+              authorization: ''
+          }
+      }),
+      queryKey: ['card', parseInt(id!)]
+  })
 
    useEffect(() => {
-      shuffleAnswers()
-
-   }, [questionIndex])
+      if(data?.data) {
+         shuffleAnswers()
+      }
+      
+   }, [questionIndex, data])
 
    function checkAnswer(answer: boolean, element: HTMLDivElement) {
       if(isQuestionAnswered) return;
@@ -55,13 +77,26 @@ export default function Quiz() {
    }
 
    function shuffleAnswers() {
-      const formated = quizArr.map(({answer, question}) => {
-         return {
-            answer,
-            isCorrect: quizArr[questionIndex].question === question,
-         }
-      });
-               
+      if(data?.data.length < 4) {
+         navigate(-1);
+         return togglePopup('Not enough cards', 'ERROR');
+      }
+      
+      const formated = [];
+      
+      formated.push({
+         answer: data?.data[questionIndex].answer,
+         isCorrect: true
+      })
+
+      for(let i = 1; i <= 3; i++) {
+         
+         formated.push({
+            answer: data?.data[(questionIndex + i) % data?.data.length].answer,
+            isCorrect: false
+         })
+      }
+
       formated.sort(() => Math.random() - .5);      
       setShuffledAnswers(formated)
    }
@@ -78,11 +113,11 @@ export default function Quiz() {
       })
 
 
-      if(questionIndex > quizArr.length - 2) {
+      if(questionIndex > data?.data.length - 2) {
          return setQuestionIndex(0)
       }
       if(questionIndex < 0) {
-         return setQuestionIndex(quizArr.length - 1);
+         return setQuestionIndex(data?.data.length - 1);
       }
 
       setQuestionIndex((prev) => prev + 1);
@@ -96,20 +131,23 @@ export default function Quiz() {
     className="quiz-wrapper"> 
 
       <div className="quiz">
+         {status === 'loading' && <Loader />}
 
-         {questionIndex >= quizArr.length - 1 ? 
+         {questionIndex >= data?.data.length - 1 ? 
             <QuizResult {...answers} /> :
             <>
                <div className="quiz-progress">
-               <div className="quiz-progress-value">
-                  <span>{questionIndex + 1}</span> / <span>{quizArr.length}</span>
+                  <div className="quiz-progress-value">
+                     <span>{questionIndex + 1}</span> / <span>{data?.data.length}</span>
+                  </div>
                </div>
-               </div>
+
                <div className="question-wrapper">
-                  <h1 id='question' className="question">
-                     {quizArr[questionIndex].question}
-                  </h1>
+                     <h1 id='question' className="question">
+                        {data?.data[questionIndex].question}
+                     </h1>
                </div>
+               
                <div className="answers">
                   {shuffledAnswers && shuffledAnswers.map((question: questionType, index: number) => {
                      const {answer, isCorrect} = question;
@@ -118,8 +156,8 @@ export default function Quiz() {
                         String.fromCharCode(65 + index)
                      } answer={answer} isCorrect={isCorrect} checkAnswer={checkAnswer} key={index} />
                   })}
-            
                </div>
+
                <div ref={footer} className="footer ">
                   <h1 className="message">{statusMessage}</h1>
 
@@ -134,7 +172,6 @@ export default function Quiz() {
    </motion.div>
    )
 }
-
 
 function QuizResult(data: {correct: number, wrong: number}) {
    const navigate = useNavigate()

@@ -1,17 +1,21 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
-import { useMutation } from 'react-query'
-import { useLocation, useNavigate } from 'react-router'
+import { useMutation, useQueryClient } from 'react-query'
+import { useLocation, useNavigate, useParams } from 'react-router'
 
-import { slideAnimate, slideInitial } from '../../../functions/functions'
+import { slideAnimate, slideInitial, togglePopup, singularURLNames } from '../../../functions/functions'
 import { cardType, slideCategories, noteType } from '../../../functions/types'
 import { API } from '../../../functions/API'
-import { togglePopup } from '../../../functions/functions'
 import Modal from '../../../components/modal'
 import Loader from '../../../components/loader'
 
 export function CardsEdit() {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const { category } = useParams();
+    const { state }: {
+        state: cardType
+    } = useLocation();     
 
     const question = useRef<HTMLInputElement | null>(null);
     const answer = useRef<HTMLTextAreaElement | null>(null);
@@ -28,22 +32,25 @@ export function CardsEdit() {
      
     }
 
-    const { state }: {
-        state: cardType
-    } = useLocation();     
-
     const { 
         status,
         mutate
       } = useMutation({
         mutationFn: API,
         
-        onError: () => {
-          togglePopup('Something went wrong', 'ERROR');
-        },
-        onSuccess: newSlide => {    
-            
+        onError: newSlide => {    
+            let cat = singularURLNames(category!)
+
+            queryClient.setQueryData([cat, state.ID!], newSlide);
+            togglePopup('Card updated', 'SUCCESS');
+    
+            queryClient.refetchQueries({
+                queryKey: [cat],
+            });
+
+            navigate(-1);
         }
+       
       })
 
     if(state == null) {
@@ -74,19 +81,36 @@ export function CardsEdit() {
             <button className="add-slide-btn primary-btn" onClick={() => {
                 mutate({
                     url:`slide/update`,
-                    method: 'POST',
+                    method: 'PUT',
                     data: {
                         answer: answer.current!.value,
                         question: question.current!.value,
                         tags: JSON.stringify([]),
-                        image: imageInput.current!.files![0],
-                        id: state.ID
+                        image: imageInput.current!.files![0] || null,
+                        id: state.ID.toString()
                     },
                     headers: {
                         authorization: ''
                     }
                 })
             }}>Change</button>
+            <button className="remove-slide-btn secondary-btn" onClick={(e) => {
+                let element = (e.target as HTMLButtonElement);
+                
+                if(element.innerText === 'Are you sure?') {
+                    mutate({
+                        url: `slide/delete?id=${state.ID}`,
+                        method:'DELETE',
+                        data: null,
+                        headers: {
+                            authorization: ''
+                        }
+                    })
+                }else {
+                    element.innerText = 'Are you sure?'
+                }
+ 
+            }}>Delete</button>
         </div>
 
         </>

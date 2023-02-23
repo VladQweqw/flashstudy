@@ -25,6 +25,7 @@ export interface practiceQuestion {
 // cards
 
 export type groupElementArray = groupElementType[]
+
 export type groupType = {
    message: string,
    data: groupElementArray | any
