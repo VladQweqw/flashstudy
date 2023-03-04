@@ -1,4 +1,3 @@
-import React,{} from 'react'
 import { useNavigate, useLocation } from 'react-router'
 
 export default function SideNavbar() {
@@ -8,7 +7,7 @@ export default function SideNavbar() {
    return(
     <>
         <div className="logo" onClick={() => navigate('/account')}>
-            <h1>FS</h1>
+            <h1 className='m1'>FS</h1>
         </div>
     
         <div className="side-navbar">

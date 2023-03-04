@@ -1,6 +1,5 @@
 import { cardType, noteType, slideCategories } from "../../../functions/types";
 import { formatDate } from "../../../functions/functions";
-import { contextMenuType } from "../../../functions/types";
 import { useNavigate } from "react-router";
 
 export function Exam(data: {
@@ -12,15 +11,15 @@ export function Exam(data: {
         {...data}
         >
         <div className="slide-text">
-            <h1 className="slide-title">Test matea awd awd awd </h1>
-            <p className="slide-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi voluptatum libero praesentium. Necessitatibus, hic commodi.</p>
+            <h1 className="slide-title m3">Test matea awd awd awd </h1>
+            <p className="slide-description m5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi voluptatum libero praesentium. Necessitatibus, hic commodi.</p>
 
-            <p className="slide-last-updated">last updated: 3 hours ago</p>
+            <p className="slide-last-updated m5">last updated: 3 hours ago</p>
         </div>
 
         <div className="slide-right">
             <h1 className="exam-days-number">32</h1>
-            <p className="exam-days-number-bottom" >days left</p>
+            <p className="exam-days-number-bottom m3" >days left</p>
         </div>
     </CategoryOption>
 }
@@ -35,10 +34,10 @@ export function Note(data: {
         {...data}
         >
         
-        <h1 className="note-title">{item.title}</h1>
-        <p className="note-description">{item.text}</p>
+        <h1 className="note-title m3">{item.title}</h1>
+        <p className="note-description m4">{item.text}</p>
 
-        <p className="slide-last-updated">Last edited: {
+        <p className="slide-last-updated m5">Last edited: {
             formatDate(new Date(item.UpdatedAt || '')).dmhmy()
         }</p>
 
@@ -55,17 +54,17 @@ export function Card(data: {
         {...data}
         >
         <div className="slide-text">
-        <h1 className="slide-title">{item.question}</h1>
-        <p className="slide-description">{item.answer}</p>
-        <p className="slide-last-updated">Last edited: {
+        <h1 className="slide-title m3">{item.question}</h1>
+        <p className="slide-description m4">{item.answer}</p>
+        <p className="slide-last-updated m5">Last edited: {
             formatDate(new Date(item.UpdatedAt || '')).dmhmy()
             }</p>
         </div>
 
         <div className="slide-thumbnail">
         <div className="card-image-overlay"></div>
-        {item.image &&  <img src={item.image} className='slide-thumbnail-image' alt="slide-thumbnail" />}
-        
+        {/* {item.image &&  <img src={item.image} className='slide-thumbnail-image' alt="slide-thumbnail" />} */}
+        <img src="https://images.pexels.com/photos/15476701/pexels-photo-15476701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className='slide-thumbnail-image' alt="slide-thumbnail" />
         </div>
     </CategoryOption>
 

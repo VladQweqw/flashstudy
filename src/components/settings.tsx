@@ -31,8 +31,8 @@ export default function Settings() {
         animate={slideAnimate}
         className="settings">
             <ul className="settings-navbar">
-                <li className="navbar-item navbar-item-active" onClick={() => setSettingsPanel(<Account />)}>Account</li>
-                <li className="navbar-item" onClick={() => setSettingsPanel(<Aspect />)} >Aspect</li>
+                <li className="navbar-item navbar-item-active m4" onClick={() => setSettingsPanel(<Account />)}>Account</li>
+                <li className="navbar-item m4" onClick={() => setSettingsPanel(<Aspect />)} >Aspect</li>
             </ul>
 
             <div className="settings-content">
@@ -48,9 +48,9 @@ function Account() {
   return(
     <>
       <div className="settings-container">
-        <h2 className="settings-title">Name</h2>
+        <h2 className="settings-title m4">Name</h2>
         <form className='change-username-form'>
-          <input type="text" name='change_username' id='change-uid' className="input" placeholder='New Username' />
+          <input type="text" name='change_username' id='change-uid' className="input m4" placeholder='New Username' />
           <button className="primary-btn">Change</button>
         </form>
       </div>
@@ -91,7 +91,7 @@ function Aspect() {
   return(      
       <>
       <Setting>
-        <h2 className="settings-title">Theme</h2>
+        <h2 className="settings-title m4">Theme</h2>
         <div className="cl-toggle-switch">
             <p> {isDarkMode ? 'Dark': 'Light'} </p>
           <label className="cl-switch">
@@ -109,7 +109,7 @@ function Aspect() {
       </Setting>
       
       <Setting>
-        <h2 className="settings-title">Background</h2>
+        <h2 className="settings-title m4">Background</h2>
         <div className="background-grid">
 
         <div onClick={() => {

@@ -8,8 +8,8 @@ export default function Feed() {
         <div className="feed-header">
 
             <header className="feed-titles">
-                <h1 className="primary-title m3">Discover</h1>
-                <p className="secondary-text m2">Explore the latest uploaded by the community</p> 
+                <h1 className="primary-title m1">Discover</h1>
+                <p className="secondary-text m3">Explore the latest uploaded by the community</p> 
             </header>   
 
             <div className="search-feed-wrapper">
@@ -23,19 +23,13 @@ export default function Feed() {
         </div>
 
         <div className="feed-content">
-            <div className="feed-row">
-                <div className="feed-item"></div>
-                <div className="feed-item"></div>
-                <div className="feed-item"></div>
-                <div className="feed-item"></div>
-            </div>
+            <h1 className="m1">Cal marian</h1>
+            <h2 className="m2">Cal marian</h2>
+            <h3 className="m3">Cal marian</h3>
+            <h4 className="m4">Cal marian</h4>
+            <h5 className="m5">Cal marian</h5>
+            <h6 className="m6">Cal marian</h6>
 
-            <div className="feed-row">
-                <div className="feed-item"></div>
-                <div className="feed-item"></div>
-                <div className="feed-item"></div>
-                <div className="feed-item"></div>
-            </div>
         </div>
     </div>
    )

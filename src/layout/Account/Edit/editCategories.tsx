@@ -38,7 +38,7 @@ export function CardsEdit() {
       } = useMutation({
         mutationFn: API,
         
-        onError: newSlide => {    
+        onSuccess: newSlide => {    
             let cat = singularURLNames(category!)
 
             queryClient.setQueryData([cat, state.ID!], newSlide);
@@ -57,7 +57,7 @@ export function CardsEdit() {
         navigate('/account')
         return <></>
     }
-
+    
       return(
     <EditOption type={'slide'}>
         {status === 'loading' ? <Loader /> :
@@ -78,23 +78,7 @@ export function CardsEdit() {
         </form>
 
         <div className="add-slide-btn-wrapper">
-            <button className="add-slide-btn primary-btn" onClick={() => {
-                mutate({
-                    url:`slide/update`,
-                    method: 'PUT',
-                    data: {
-                        answer: answer.current!.value,
-                        question: question.current!.value,
-                        tags: JSON.stringify([]),
-                        image: imageInput.current!.files![0] || null,
-                        id: state.ID.toString()
-                    },
-                    headers: {
-                        authorization: ''
-                    }
-                })
-            }}>Change</button>
-            <button className="remove-slide-btn secondary-btn" onClick={(e) => {
+        <button className="remove-slide-btn secondary-btn" onClick={(e) => {
                 let element = (e.target as HTMLButtonElement);
                 
                 if(element.innerText === 'Are you sure?') {
@@ -111,6 +95,23 @@ export function CardsEdit() {
                 }
  
             }}>Delete</button>
+            <button className="add-slide-btn primary-btn" onClick={() => {
+                mutate({
+                    url:`slide/update`,
+                    method: 'PUT',
+                    data: {
+                        answer: answer.current!.value || state.answer,
+                        question: question.current!.value || state.question,
+                        tags: JSON.stringify([]) || JSON.stringify(state.tags),
+                        image: imageInput.current!.files![0] || null,
+                        id: state.ID.toString()
+                    },
+                    headers: {
+                        authorization: ''
+                    }
+                })
+            }}>Change</button>
+            
         </div>
 
         </>

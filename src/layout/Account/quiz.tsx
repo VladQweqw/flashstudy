@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router';
 import { useQuery } from 'react-query';
 import { API } from '../../functions/API';
 import Loader from '../../components/loader';
-import { log } from 'console';
+import { useMutation } from 'react-query';
 
 export default function Quiz() {
    const [questionIndex, setQuestionIndex] = useState(0);
@@ -143,7 +143,7 @@ export default function Quiz() {
                </div>
 
                <div className="question-wrapper">
-                     <h1 id='question' className="question">
+                     <h1 id='question' className="question m2">
                         {data?.data[questionIndex].question}
                      </h1>
                </div>
@@ -159,7 +159,7 @@ export default function Quiz() {
                </div>
 
                <div ref={footer} className="footer ">
-                  <h1 className="message">{statusMessage}</h1>
+                  <h1 className="message m3">{statusMessage}</h1>
 
                   <button className="next-question" onClick={() => nextQuestion()}>
                      <i className="fa-solid fa-arrow-right"></i>
@@ -175,20 +175,45 @@ export default function Quiz() {
 
 function QuizResult(data: {correct: number, wrong: number}) {
    const navigate = useNavigate()
+   const { id } = useParams();
+
+   const { 
+      status,
+      mutate
+    } = useMutation({
+      mutationFn: API,
+      
+    })
+   
+   useEffect(() => {      
+      mutate({
+         url: 'stats/create',
+         method:'POST',
+         data: {
+            correctAnswer: data.correct,
+            groupId: parseInt(id!),
+            wrongAnswer: data.wrong
+         },
+         headers: {
+            authorization: '',
+         },
+       })
+   
+   }, [])
    
    return(
       <div className="quiz-result">
-         <h1 className="quiz-result-message">
+         <h1 className="quiz-result-message m1">
             {data.correct > data.wrong ? 'Well done!' : 'Next time'}
          </h1>
             <div className="result-wrapper">
                <div className="result">
-                  <h1 className="answer-count" id='correct-answer'>{data.correct}</h1>
-                  <p className="answer-text">Correct</p>
+                  <h1 className="answer-count " id='correct-answer'>{data.correct}</h1>
+                  <p className="answer-text m4">Correct</p>
                </div>
                <div className="result">
                   <h1 className="answer-count" id='wrong-answer'>{data.wrong}</h1>
-                  <p className="answer-text">Wrong</p>
+                  <p className="answer-text m4">Wrong</p>
                </div>
             </div>
 
@@ -211,8 +236,8 @@ const Answer = (props: {
    
    return(
       <div className="answer" onClick={(e) => checkAnswer(isCorrect, (e.target as HTMLElement).closest('.answer'))}>
-         <span className="answer-index">{char}</span>
-         <p className="answer-text">{answer}</p>
+         <span className="answer-index m5">{char}</span>
+         <p className="answer-text m4">{answer}</p>
       </div>
    )
 

@@ -258,7 +258,7 @@ export function ExamsAdd() {
                     onClick={() => {
                         mutate({
                             url:'exam/create',
-                            method: 'GET',
+                            method: 'POST',
                             data: {
                                 description: description.current!.value || 'Untitled',
                                 examDate: examDate.current!.value || new Date().getTime(),

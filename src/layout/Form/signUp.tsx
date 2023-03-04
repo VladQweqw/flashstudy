@@ -44,7 +44,7 @@ export default function SignUp({setFormState}: {setFormState: (state: boolean) =
     <form action="submit" id="signup-form" className='login-form'>
 
       <div className="input">
-         <input type="text"     ref={name} id='signup-name' className='name' placeholder='Display name' />
+         <input type="text"     ref={name} id='signup-name' className='name ' placeholder='Display name' />
       </div>
       <div className="input">
          <input type="email"    ref={email} id='signup-email' className='email' placeholder='Email' />

@@ -47,7 +47,7 @@ export default function SignIn() {
    <form action="submit" id="login-form" className='login-form'>
 
       <div className="input">
-         <input type="text" ref={email} id='signin-email' className='email' placeholder='Email or name' />
+         <input type="text" ref={email} id='signin-email' className='email m' placeholder='Email or name' />
       </div>
       <div className="input">
          <input autoComplete="on" type={seePassword ? 'password': 'text'} ref={password} id='signin-pwd' className='pwd' placeholder='Password' />

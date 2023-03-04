@@ -76,7 +76,7 @@ export default function Account() {
         
         {!category || category === 'edit' || category === 'create' ? 
         <header className='account-header'>
-            <span className="">
+            <span className="m2">
                 {getGreeding()} 
             </span>
         </header>
@@ -162,7 +162,7 @@ function AccountHeader({navigate, id}: any) {
     return(
         <header className="account-header">
            <span ref={option1} onClick={(e) => changeCategory('cards')} 
-            className="account-option" id='cards'>
+            className="account-option m1" id='cards'>
                 Cards  
                 <svg className='account-option-svg' viewBox="0 0 98 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M49.7207 14C47.8597 6.3704 25.943 12.5858 38.3891 8.76751C50.9596 4.91106 119.584 5.40032 87.5753 4.32741C55.5665 3.2545 -33.7757 6.90335 15.5402 2.96934C54.993 -0.177872 85.0136 1.43129 92.3955 1.27234" stroke="#D09683" strokeWidth="2"/>
@@ -170,7 +170,7 @@ function AccountHeader({navigate, id}: any) {
 
             </span> / 
            <span ref={option2} onClick={(e) => changeCategory('notes')}
-           className="account-option" id='notes'>
+           className="account-option m1" id='notes'>
             Notes
             <svg className='account-option-svg' viewBox="0 0 98 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M49.7207 14C47.8597 6.3704 25.943 12.5858 38.3891 8.76751C50.9596 4.91106 119.584 5.40032 87.5753 4.32741C55.5665 3.2545 -33.7757 6.90335 15.5402 2.96934C54.993 -0.177872 85.0136 1.43129 92.3955 1.27234" stroke="#D09683" strokeWidth="2"/>
@@ -178,7 +178,7 @@ function AccountHeader({navigate, id}: any) {
             
             </span> / 
            <span ref={option3} onClick={(e) => {changeCategory('exams')}} 
-           className="account-option" id='exams'>
+           className="account-option m1" id='exams'>
             Exams
             <svg className='account-option-svg' viewBox="0 0 98 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M49.7207 14C47.8597 6.3704 25.943 12.5858 38.3891 8.76751C50.9596 4.91106 119.584 5.40032 87.5753 4.32741C55.5665 3.2545 -33.7757 6.90335 15.5402 2.96934C54.993 -0.177872 85.0136 1.43129 92.3955 1.27234" stroke="#D09683" strokeWidth="2"/>

@@ -2,18 +2,18 @@
     width: 100%;
     background-color: $primary-background;
     display: flex;
-    padding: 1rem 2rem;
+    padding: 1rem 3vw;
     align-items: center;
     position: fixed;
     z-index: 999999;
     background-color: $primary-background;
     justify-content: space-between;
-
+    height: 80px;
     
 }
 
 .logo {
-    font-size: 3rem;
+    font-size: clamp(2rem, 3.5vw , 3rem);
     font-family: 'Righteous';
     cursor: pointer;
     transition: 200ms ease;

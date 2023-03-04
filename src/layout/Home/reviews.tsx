@@ -7,8 +7,8 @@ export default function Reviews() {
     <div className="reviews section-spacing">
         
         <header className="reviews-titles">
-            <h1 className="primary-title m3">Why to choose us</h1>
-            <p className="secondary-text m2">Some thoughts from few of our users</p> 
+            <h1 className="primary-title m1">Why to choose us</h1>
+            <p className="secondary-text m3">Some thoughts from few of our users</p> 
         </header>   
 
         <svg  viewBox="0 0 212 528" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,19 +21,38 @@ export default function Reviews() {
             <div className="review ">
                 <div className="review-header">
                     <div className="user">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="review-user-image" className="review-user-image" /> 
-
-                        <p className="review-user-name">Emily</p>
+                        <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="review-user-image" className="review-user-image" />   
+                        <p className="review-user-name m3">Marques</p>
                     </div>   
                     
                     <div className="rating">
-                        <span className='rating-score'>5/5</span>
+                        <span className='rating-score m3'>5/5</span>
                         <i className="fas fa-star"></i>    
                     </div>      
                 </div>
 
                 <div className="review-text">
-                    <p >
+                    <p className='m4'>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia impedit, consequatur rerum dolores dolorum tenetur? Praesentium, modi quae?
+                    </p>
+                </div>
+            </div>
+            
+            <div className="review ">
+                <div className="review-header">
+                    <div className="user">
+                        <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="review-user-image" className="review-user-image" />   
+                        <p className="review-user-name m3">Marques</p>
+                    </div>   
+                    
+                    <div className="rating">
+                        <span className='rating-score m3'>5/5</span>
+                        <i className="fas fa-star"></i>    
+                    </div>      
+                </div>
+
+                <div className="review-text">
+                    <p className='m4'>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia impedit, consequatur rerum dolores dolorum tenetur? Praesentium, modi quae?
                     </p>
                 </div>
@@ -42,19 +61,19 @@ export default function Reviews() {
             <div className="review ">
                 <div className="review-header">
                     <div className="user">
-                        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=399&q=80" alt="review-user-image" className="review-user-image" />
-
-                        <p className="review-user-name">Gabriel</p>
+                        <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="review-user-image" className="review-user-image" />   
+                        <p className="review-user-name m3">Marques</p>
                     </div>   
+                    
                     <div className="rating">
-                        <span className='rating-score'>4/5</span>
+                        <span className='rating-score m3'>5/5</span>
                         <i className="fas fa-star"></i>    
                     </div>      
                 </div>
 
                 <div className="review-text">
-                    <p >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus,
+                    <p className='m4'>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia impedit, consequatur rerum dolores dolorum tenetur? Praesentium, modi quae?
                     </p>
                 </div>
             </div>
@@ -63,39 +82,17 @@ export default function Reviews() {
                 <div className="review-header">
                     <div className="user">
                         <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="review-user-image" className="review-user-image" />   
-
-                        <p className="review-user-name">Samuel</p>
+                        <p className="review-user-name m3">Marques</p>
                     </div>   
-
+                    
                     <div className="rating">
-                        <span className='rating-score'>5/5</span>
+                        <span className='rating-score m3'>5/5</span>
                         <i className="fas fa-star"></i>    
                     </div>      
                 </div>
 
                 <div className="review-text">
-                    <p >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus,
-                    </p>
-                </div>
-            </div>
-
-            <div className="review ">
-                <div className="review-header">
-                   <div className="user">
-                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="review-user-image" className="review-user-image" />
-
-                        <p className="review-user-name">John</p>
-                    </div>      
-
-                    <div className="rating">
-                        <span className='rating-score'>5/5</span>
-                        <i className="fas fa-star"></i>    
-                    </div>      
-                </div>
-
-                <div className="review-text">
-                    <p >
+                    <p className='m4'>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia impedit, consequatur rerum dolores dolorum tenetur? Praesentium, modi quae?
                     </p>
                 </div>

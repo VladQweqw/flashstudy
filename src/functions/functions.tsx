@@ -219,6 +219,22 @@ export function formValidation(username: string, password: string, email: string
 //animation 
 export const STAGGER_DURATION = 100;
 
+export const variantDefault = {
+    animate: {
+        translateY: '0%',
+        scale: 1,
+        opacity:1,
+        transition: {
+            duration: .05
+        }
+    },
+    intial: {
+        translateY: '100%',
+        opacity: 0,
+        scale: 0,
+    }
+}
+
 export const slideAnimate = {
     translateY: '0%',
     scale: 1,
@@ -234,6 +250,19 @@ export const slideInitial = {
     scale: 0,
 }
 
+export const slowSlideVariant = {
+    'initial': {
+        translateY: '100%',
+        scale: 0,
+    },
+    'animate': {
+        translateY: '0%',
+        scale: 1,
+        transition: {
+            duration: .1,
+        },
+    }
+}
 export const slowSlideInitial = {
     translateY: '100%',
 }
