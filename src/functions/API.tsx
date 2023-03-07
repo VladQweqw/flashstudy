@@ -6,23 +6,12 @@ export const ENDPOINT = 'https://flashstudy.razvanpoienariu.net/api/';
 
 const token = decodeAndRetrieve('token');
 
-export async function API(options: APIdefaultTypes) {
-
-  // if(options.method === 'POST') {
-  //   const formData = new FormData()
-
-  //   Object.entries(options.data).forEach((data) => {
-  //   const [key, value]: [string, any] = data;      
-  //     formData.append(key, value)
-  //   })
-    
-  //   options.data = formData;    
-  // }
-  
-  
+export async function API(options: APIdefaultTypes) {  
   options.headers.authorization = `Bearer ${token}`;
   options.url = ENDPOINT + options.url;
   
   const res = await axios.request(options);
   return res.data;
 };
+
+//"Key: 'StatsInput.CorrectAnswer' Error:Field validation for 'CorrectAnswer' failed on the 'required' tag"

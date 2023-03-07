@@ -4,9 +4,9 @@ import { correctPhrases, wrongPhrases, slowSlideAniamte, slowSlideInitial, toggl
 import { motion } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router';
 import { useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { API } from '../../functions/API';
 import Loader from '../../components/loader';
-import { useMutation } from 'react-query';
 
 export default function Quiz() {
    const [questionIndex, setQuestionIndex] = useState(0);
@@ -191,12 +191,11 @@ function QuizResult(data: {correct: number, wrong: number}) {
          method:'POST',
          data: {
             CorrectAnswer: data.correct,
-            groupId: id,
+            groupId: parseInt(id!),
             WrongAnswer: data.wrong
          },
          headers: {
             authorization: '',
-            "Content-Type": "multipart/form-data",
          },
        })
    

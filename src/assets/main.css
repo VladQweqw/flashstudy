@@ -1394,47 +1394,38 @@ button {
   gap: 1rem;
 }
 .modal-wrapper .settings .background-grid {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  gap: 1rem;
-  grid-template-rows: auto;
-  padding: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  gap: 5px;
+  max-height: 400px;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
 }
-.modal-wrapper .settings .background-grid #custom-background-id {
-  text-align: center;
+.modal-wrapper .settings .background-grid .image-wrapper {
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
 }
-.modal-wrapper .settings .background-grid .background-grid-image {
+.modal-wrapper .settings .background-grid .image-wrapper .settings-image {
+  transition: 300ms ease;
   -o-object-fit: cover;
      object-fit: cover;
-  width: 200px;
-  height: 150px;
-  transition: 200ms ease;
-  cursor: pointer;
-  outline: 2px solid transparent;
-  border-radius: 6px;
-  flex: none;
+  width: 100%;
+  height: 100%;
 }
-.modal-wrapper .settings .background-grid .custom {
-  padding: 1rem;
+.modal-wrapper .settings .background-grid .custom-image-wrapper {
   display: flex;
-  justify-content: space-between;
-  width: 200px;
-  height: 150px;
   flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem;
 }
-.modal-wrapper .settings .background-grid .default {
-  display: grid;
-  place-items: center;
-}
-.modal-wrapper .settings .background-grid .background-grid-image-active {
-  outline: 2px solid var(--accent-color, #D09683);
-}
-.modal-wrapper .settings .background-grid .background-grid-image:active {
-  scale: 0.9;
-}
-.modal-wrapper .settings .background-grid .background-grid-image:hover {
-  outline: 2px solid var(--accent-color, #D09683);
+.modal-wrapper .settings .background-grid .image-wrapper:hover .settings-image {
+  scale: 1.2;
+  opacity: 0.7;
 }
 .modal-wrapper .settings .settings-navbar {
   position: relative;

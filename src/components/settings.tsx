@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion';
 import { saveToLocal, getFromLocal, setDarkMode, togglePopup } from '../functions/functions';
-import { setBackground, backgroundImages } from '../functions/functions';
+import { setBackground, SETTINGS_IMAGES } from '../functions/functions';
 import { slideInitial, slideAnimate } from '../functions/functions';
 
 import Modal from './modal';
+
+
 
 export default function Settings() {
    const [settingsPanel, setSettingsPanel] = useState(<Account />)
@@ -74,17 +76,7 @@ function Aspect() {
       )
     }
 
-    document.querySelectorAll('.background-grid-image').forEach((item, index) => {
-
-      item.addEventListener('click', () => {
-        document.querySelectorAll('.background-grid-image').forEach((e) => {
-          e.classList.remove('background-grid-image-active')
-        })
-
-        item.classList.add('background-grid-image-active')
-        setBackground(index)
-      })
-   })
+    
 
   }, [])
 
@@ -111,36 +103,26 @@ function Aspect() {
       <Setting>
         <h2 className="settings-title m4">Background</h2>
         <div className="background-grid">
+            <div onClick={() => {
+                setBackground('DEFAULT')
+              }}  className="image-wrapper">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAAYFBMVEXDw8MAAABwcHDHx8eKioqkpKS8vLzGxsatra3KysqQkJCenp6AgIB3d3dra2u3t7dZWVlMTEyysrIsLCxTU1NDQ0OUlJQhISEyMjJlZWUMDAw9PT2Dg4N0dHQYGBhGRkaaAXj3AAACVklEQVR4nO3a63KiQBBAYbATxxYQbxtNdjd5/7dMIFwEGbaA1Fo05/tpNFVzZJgBCQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICFEdFJROTRQ5jKxbvVRLF79CCmkW043XbeEeTpBxo8zXs2ZA2i9RSRiQbPUw5l90wDUw2cqIyIYamBHpP9Lho+GEMNNM7P8IfB/8BOg2qbcNaB/8BQg2qt3ww8J5hpkA2kkAwcj50GUdVgN3AymGkQpPW+1zMXfFeHdhror7LBuvt9GsXHzpHaaVAdCC/dw9FddnnYNU0MNXDp4WuUp6j7bCAv3jXDUIPAabo5eia9K46SS9ffDDX44nxbA7kWM2V/f5gYa+CTnwyKVeMuwjIaSL15CMNj+72LaODWt7fNTotsUG8dcq+t2bCEBpq0bqC2dhA2G4ho/cLN1VT3TtJkA00u57R8xQVvdw2ujdlgsYGusnGWEfRwl6B1aWmwQbEQ/v4elf7pSBCGt7cdDTYoF8K/2XftNp0JGqcEew3qhTD7rt27p8FHPRvMNbhZCN/Wge49CcIwqSJYa9BYCD+07yfpxmcsNQgax/6qJ0H4Xn7EWAM99426pfwhwlYDz0LoU1xGm2rgXQh9vu+smWoQXAY2uJhr0LMQ+uR31gw1GPVs1lZMNUj/PeIOqaUGchrV4Cp2GujrqATZZbSVBr274n5bNdJANuOJjQY8ozl6GtRm3sD9yDPb824QuHjqo/ureOYJ8p8TZKJHDwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOB/+wQBph2Iu8J1cQAAAABJRU5ErkJggg==" alt="settings-image-1" className='settings-image' />
+            </div>
+            <div onClick={() => {
 
-        <div onClick={() => {
-              setBackground(0)
-            }}  className="default background-grid-image background-grid-image-active">
-            <p>Default</p>
-          </div>
-
-        <div className="background-grid-image custom">
-          <input defaultValue={getFromLocal('customBackground') || ''} type="text" placeholder='Custom URL' id='custom-background-id' />
-          <button id="apply-custom-background" onClick={() => {
-            let inpValue = (document.getElementById('custom-background-id') as HTMLInputElement).value
-            if(inpValue === '') return togglePopup('Add a valid URL', 'ERROR')
-            saveToLocal('customBackground', inpValue)
-            saveToLocal('backgroundId', 1)
-
-            backgroundImages[1] = inpValue
-            setBackground(1)
-            togglePopup('Style applied', "SUCCESS")
-          }} className='primary-btn'>Apply</button>
-        </div>
-
-          {backgroundImages.map((image, index) => {
-            if(image === 'DEFAULT' || image === '') return;
-            return <img onClick={() => {
-              setBackground(index) 
-              togglePopup('Style applied', "SUCCESS")
-            }} className='background-grid-image' onError={(e) => {
-              (e.target as HTMLImageElement).src = 'https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
-            }} src={image} alt="image" key={index} />
-          })}
+            }} className="image-wrapper custom-image-wrapper">
+              <h1 className="m4">Add custom</h1>
+              <input type="text" placeholder='Url' className='custom-image-upload' />
+              <button className="primary-btn">Add</button>
+            </div>
+           
+            {SETTINGS_IMAGES.images.map((image, index) => {
+              return <div onClick={() => {
+                setBackground(index)
+              }} className="image-wrapper">
+              <img src={image} key={index} alt={`settings-image-${index + 1}`} className="settings-image" />
+            </div>
+            })}
         </div>
       </Setting>
 

@@ -58,16 +58,32 @@ export const quizArr = [
     },
 }
 
-export function setBackground(id: number) {
+export const SETTINGS_IMAGES = {
+    custom: [
+
+    ],
+    images: [
+        'https://images.pexels.com/photos/7889450/pexels-photo-7889450.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+        'https://images.pexels.com/photos/13211456/pexels-photo-13211456.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        'https://images.pexels.com/photos/2325446/pexels-photo-2325446.jpeg?auto=compress&cs=tinysrgb&w=1600',
+        'https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    ]
+    
+}
+
+export function setBackground(id: any) {
     const accountElement = document?.getElementById('account');
     
-    if(id === 0) {
+    if(id === 'DEFAULT') {
         accountElement!.style.background = '#121212'
-        saveToLocal('backgroundId', JSON.stringify(id));
-        return 
+
+        return saveToLocal('backgroundId', JSON.stringify(0));
+
     }
 
-    accountElement!.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${backgroundImages[id]}) no-repeat`;
+    accountElement!.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${
+        SETTINGS_IMAGES.images[id]
+    }) no-repeat`;
     accountElement!.style.backgroundSize = 'cover'
     accountElement!.style.backgroundAttachment = 'fixed'
 
@@ -88,15 +104,6 @@ export function setDarkMode(mode: colorThemes) {
     })
     
 }
-
-export const backgroundImages = [
-    'DEFAULT',
-    getFromLocal('customBackground'),
-    'https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/956999/milky-way-starry-sky-night-sky-star-956999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-]
 
 export function togglePopup(message: string, state: "SUCCESS" | 'WARNING' | 'ERROR') {
     const title = document.getElementById('popup-title')

@@ -96,16 +96,19 @@ export function CardsEdit() {
  
             }}>Delete</button>
             <button className="add-slide-btn primary-btn" onClick={() => {
+                const fd = new FormData();
+
+                fd.append('answer', answer.current!.value || state.answer)
+                fd.append('question', question.current!.value || state.question)
+                fd.append('tags', JSON.stringify([]) || JSON.stringify(state.tags))
+                fd.append('anaswer', answer.current!.value || state.answer)
+                fd.append('image', imageInput.current!.files![0] || null)
+                fd.append('id', state.ID.toString())
+
                 mutate({
                     url:`slide/update`,
                     method: 'PUT',
-                    data: {
-                        answer: answer.current!.value || state.answer,
-                        question: question.current!.value || state.question,
-                        tags: JSON.stringify([]) || JSON.stringify(state.tags),
-                        image: imageInput.current!.files![0] || null,
-                        id: state.ID.toString()
-                    },
+                    data: fd,
                     headers: {
                         authorization: ''
                     }
