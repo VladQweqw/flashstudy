@@ -190,12 +190,13 @@ function QuizResult(data: {correct: number, wrong: number}) {
          url: 'stats/create',
          method:'POST',
          data: {
-            correctAnswer: data.correct,
-            groupId: parseInt(id!),
-            wrongAnswer: data.wrong
+            CorrectAnswer: data.correct,
+            groupId: id,
+            WrongAnswer: data.wrong
          },
          headers: {
             authorization: '',
+            "Content-Type": "multipart/form-data",
          },
        })
    

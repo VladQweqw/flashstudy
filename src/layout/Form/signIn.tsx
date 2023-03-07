@@ -1,11 +1,11 @@
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
-import { formValidation, encodeAndSave } from '../../functions/functions';
+import { formValidation, encodeAndSave, togglePopup } from '../../functions/functions';
 import { API } from '../../functions/API';
 import Loader from '../../components/loader';
 import { useQuery } from 'react-query';
-
+import { useMutation } from 'react-query';
 export default function SignIn() {
    const email = useRef<HTMLInputElement>(null);
    const password = useRef<HTMLInputElement>(null); 
@@ -13,34 +13,23 @@ export default function SignIn() {
 
    const [seePassword, setSeePassword] = useState(true);
    const [formErrors, setFormErrors] = useState< string[]>([]);
-    
-   const {
+
+   const { 
       status,
-      data,
-      refetch
-   } = useQuery({
-      enabled: false,
-      queryFn: () => API({
-         url: 'login',
-         data: {
-            email:    email.current!.value,
-            password: password.current!.value,
-         },
-         method: 'POST',
-         headers: {
-            authorization: ''
+      mutate,
+      data
+    } = useMutation({
+      mutationFn: API,
+      onSuccess: resp => {
+         if(encodeAndSave('token', data.token)) {
+            navigate('/account')
          }
-   }),
-   queryKey: ['login']
-   })
-   
-   useEffect(() => {
-     if(data?.token) {
-      if(encodeAndSave('token', data.token)) {
-         navigate('/account')
-      }
-     }
-   }, [data])
+      },
+      onError: err => {
+         togglePopup('Something went wrong', 'ERROR');
+      },
+      mutationKey: ['login']
+    })
 
    if(status === 'loading') return <Loader />
    return(
@@ -68,7 +57,18 @@ export default function SignIn() {
             if(resp.length) {
                setFormErrors(resp)
             }else {
-               refetch()
+               const fd = new FormData();
+               fd.append('email', email.current!.value);
+               fd.append('password', password.current!.value);
+
+               mutate({
+                  url: 'login',
+                  data: fd,
+                  headers: {
+                     'Content-Type': 'multipart/form-data;'
+                  },
+                  method: 'POST'
+               })
             }
          
       }} className='submit-btn primary-btn' id='signin-btn' >Submit</button>

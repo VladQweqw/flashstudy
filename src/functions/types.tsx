@@ -98,7 +98,5 @@ export type APIdefaultTypes = {
    method: MethodsType,
    url: string,
    data: any,
-   headers: {
-     authorization: string,
-   }
+   headers: any
 }
