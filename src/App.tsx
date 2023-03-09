@@ -54,7 +54,7 @@ export default function App() {
         </Route>
 
         <Route path='/account' element={<Account />}>
-          <Route path='stats' element={<Chart />}></Route>
+          <Route path='cards/:id/stats' element={<Chart />}></Route>
           <Route path='cards/:id/practice' element={<Practice />}></Route>
           <Route path='cards/:id/quiz' element={<Quiz />}></Route>
 

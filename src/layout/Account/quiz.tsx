@@ -38,7 +38,8 @@ export default function Quiz() {
       if(data?.data) {
          shuffleAnswers()
       }
-      
+
+      console.log(questionIndex, data?.data.length);
    }, [questionIndex, data])
 
    function checkAnswer(answer: boolean, element: HTMLDivElement) {
@@ -77,6 +78,7 @@ export default function Quiz() {
    }
 
    function shuffleAnswers() {
+      if(questionIndex >= data?.data.length) return
       if(data?.data.length < 4) {
          navigate(-1);
          return togglePopup('Not enough cards', 'ERROR');
@@ -112,18 +114,11 @@ export default function Quiz() {
 
       })
 
-
-      if(questionIndex > data?.data.length - 2) {
-         return setQuestionIndex(0)
-      }
-      if(questionIndex < 0) {
-         return setQuestionIndex(data?.data.length - 1);
-      }
-
+   
       setQuestionIndex((prev) => prev + 1);
 
    }
-
+   
    return(
     <motion.div 
     initial={slowSlideInitial}
@@ -133,7 +128,7 @@ export default function Quiz() {
       <div className="quiz">
          {status === 'loading' && <Loader />}
 
-         {questionIndex >= data?.data.length - 1 ? 
+         {questionIndex >= data?.data.length  ? 
             <QuizResult {...answers} /> :
             <>
                <div className="quiz-progress">
@@ -178,7 +173,6 @@ function QuizResult(data: {correct: number, wrong: number}) {
    const { id } = useParams();
 
    const { 
-      status,
       mutate
     } = useMutation({
       mutationFn: API,
@@ -219,7 +213,7 @@ function QuizResult(data: {correct: number, wrong: number}) {
 
             <div className="btn-wrapper">
                <button className="secondary-btn" onClick={() => navigate('/account/cards')}>Home</button>
-               <button className="primary-btn" onClick={() => navigate('/account/stats')}>See stats</button>
+               <button className="primary-btn" onClick={() => navigate(`/account/cards/${id}/stats`)}>See stats</button>
             </div>
       </div>
    )

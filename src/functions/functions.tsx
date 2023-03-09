@@ -58,10 +58,11 @@ export const quizArr = [
     },
 }
 
-export const SETTINGS_IMAGES = {
-    custom: [
-
-    ],
+export const SETTINGS_IMAGES: {
+    custom: string[],
+    images: string[]
+} = {
+    custom: getFromLocal('customImages') || [],
     images: [
         'https://images.pexels.com/photos/7889450/pexels-photo-7889450.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
         'https://images.pexels.com/photos/13211456/pexels-photo-13211456.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -71,22 +72,51 @@ export const SETTINGS_IMAGES = {
     
 }
 
+export function addCustomBackground(image: string) {
+
+    if(SETTINGS_IMAGES.custom.length >= 5) {
+        SETTINGS_IMAGES.custom.unshift(image)
+        SETTINGS_IMAGES.custom.pop()       
+    }else {
+        SETTINGS_IMAGES.custom.unshift(image)
+    }
+    console.log(SETTINGS_IMAGES.custom);
+    
+    setBackground('C0')
+} 
+
+export async function checkValidURLImage(url: string) {
+
+    const res = await fetch(url);
+    const buff = await res.blob();
+
+    return buff.type.startsWith('image/');
+}
+
 export function setBackground(id: any) {
     const accountElement = document?.getElementById('account');
-    
+    console.log(id);
+        
     if(id === 'DEFAULT') {
         accountElement!.style.background = '#121212'
 
         return saveToLocal('backgroundId', JSON.stringify(0));
 
+    }else if(id[0] === 'S') {
+        accountElement!.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${
+            SETTINGS_IMAGES.images[id.slice(1)]
+        }) no-repeat`;
+        
+    }else if(id[0] === 'C') {
+        accountElement!.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${
+            SETTINGS_IMAGES.custom[id.slice(1)]
+        }) no-repeat`;
+
+        saveToLocal('customImages', SETTINGS_IMAGES.custom)
     }
 
-    accountElement!.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${
-        SETTINGS_IMAGES.images[id]
-    }) no-repeat`;
     accountElement!.style.backgroundSize = 'cover'
     accountElement!.style.backgroundAttachment = 'fixed'
-
     saveToLocal('backgroundId', JSON.stringify(id));
 }
 
@@ -185,8 +215,12 @@ export function formatDate(date: Date) {
         return `${day.toString().padStart(2, '0')} ${months[month]} ${year}, ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
     }
 
+    function dmy() {
+        return `${months[month]} ${day.toString().padStart(2, '0')}`
+    }
+
     return {
-        day, month, year, hours, minutes, dmhmy
+        day, month, year, hours, minutes, dmhmy, dmy
     }
 }
 

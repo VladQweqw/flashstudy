@@ -15,7 +15,7 @@ export default function Account() {
     const { category, id } = useParams()
     
     useEffect(() => {
-        setBackground(JSON.parse(getFromLocal('backgroundId')) || 0)
+        setBackground(JSON.parse(getFromLocal('backgroundId')) || 'DEFAULT')
     }, [])
 
    return(

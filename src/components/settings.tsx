@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion';
-import { saveToLocal, getFromLocal, setDarkMode, togglePopup } from '../functions/functions';
+import { saveToLocal, getFromLocal, setDarkMode, togglePopup, addCustomBackground, checkValidURLImage } from '../functions/functions';
 import { setBackground, SETTINGS_IMAGES } from '../functions/functions';
 import { slideInitial, slideAnimate } from '../functions/functions';
 
@@ -64,7 +64,7 @@ function Account() {
 
 function Aspect() {
   const [isDarkMode, setIsDarkMode] = useState(false)  
-  
+
   useEffect(() => {
     let theme = getFromLocal('darkMode');
     
@@ -75,8 +75,6 @@ function Aspect() {
         getFromLocal('darkMode')
       )
     }
-
-    
 
   }, [])
 
@@ -101,28 +99,46 @@ function Aspect() {
       </Setting>
       
       <Setting>
-        <h2 className="settings-title m4">Background</h2>
-        <div className="background-grid">
-            <div onClick={() => {
-                setBackground('DEFAULT')
-              }}  className="image-wrapper">
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAAYFBMVEXDw8MAAABwcHDHx8eKioqkpKS8vLzGxsatra3KysqQkJCenp6AgIB3d3dra2u3t7dZWVlMTEyysrIsLCxTU1NDQ0OUlJQhISEyMjJlZWUMDAw9PT2Dg4N0dHQYGBhGRkaaAXj3AAACVklEQVR4nO3a63KiQBBAYbATxxYQbxtNdjd5/7dMIFwEGbaA1Fo05/tpNFVzZJgBCQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICFEdFJROTRQ5jKxbvVRLF79CCmkW043XbeEeTpBxo8zXs2ZA2i9RSRiQbPUw5l90wDUw2cqIyIYamBHpP9Lho+GEMNNM7P8IfB/8BOg2qbcNaB/8BQg2qt3ww8J5hpkA2kkAwcj50GUdVgN3AymGkQpPW+1zMXfFeHdhror7LBuvt9GsXHzpHaaVAdCC/dw9FddnnYNU0MNXDp4WuUp6j7bCAv3jXDUIPAabo5eia9K46SS9ffDDX44nxbA7kWM2V/f5gYa+CTnwyKVeMuwjIaSL15CMNj+72LaODWt7fNTotsUG8dcq+t2bCEBpq0bqC2dhA2G4ho/cLN1VT3TtJkA00u57R8xQVvdw2ujdlgsYGusnGWEfRwl6B1aWmwQbEQ/v4elf7pSBCGt7cdDTYoF8K/2XftNp0JGqcEew3qhTD7rt27p8FHPRvMNbhZCN/Wge49CcIwqSJYa9BYCD+07yfpxmcsNQgax/6qJ0H4Xn7EWAM99426pfwhwlYDz0LoU1xGm2rgXQh9vu+smWoQXAY2uJhr0LMQ+uR31gw1GPVs1lZMNUj/PeIOqaUGchrV4Cp2GujrqATZZbSVBr274n5bNdJANuOJjQY8ozl6GtRm3sD9yDPb824QuHjqo/ureOYJ8p8TZKJHDwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOB/+wQBph2Iu8J1cQAAAABJRU5ErkJggg==" alt="settings-image-1" className='settings-image' />
-            </div>
-            <div onClick={() => {
+        <div className="background-images-wrapper">
+          <h2 className="settings-title m4">Background</h2>
+          <div className="add-custom-background">
+            <p className="m4">Add custom URL</p>
+            <div className="wrapper">
+              <input type="text" name="" placeholder='URL' id="custom-url" className='input' />
+              <button className="primary-btn add-custom-btn" onClick={(e) => {
+                let inp = (document.getElementById('custom-url') as HTMLInputElement)!.value;
+                if(inp.trim() === '') return togglePopup('Invalid', 'ERROR');
 
-            }} className="image-wrapper custom-image-wrapper">
-              <h1 className="m4">Add custom</h1>
-              <input type="text" placeholder='Url' className='custom-image-upload' />
-              <button className="primary-btn">Add</button>
+                addCustomBackground(inp)
+              }}>Add</button>
             </div>
-           
-            {SETTINGS_IMAGES.images.map((image, index) => {
-              return <div onClick={() => {
-                setBackground(index)
-              }} className="image-wrapper">
-              <img src={image} key={index} alt={`settings-image-${index + 1}`} className="settings-image" />
-            </div>
-            })}
+          </div>
+          <div className="background-grid">
+              <div onClick={() => {
+                  setBackground('DEFAULT')
+                }}  className="image-wrapper">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAAYFBMVEXDw8MAAABwcHDHx8eKioqkpKS8vLzGxsatra3KysqQkJCenp6AgIB3d3dra2u3t7dZWVlMTEyysrIsLCxTU1NDQ0OUlJQhISEyMjJlZWUMDAw9PT2Dg4N0dHQYGBhGRkaaAXj3AAACVklEQVR4nO3a63KiQBBAYbATxxYQbxtNdjd5/7dMIFwEGbaA1Fo05/tpNFVzZJgBCQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICFEdFJROTRQ5jKxbvVRLF79CCmkW043XbeEeTpBxo8zXs2ZA2i9RSRiQbPUw5l90wDUw2cqIyIYamBHpP9Lho+GEMNNM7P8IfB/8BOg2qbcNaB/8BQg2qt3ww8J5hpkA2kkAwcj50GUdVgN3AymGkQpPW+1zMXfFeHdhror7LBuvt9GsXHzpHaaVAdCC/dw9FddnnYNU0MNXDp4WuUp6j7bCAv3jXDUIPAabo5eia9K46SS9ffDDX44nxbA7kWM2V/f5gYa+CTnwyKVeMuwjIaSL15CMNj+72LaODWt7fNTotsUG8dcq+t2bCEBpq0bqC2dhA2G4ho/cLN1VT3TtJkA00u57R8xQVvdw2ujdlgsYGusnGWEfRwl6B1aWmwQbEQ/v4elf7pSBCGt7cdDTYoF8K/2XftNp0JGqcEew3qhTD7rt27p8FHPRvMNbhZCN/Wge49CcIwqSJYa9BYCD+07yfpxmcsNQgax/6qJ0H4Xn7EWAM99426pfwhwlYDz0LoU1xGm2rgXQh9vu+smWoQXAY2uJhr0LMQ+uR31gw1GPVs1lZMNUj/PeIOqaUGchrV4Cp2GujrqATZZbSVBr274n5bNdJANuOJjQY8ozl6GtRm3sD9yDPb824QuHjqo/ureOYJ8p8TZKJHDwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOB/+wQBph2Iu8J1cQAAAABJRU5ErkJggg==" alt="settings-image-1" className='settings-image' />
+              </div>
+              {SETTINGS_IMAGES.custom && SETTINGS_IMAGES.custom.map((image, index) => {
+                
+                return <div key={index} onClick={() => {
+                  setBackground("C" + index)
+                }} className="image-wrapper">
+
+                <img src={image} onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkm2qjWIqMY8Tq9V1h2Gdy_2p4qhF8dlTNjARaW7Eex2nXsN5znkj1QvoxLqex5dljqww&usqp=CAU'
+                }}  alt={`custom-setting-image-${index + 1}`} className="settings-image custom-image" />
+              </div>
+              })}
+
+              {SETTINGS_IMAGES.images.map((image, index) => {
+                return <div key={index} onClick={() => {
+                  setBackground("S" + index)
+                }} className="image-wrapper">
+                <img src={image}  alt={`settings-image-${index + 1}`} className="settings-image" />
+              </div>
+              })}
+          </div>
         </div>
       </Setting>
 

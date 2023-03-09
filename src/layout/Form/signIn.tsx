@@ -2,10 +2,9 @@ import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
 import { formValidation, encodeAndSave, togglePopup } from '../../functions/functions';
+import { useMutation } from 'react-query';
 import { API } from '../../functions/API';
 import Loader from '../../components/loader';
-import { useQuery } from 'react-query';
-import { useMutation } from 'react-query';
 export default function SignIn() {
    const email = useRef<HTMLInputElement>(null);
    const password = useRef<HTMLInputElement>(null); 
@@ -21,9 +20,11 @@ export default function SignIn() {
     } = useMutation({
       mutationFn: API,
       onSuccess: resp => {
-         if(encodeAndSave('token', data.token)) {
+         if(encodeAndSave('token', resp.token)) {
+            togglePopup('Logged in succesfully', 'SUCCESS')
             navigate('/account')
          }
+
       },
       onError: err => {
          togglePopup('Something went wrong', 'ERROR');
@@ -57,15 +58,15 @@ export default function SignIn() {
             if(resp.length) {
                setFormErrors(resp)
             }else {
-               const fd = new FormData();
-               fd.append('email', email.current!.value);
-               fd.append('password', password.current!.value);
-
+      
                mutate({
                   url: 'login',
-                  data: fd,
+                  data: {
+                     'email': email.current!.value,
+                     'password': password.current!.value
+                  },
                   headers: {
-                     'Content-Type': 'multipart/form-data;'
+                    
                   },
                   method: 'POST'
                })
