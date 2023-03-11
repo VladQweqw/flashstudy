@@ -39,7 +39,6 @@ export default function Quiz() {
          shuffleAnswers()
       }
 
-      console.log(questionIndex, data?.data.length);
    }, [questionIndex, data])
 
    function checkAnswer(answer: boolean, element: HTMLDivElement) {

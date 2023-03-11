@@ -11,7 +11,6 @@ import Loader from '../../../components/loader'
 
 export function CardsUpdate() {
     const { id, category } = useParams(); 
-    const { state } = useLocation(); 
 
     const queryClient = useQueryClient();
 

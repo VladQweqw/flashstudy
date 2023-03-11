@@ -187,7 +187,7 @@ export function ExamsAdd() {
    const examDate = useRef<HTMLInputElement | null>(null)
 
 
-   function convertTime(timeInMs: number) {
+   function convertTime(timeInMs: number) {    
       let examDate = new Date(
          timeInMs - new Date().getTime()
       ).getTime();
@@ -233,7 +233,7 @@ export function ExamsAdd() {
                     if(e.target.value != '') {
                         setDaysUntilExam(
                             convertTime(
-                                new Date(e.target.value).getTime()
+                                new Date(examDate.current!.value).getTime()
                             )   
                         )                     
                     }else {
@@ -261,7 +261,7 @@ export function ExamsAdd() {
                             method: 'POST',
                             data: {
                                 description: description.current!.value || 'Untitled',
-                                examDate: examDate.current!.value || new Date().getTime(),
+                                examDate: examDate.current!.value || new Date(),
                                 name: name.current!.value || 'Untitled',
                             },
                             headers: {

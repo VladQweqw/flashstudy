@@ -4,7 +4,6 @@ export default function SideNavbar() {
     const navigate = useNavigate();
     const location = useLocation();
     const { id, category } = useParams();
-    console.log(category);
     
    return(
     <>

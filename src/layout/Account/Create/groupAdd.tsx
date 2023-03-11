@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { slideAnimate, slideInitial, togglePopup } from '../../../functions/functions'
+import { checkLengts, slideAnimate, slideInitial, togglePopup } from '../../../functions/functions'
 import { useNavigate } from 'react-router'
 import Modal from '../../../components/modal'
 import Loader from '../../../components/loader'
@@ -40,23 +40,24 @@ export default function GroupAdd() {
         <motion.div
         initial={slideInitial}
         animate={slideAnimate}
-        className="notes-modal modal--wrapper">
+        className="note-modal modal--wrapper">
     
           {status === 'loading' ? <Loader /> : 
-          <form className="add-slide-content">
-              <input ref={title} type="text" id='add-notes-input' className="input add-slide-input" placeholder='Title' name='Title' />
-              <textarea ref={description} className='input textarea add-slide-textarea'id='add-notes-textarea ' placeholder='Description (optional)'></textarea>
-          </form>
+           <form className="add-slide-content">
+              <input ref={title} type="text"  id='add-group-input' className="input add-slide-input" placeholder='Title'  name='Title' />
+              <textarea ref={description} className='input textarea add-slide-textarea'id='add-group-textarea ' placeholder='Description (optional)'></textarea>
+            </form>
           }
         
           <div className="add-slide-btn-wrapper">
               <button className="add-slide-btn primary-btn" onClick={() => {
+             
                 mutate({
                   url: 'group/create',
                   method: 'POST',
                   data: {
                     color: '#FFFFFF',
-                    description: title.current!.value || 'Untitled',
+                    description: description.current!.value || 'Untitled',
                     isPublic: true,
                     name: title.current!.value || 'Untitled'
                   },

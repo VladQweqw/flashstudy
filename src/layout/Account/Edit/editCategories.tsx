@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { useLocation, useNavigate, useParams } from 'react-router'
 
@@ -95,25 +95,23 @@ export function CardsEdit() {
                 }
  
             }}>Delete</button>
-            <button className="add-slide-btn primary-btn" onClick={() => {
-                const fd = new FormData();
-
-                fd.append('answer', answer.current!.value || state.answer)
-                fd.append('question', question.current!.value || state.question)
-                fd.append('tags', JSON.stringify([]) || JSON.stringify(state.tags))
-                fd.append('anaswer', answer.current!.value || state.answer)
-                fd.append('image', imageInput.current!.files![0] || null)
-                fd.append('id', state.ID.toString())
+        <button className="add-slide-btn primary-btn" onClick={() => {
 
                 mutate({
-                    url:`slide/update`,
+                    url:`slide/update?id=${state.ID}`,
                     method: 'PUT',
-                    data: fd,
+                    data: {
+                        answer: answer.current!.value || state.answer,
+                        question: question.current!.value || state.question,
+                        tags: JSON.stringify([]),
+                        image: imageInput.current!.files![0] || null,
+                        
+                    },
                     headers: {
                         authorization: ''
                     }
                 })
-            }}>Change</button>
+        }}>Change</button>
             
         </div>
 
@@ -124,21 +122,81 @@ export function CardsEdit() {
 }
 
 export function NotesEdit() {
+    const { id, slideId } = useParams()
     const { state }: {
         state: noteType
     } = useLocation();
+    
+    const title = useRef<HTMLInputElement | null>(null)
+    const text = useRef<HTMLTextAreaElement | null>(null)
+
+    const queryClient = useQueryClient();
+    const {
+        mutate,
+        status
+    } = useMutation({
+        mutationFn: API,
+        mutationKey: ['note', parseInt(id!)],
+        onSuccess: (newSlide) => {
+
+            queryClient.setQueryData(['note', parseInt(id!)], newSlide);
+            togglePopup('Changes saved!', 'SUCCESS');
+    
+            queryClient.refetchQueries({
+                queryKey: ['note', parseInt(id!)],
+            });
+   
+   
+            togglePopup('Changes saved', 'SUCCESS')
+         },
+    })
 
     return(
         <EditOption type='note'>
 
-        <form className="add-slide-content">
-            <input type="text" defaultValue={state?.title}  id='add-notes-input' className="input add-slide-input" placeholder='Title'  name='Title' />
-            <textarea defaultValue={state?.text} className='input textarea add-slide-textarea'id='add-notes-textarea ' placeholder='Description (optional)'></textarea>
-        </form>
+        {status === 'loading' ? <Loader /> :
+            <>
+                <form className="add-slide-content">
+                    <input ref={title} type="text" defaultValue={state?.title}  id='add-notes-input' className="input add-slide-input" placeholder='Title'  name='Title' />
+                    <textarea ref={text} defaultValue={state?.text} className='input textarea add-slide-textarea'id='add-notes-textarea ' placeholder='Description (optional)'></textarea>
+                </form>
 
-        <div className="add-slide-btn-wrapper">
-            <button className="add-slide-btn primary-btn ">Change</button>
-        </div>
+                <div className="add-slide-btn-wrapper">
+                    <button className="remove-slide-btn secondary-btn" onClick={(e) => {
+                        let element = (e.target as HTMLButtonElement);
+                        
+                        if(element.innerText === 'Are you sure?') {
+                        mutate({
+                            url: `note/delete?id=${slideId}`,
+                            method: 'DELETE',
+                            data: {},
+                            headers: {
+                                authorization: ''
+                            }
+                        })
+                        }else {
+                            element.innerText = 'Are you sure?'
+                        }
+        
+                    }}>Delete</button>
+
+                    <button className="add-slide-btn primary-btn" onClick={() => {
+                        mutate({
+                            method: 'PUT',
+                            url: `note/update`,
+                            data: {
+                                title: title.current!.value || '',
+                                text: text.current!.value || '' ,
+                                id: parseInt(slideId!),
+                            },  
+                            headers: {
+                                authorization: ''
+                            }
+                        })
+                    }}>Change</button>
+                </div>
+            </>
+        }
 
         </EditOption>
     )
@@ -146,7 +204,14 @@ export function NotesEdit() {
 
 export function ExamsEdit() {
     const { state } = useLocation();
-    let daysUntilExam = 0;
+    const { id, slideId } = useParams()
+    const queryClient = useQueryClient();
+
+    const [daysUntilExam, setDaysUntilExam] = useState(convertTime(new Date(state.examDate).getTime()))
+
+    const name = useRef<HTMLInputElement | null>(null);
+    const description = useRef<HTMLTextAreaElement | null>(null);
+    const examDate = useRef<HTMLInputElement | null>(null);
 
 
     function convertTime(timeInMs: number) {
@@ -157,44 +222,103 @@ export function ExamsEdit() {
         let days = (examDate / (1000 * 60* 60 * 24))
            
         return Math.ceil(days)
-     }
+    }
 
+    const {
+        mutate,
+        status
+    } = useMutation({
+        mutationFn: API,
+        mutationKey: ['exam', parseInt(id!)],
+        onSuccess: (newSlide) => {
+
+            queryClient.setQueryData(['exam', parseInt(id!)], newSlide);
+            togglePopup('Changes saved!', 'SUCCESS');
+    
+            queryClient.refetchQueries({
+                queryKey: ['exam', parseInt(id!)],
+            });
+   
+   
+            togglePopup('Changes saved', 'SUCCESS')
+         },
+    })
+
+    
     return(
         <EditOption type='exam'>
-            <div className="slide-header">
-            <input
-            onChange={(e: any) => {
 
-               if(e.target.value != '') {
-                daysUntilExam = (
-                     convertTime(
-                        new Date(e.target.value).getTime()
-                     )   
-                  )                     
-               }else {
-                daysUntilExam = 0
-               }
-            }}
-            type="date" name="Add exam date" className='exam-date' id="exam-date" />
-            <p id="slide-days-left">{
-               daysUntilExam < 1 ? 'Today' : `In: ${daysUntilExam} days` 
-            }</p>
-            </div>
+            {status === 'loading' ? <Loader /> :
+            <>
+            
+                <div className="slide-header">
+                    <input ref={examDate} defaultValue={state.examDate}
+                        onChange={(e: any) => {
 
-            <form className="add-slide-content">
-                <input type="text" id='add-exam-input' className="input add-slide-input" placeholder='Title' name='Title' />
+                        if(e.target.value != '') {
+                            setDaysUntilExam(
+                                convertTime(
+                                    new Date(e.target.value).getTime()
+                                )   
+                            )                     
+                        }else {
+                            setDaysUntilExam(0)
+                        }
+                        }}
+                    type="date" name="Add exam date" className='exam-date' id="exam-date" />
+                    <p id="exam-days-left">{
+                    daysUntilExam < 1 ? 'Today' : `In: ${daysUntilExam} days` 
+                    }</p>
+                </div>
 
-                <textarea className='input textarea add-slide-textarea 'id='add-exam-textarea' placeholder='Description (optional)'></textarea>
-            </form>
+                <form className="add-slide-content">
+                    <input ref={name} type="text" defaultValue={state.name} id='add-exam-input' className="input add-slide-input" placeholder='Title' name='Title' />
+
+                    <textarea ref={description} defaultValue={state.description} className='input textarea edit-slide-textarea 'id='edit-exam-textarea' placeholder='Description (optional)'></textarea>
+                </form>
+            </>
+            }
 
             <div className="add-slide-btn-wrapper">
-            <button className="add-slide-btn primary-btn ">Change</button>
+            <button className="remove-slide-btn secondary-btn" onClick={(e) => {
+                let element = (e.target as HTMLButtonElement);
+                
+                if(element.innerText === 'Are you sure?') {
+                   mutate({
+                     url: `exam/delete?id=${slideId}`,
+                     method: 'DELETE',
+                     data: {},
+                     headers: {
+                        authorization: ''
+                     }
+                   })
+                }else {
+                    element.innerText = 'Are you sure?'
+                }
+ 
+            }}>Delete</button>
+
+            <button className="add-slide-btn primary-btn" onClick={() => {
+                mutate({
+                    method: 'PUT',
+                    url: `exam/update`,
+                    data: {
+                        description: description.current!.value || " ",
+                        name: name.current!.value || " ",
+                        examDate: examDate.current!.value || new Date().getTime(),
+                        id: parseInt(slideId!),
+                    },  
+                    headers: {
+                        authorization: ''
+                    }
+                })
+            }}>Change</button>
             </div>
         </EditOption>
     )
 }
 
-function EditOption(props: {
+export function EditOption(props: {
     children: any,
     type: slideCategories
 }) {

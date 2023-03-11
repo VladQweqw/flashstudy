@@ -60,7 +60,7 @@ export default function App() {
 
           <Route path='' element={<Groups />}>
             <Route path='create' element={<GroupAdd />}></Route>
-            <Route path='edit' element={<GroupEdit />}></Route>  
+            <Route path=':id/edit' element={<GroupEdit />}></Route>  
           </Route>
           
           <Route path=':category/:id' element={<Category />}>

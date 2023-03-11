@@ -10,6 +10,12 @@ export const wrongPhrases = [
     'Could be worse', 'Hard question anyway', 'Damn..', 'F'
  ]
 
+export function checkLengts(min: number, max: number, string: string) {
+    if(string.length >= min && string.length <= max) return true;
+
+    return false;
+}
+
 export const quizArr = [
     {
        question:'E cabral negru',
@@ -80,7 +86,6 @@ export function addCustomBackground(image: string) {
     }else {
         SETTINGS_IMAGES.custom.unshift(image)
     }
-    console.log(SETTINGS_IMAGES.custom);
     
     setBackground('C0')
 } 
@@ -95,7 +100,6 @@ export async function checkValidURLImage(url: string) {
 
 export function setBackground(id: any) {
     const accountElement = document?.getElementById('account');
-    console.log(id);
         
     if(id === 'DEFAULT') {
         accountElement!.style.background = '#121212'
@@ -142,6 +146,23 @@ export function togglePopup(message: string, state: "SUCCESS" | 'WARNING' | 'ERR
     popup?.classList.add('popup')
 
     title!.innerText = message;
+    if(message === 'DEFAULT') {
+        let msg = '';
+
+        if(state === 'ERROR') {
+            msg = 'Unexpected error'
+        }else if(state === 'WARNING') {
+            msg = 'Something not perfect'
+        }else if(state === 'SUCCESS') {
+            msg = 'Action success'
+        }else {
+
+        }
+
+        title!.innerText = msg;
+    }
+
+
     if(state === 'SUCCESS') {
         popup?.classList.add('popup-success')
     }else if(state === 'ERROR') {

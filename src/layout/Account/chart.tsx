@@ -6,18 +6,10 @@ import { API } from '../../functions/API';
 import Loader from '../../components/loader';
 import { useParams } from 'react-router';
 import { formatDate } from '../../functions/functions';
+import { chartDataType, chartOptionsType } from '../../functions/types';
 
 ChartJS.register(...registerables);
 
-interface chartDataType {
-    labels: string[],
-    datasets: {label: string, data: number[], backgroundColor: string[]}[],
-}
-
-interface chartOptionsType {
-    maintainAspectRatio : boolean,
-    plugins: any
-}
 
 export default function Chart() {
     const [chartData, setChartData] = useState<chartDataType>()
@@ -51,10 +43,10 @@ export default function Chart() {
 
         setChartData({
             labels,
-            datasets: [
-                {
+            datasets: [{
                     label: 'Grade',
                     data: chartData,
+                    borderColor: ['rgb(110, 110, 110)'],
                     backgroundColor: [
                         '#D09683',
                     ]
@@ -64,7 +56,6 @@ export default function Chart() {
 
         setChartOptions({
             maintainAspectRatio : false,
-            
             plugins: {
                 layout: {
                     padding:10
@@ -95,7 +86,7 @@ export default function Chart() {
                         label: function(e: any) {
                             let item = data.data[e.dataIndex];
                             
-                            let msg = `${item.correctAnswer}/${item.wrongAnswer + item.correctAnswer}, Grade: ${Math.floor(item.grade)}`;
+                            let msg = `${item.correctAnswer}/${item.wrongAnswer + item.correctAnswer}, Grade: ${Math.floor(item.grade)}%`;
 
                             return msg
                         }

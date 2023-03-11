@@ -22,6 +22,18 @@ export interface practiceQuestion {
    answer: string, 
 }
 
+//stats
+
+export interface chartDataType {
+   labels: string[],
+   datasets: {label: string, data: number[], backgroundColor: string[], borderColor: string[]}[],
+}
+
+export interface chartOptionsType {
+   maintainAspectRatio : boolean,
+   plugins: any
+}
+
 // cards
 
 export type groupElementArray = groupElementType[]

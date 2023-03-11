@@ -3,23 +3,37 @@ import { formatDate } from "../../../functions/functions";
 import { useNavigate } from "react-router";
 
 export function Exam(data: {
-    item: cardType,
+    item: any,
     type: slideCategories
  }) {
    
+   function convertTime(timeInMs: number) {
+    let examDate = new Date(
+        timeInMs - new Date().getTime()
+    ).getTime();
+        
+    let days = (examDate / (1000 * 60* 60 * 24))
+       
+    return Math.ceil(days)
+ }
+
     return <CategoryOption
         {...data}
         >
         <div className="slide-text">
-            <h1 className="slide-title m3">Test matea awd awd awd </h1>
-            <p className="slide-description m5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi voluptatum libero praesentium. Necessitatibus, hic commodi.</p>
+            <h1 className="slide-title m3">{data.item?.name}</h1>
+            <p className="slide-description m5">{data.item?.description}</p>
 
-            <p className="slide-last-updated m5">last updated: 3 hours ago</p>
+            <p className="slide-last-updated m5">Last edited: {
+            formatDate(new Date(data.item.UpdatedAt || '')).dmhmy()
+            }</p>
         </div>
 
         <div className="slide-right">
-            <h1 className="exam-days-number">32</h1>
-            <p className="exam-days-number-bottom m3" >days left</p>
+            <h1 className="exam-days-number">{
+            convertTime(new Date(data.item.examDate).getTime())
+        }</h1>
+            <p className="exam-days-number-bottom m3">days left</p>
         </div>
     </CategoryOption>
 }

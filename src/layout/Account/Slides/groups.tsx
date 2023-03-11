@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react'
+import { useEffect} from 'react'
 import { useNavigate } from 'react-router'
-import { groupType, groupElementType } from '../../../functions/types';
+import { groupElementType } from '../../../functions/types';
 import { formatDate, STAGGER_DURATION } from '../../../functions/functions';
 import anime from 'animejs'
 import Loader from '../../../components/loader';
@@ -79,7 +79,14 @@ function Group({
     return(
            <div onClickCapture={() => {
             navigate(`cards/${data.ID}`)
-           }} onClick={() => navigate('edit') } className="account-slide slide group group-slide">
+           }} 
+           onContextMenu={() => {
+            navigate(`${data.ID}/edit`, {state: {item: {
+               name: data?.name,
+               description: data?.description
+            }}})
+           }}
+           onClick={() => navigate('edit') } className="account-slide slide group group-slide">
  
              <h1 className="slide-title">{data?.name} </h1>
              <p className="slide-description">{data?.description}</p>
