@@ -15,8 +15,6 @@ export default function GroupAdd() {
   const title = useRef<HTMLInputElement | null>(null)
   const description = useRef<HTMLTextAreaElement | null>(null)
   const [colorIndex, setColorIndex] = useState(0)
-
-
   const queryClient = useQueryClient();
 
     const {
