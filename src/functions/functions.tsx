@@ -197,6 +197,10 @@ export function getFromSession(name: string) {
     return JSON.parse(sessionStorage.getItem(name)!)
 }
 
+export function asyncLocalStorage(key: string, value: any) {
+    return Promise.resolve().then(() => encodeAndSave(key, value))
+}
+
 export function encodeAndSave(key: string, token: string) {
     saveToLocal(
         key, window.btoa(token)

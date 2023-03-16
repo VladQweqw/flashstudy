@@ -77,7 +77,11 @@ function Group({
    
    
     return(
-           <div onClickCapture={() => {
+           <div
+           title={'Right click to edit'}
+           style={{
+            backgroundColor: data.color
+           }} onClickCapture={() => {
             navigate(`cards/${data.ID}`)
            }} 
            onContextMenu={() => {

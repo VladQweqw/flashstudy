@@ -152,7 +152,7 @@ export default function Quiz() {
                   })}
                </div>
 
-               <div ref={footer} className="footer ">
+               <div ref={footer} className="quiz-footer">
                   <h1 className="message m3">{statusMessage}</h1>
 
                   <button className="next-question" onClick={() => nextQuestion()}>
@@ -211,7 +211,7 @@ function QuizResult(data: {correct: number, wrong: number}) {
             </div>
 
             <div className="btn-wrapper">
-               <button className="secondary-btn" onClick={() => navigate('/account/cards')}>Home</button>
+               <button className="secondary-btn" onClick={() => navigate('/account')}>Home</button>
                <button className="primary-btn" onClick={() => navigate(`/account/cards/${id}/stats`)}>See stats</button>
             </div>
       </div>

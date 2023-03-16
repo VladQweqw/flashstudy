@@ -126,26 +126,7 @@
         outline: 2px solid transparent;
         transition: 200ms ease;
         height: 100%;
-        position: relative;
 
-        .slide-options {
-            position: absolute;
-            z-index: 99;
-            width: 30px;
-            right: 0;
-            height: 50px;
-            display: grid;
-            place-items: center;
-            
-            i {
-                transition: 200ms ease;
-            }
-        }
-        .slide-options:hover {
-            i {
-                color: $accent-color;
-            }
-        }
     }
 
     .group-slide {
@@ -345,6 +326,7 @@
 
     .slide:hover {
         outline: 2px solid $accent-color;
+        
     }
     .slide:active {
         scale: .95;
@@ -394,7 +376,44 @@
     justify-content: center;
     align-items: center;
     padding: 2vw;
+    width: 100%;
     
+
+
+    .color-select {
+        display: flex;
+        justify-content: space-evenly;
+        align-content: center;
+        gap: 1rem;
+        width: 100%;
+        overflow-x: auto;
+
+        padding: .5rem 2vw;
+        
+        .color {
+            flex: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: 200ms ease;
+            outline: 2px solid transparent;
+            box-shadow: 1px 2px 5px #00000090;
+        }
+        .color:hover {
+            scale: 1.1;
+            outline: 2px solid white;
+        }
+        .color:active {
+            scale: .9;
+        }
+
+        .color-select-active {
+            outline: 2px solid white;
+
+        }
+    }
+
     textarea {
         min-height: 150px;
     }
@@ -418,7 +437,6 @@
         width: 100%;
         height: 100%;
         gap: 10px;
-        padding: 2vw;
         
 
         .add-slide-btn, .remove-slide-btn {
@@ -649,46 +667,11 @@
                 scale: 1.2;
             }
         }
-
-        .color-select {
-            display: flex;
-            justify-content: space-between;
-            align-content: center;
-            gap: 1rem;
-            overflow-x: auto;
-            max-width: 900px;
-            padding: .5rem 1rem;
-           
-            
-            .color {
-                flex: none;
-                width: 40px;
-                height: 40px;
-                cursor: pointer;
-                border-radius: 40px;
-                transition: 200ms ease;
-                outline: 2px solid transparent;
-            }
-            .color:hover {
-                scale: 1.1;
-                outline: 2px solid white;
-            }
-            .color:active {
-                scale: .9;
-            }
-
-            .color-select-active {
-                outline: 2px solid white;
-
-            }
-        }
     }
 
     .note-modal {
         display: grid;
         grid-template-rows: auto 75px;
-        padding: 1vw;
-
         
         textarea {
             height: 100%;
@@ -718,6 +701,15 @@
 
     }
     
+}
+
+#group-add {
+    grid-template-rows: auto 75px 75px;
+
+
+    input, textarea {
+        background-color: transparent;
+    }
 }
 
 .hamburger-wrapper {
