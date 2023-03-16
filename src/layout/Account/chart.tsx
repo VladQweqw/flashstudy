@@ -1,41 +1,52 @@
-import React,{useState, useEffect} from 'react'
-import { Bar } from 'react-chartjs-2';
+import {useState, useEffect} from 'react'
+import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, registerables } from 'chart.js';
+import { useQuery } from 'react-query';
+import { API } from '../../functions/API';
+import Loader from '../../components/loader';
+import { useParams } from 'react-router';
+import { formatDate } from '../../functions/functions';
+import { chartDataType, chartOptionsType } from '../../functions/types';
 
 ChartJS.register(...registerables);
 
 
-
-
-interface chartDataType {
-    labels: string[],
-    datasets: {label: string, data: number[], backgroundColor: string[]}[],
-}
-
-interface chartOptionsType {
-    maintainAspectRatio : boolean,
-    plugins: any
-}
-
-const data = {
-    marks: [65, 98, 23],
-
-}
-
-const dates = new Array(3).fill(new Date().toDateString())
-
 export default function Chart() {
     const [chartData, setChartData] = useState<chartDataType>()
     const [chartOptions, setChartOptions] = useState<chartOptionsType>()
+    const { id } = useParams();
+
+    const {
+        status, 
+        data
+    } = useQuery({
+        queryKey:['stats'],
+        queryFn: () => API({
+            url:`stats?id=${id}`,
+            method:'GET',
+            data: {},
+            headers: {}
+        }),
     
+    })    
+
     useEffect(() => {
-      
+        if(!data) return
+
+        let labels = data.data.map((item: any) => {
+            return formatDate(new Date(item.CreatedAt)).dmy()
+        })
+        
+        let chartData = data.data.map((item: any) => {
+            return item.grade
+        })
+
         setChartData({
-            labels: dates.map((mark) => mark),
-            datasets: [
-                {
-                    label: '% Of correct answers',
-                    data: data.marks.map((mark) => mark),
+            labels,
+            datasets: [{
+                    label: 'Grade',
+                    data: chartData,
+                    borderColor: ['rgb(110, 110, 110)'],
                     backgroundColor: [
                         '#D09683',
                     ]
@@ -45,7 +56,6 @@ export default function Chart() {
 
         setChartOptions({
             maintainAspectRatio : false,
-            
             plugins: {
                 layout: {
                     padding:10
@@ -70,12 +80,21 @@ export default function Chart() {
                 },
                 tooltip: {
                     font: {
-                        size: 18,
-                       
+                        size: 24,
+                    },
+                    callbacks: {
+                        label: function(e: any) {
+                            let item = data.data[e.dataIndex];
+                            
+                            let msg = `${item.correctAnswer}/${item.wrongAnswer + item.correctAnswer}, Grade: ${Math.floor(item.grade)}%`;
+
+                            return msg
+                        }
                     },
                     titleFont: {
                         family: 'Poppins',
-                        weight: '500'
+                        weight: '600',
+                       
                     },
                     padding: {
                         top: 10,
@@ -84,19 +103,20 @@ export default function Chart() {
                         right: 10,
                     },
                     backgroundColor: '#1C1C1C',
+               
                 }
             }
         })   
 
-    }, [])
+    }, [data])
     
-
+    if(status === 'loading') return <Loader />
    return(
     <div className="chart-wrapper">
 
         <div className="chart">
             {(chartData && chartOptions) && 
-            <Bar data={chartData} options={chartOptions} />}
+            <Line data={chartData} options={chartOptions} />}
         </div>
     </div>
    )

@@ -104,10 +104,14 @@
 
     }
 
-    .footer {
+    .quiz-footer {
         background-color: $background-contrast;
         display: grid;
-        grid-template-columns: auto 100px;
+        grid-template-columns: auto 50px;
+        padding: 0 2vw;
+        gap: 1rem;
+        justify-content: space-between;
+
         align-items: center;
         height: 100%;
         border-top: 2px solid $accent-color;
@@ -116,7 +120,6 @@
 
         .message {
             text-align: center;
-            margin-left: 100px;
             font-weight: 400;
             font-size: 1.5rem;
         }

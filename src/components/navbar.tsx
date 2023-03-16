@@ -9,7 +9,7 @@ export default function Navbar() {
     return(
     <div className="navbar" >
         <div onClick={() => navigate('/')} className="brand">
-            <h1 id='logo'>FS</h1>
+            <h1 className='logo'>FS</h1>
         </div>
 
         <nav className="nav">

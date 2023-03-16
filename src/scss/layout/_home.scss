@@ -2,27 +2,26 @@
 
 .hero {
     height: calc(100vh - 80px);
+    height: calc(100svh - 80px);
     display: grid;
     grid-template-columns:25% 50% 25%;
-    grid-template-rows: 20% 70% 10%;
+    grid-template-rows: 150px 70%;
     margin-top: 80px;
-
+    padding: 2vw;
+    
     .hero-header {
         grid-column: 1/4;
         text-align: center;
         z-index: 2;
         position: static;
 
-        #hero-title {
-            line-height: 70px;
+        
+        #hero-description{
+            color: $secondary-text;            
         }
-        #hero-description {
-            color: $secondary-text;
-            
-        }
+
         div {
             display: flex;
-            gap: 1rem;
             align-items: center;
             position: relative;
             width: fit-content;
@@ -44,7 +43,7 @@
         flex-direction: column;
         
         h1 {
-            margin-bottom: .5rem;
+            font-size: calc(.95rem + 1vw);
         }
     }
 
@@ -67,14 +66,12 @@
 
     .hero-middle {
         display: grid;
-        grid-template-rows: 90% 10%;
-        height: 100%;
-
+        grid-template-rows: auto 20px;
+        
         .hero-slideshow {
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            height: 100%;
             width: 100%;
             border-radius: 8px;
 
@@ -121,33 +118,16 @@
         }
 
     }
-
-    .svg-test {
-        grid-column: 1/4;
-        pointer-events: none;
-    }
-  
-    .hero-wave-svg {
-        width: 100%;  
-        transition: 400ms ease;
-        transform: translateY(0%);
-
-    }
-    .svg-test-hidden {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-
-
+    
 }
 
 // feed
 .feed {
     height: 100vh;
     display: grid;
-    grid-template-rows: 40% 60%;
     text-align: center;
-    
+    grid-template-rows: 300px auto;
+    gap: 1rem;
 
     .feed-header {
         height: 100%;
@@ -179,9 +159,7 @@
             .search-icon-wrapper:hover {
                 background-color: $accent-color;
 
-                #search-icon {
-                    transform: translateY(-2px);
-                }
+              
             }
             
             .search-icon-wrapper::before {
@@ -231,40 +209,122 @@
 
     .feed-content {
         display: grid;
-        row-gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: .75rem;
+        padding: .5rem;
+        grid-auto-flow: dense;
+        grid-auto-rows: 225px;
+        max-height: 100vh;
+        position: relative;
+        overflow: hidden;
 
-        .feed-row {
+        .see-all {
+            position: absolute; 
+            top: calc(100% - 120px);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(to top, $primary-background 20%, rgba(0, 0, 0, 0));
+            width: 100%;
+            height: 240px;
+            display: grid;
+            cursor: pointer;
+            place-items: center;
+            transition: 200ms ease;
+        }
+        
+        .see-all:hover {
+            color: $accent-color;
+        }
+        
+        .feed-item {
+            flex: none;
+            background-color: $background-contrast;
+            border-radius: 8px;
+            cursor: pointer;
+            outline: 2px solid transparent;
+            transition: 200ms ease;
+            height: 100%;
+            width: 100%;
+            position: relative;
             display: flex;
-            flex-direction: row;
-            padding: 0 1rem;
-            column-gap: 1rem;
-            overflow: hidden;
+            flex-direction: column;
+            justify-content: space-between;
             padding: .5rem;
 
-            .feed-item {
-                max-width: 100%;
-                width: 100%;
-                min-width: 300px;
-                cursor: pointer;
-                height: 100%;
-                border-radius: 8px;
-                background-color: $background-contrast;
-                transition: 200ms ease;
-                outline: 2px solid transparent;
+            .feed-item-footer {
+                display: flex;
+                justify-content: space-between;
+                
+                
+                .tag {
+                    color: $accent-color;
+                }
+            }
+
+            .text-wrapper {
+                align-self: flex-start;
+                text-align: left;
+                width: 85%;
+
+                .slide-description {
+                    color: $secondary-text;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 4;
+                    -webkit-box-orient: vertical;
+                    font-weight: 400;
+                    height: fit-content;
+                }
+
+                .slide-title {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    font-weight: 400;
+                    height: fit-content;
+                }
 
             }
-            .feed-item:hover {
-                outline: 2px solid $accent-color;
-                box-shadow: 0 4px 5px #00000060;
+            
+            .feed-item-reviews {
+                align-items: flex-end;
+                text-align: right;
             }
             
+            .like-slide {
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                font-size: 1.25rem;
+                cursor: pointer;
+                transform: 200ms ease;
+
+            }
+
+            .like-slide:hover {
+                color: $accent-color;
+            }
+
+            
+
+            
         }
+        
+        .feed-item:hover {
+            outline: 2px solid $accent-color;
+        }
+        .feed-item:active {
+            scale: .95;
+        }
+
     }
 
 }
 
 //reviews
-
 .reviews {
     min-height: 100vh;
     display: flex;
@@ -272,7 +332,6 @@
     justify-content: center;
     flex-direction: column;
     gap: 2rem;
-    padding: .5rem;
     position: relative;
     overflow: hidden;
     
@@ -378,8 +437,8 @@
         }
 
         .review:hover {
-            outline: 2px solid #ffffff43;
-            scale: 1.05;
+            outline: 2px solid $accent-color;
+            scale: 1.01;
         }
 
         .review:nth-child(1) {
@@ -414,34 +473,22 @@
 
 }
 
-
-
-
-
 //medias
 @media (max-width: 1300px) {
     .hero {
        grid-template-columns: 50% 50%;
-       grid-template-rows: 20% 50% 20% 10%;
+       grid-template-rows: 30% 50% 20%;
         
         .hero-middle {
             grid-column: 1/3;
-            padding: 1rem;
+            padding: 0;
 
-            .hero-slideshow {
-                max-width: 900px;
-                margin: 0 auto;
-                
-                img {
-                    object-fit: contain;
-                }
-            }
         }
 
         
             
        .hero-left, .hero-right {
-        grid-row: 3;
+            grid-row: 3;
        }
        
     }
@@ -463,21 +510,6 @@
             display: none;
         }
 
-        .hero-middle {
-            grid-column: 1/3;
-            padding: 1rem;
-
-            .hero-slideshow {
-                max-width: 900px;
-                margin: 0 auto;
-
-                img {
-                    object-fit: contain;
-                    
-                }
-            }
-        }
-
        .hero-left, .hero-right {
             grid-row: 3;
        }
@@ -493,29 +525,15 @@
 @media (max-width: 600px) {
     .hero {
         grid-template-columns: 1fr;
-        grid-template-rows: 20% 35% 15% 20% 10%;
+        grid-template-rows: auto 200px auto auto;
 
         .hero-header {
-            justify-content: center;
-            align-items: center;
-            display: flex;
-            flex-direction: column;
             
             #hero-title {
                 line-height: 50px;
             }
-
-            #hero-description {
-                font-size: 1rem;
-            }
         }
 
-        .hero-right, .hero-left {
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-        }
         .hero-right {
             grid-row: 4;
         }

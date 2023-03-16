@@ -34,7 +34,7 @@ export default function Error() {
                <span className="error-word">4</span>
             </div>
 
-            <h1 className="status-message">
+            <h1 className="status-message m2">
                Page not found
             </h1>
             <div className='err-btns'>

@@ -3,10 +3,7 @@
     .error-text {
         text-align: center;
         
-   
-        
         .status-message {
-            font-size: calc(1rem + 2vmin);
             color: $accent-color;
         }
 
@@ -36,34 +33,35 @@
 
 .popup {
     position: fixed;
-    z-index: 999999;
-    right: 1rem;
-    border-radius: 8px;
-    top: calc(100% - 5rem);
+    z-index: 9999999;
+    top: -2rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: $background-contrast;
-    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    text-align: center;
     transition: 200ms ease;
-    transform: translateX(150%);
-    padding: .75em 1em;
-
+    cursor: pointer;
+    
     .popup-title {
-        font-size: 1.15rem;
         color: white;
-        font-weight: 400;
+        font-weight: 300;
     }
 }
 
 .popup-active {
-    transform: translateX(0%) !important; 
+    top: 2rem !important; 
 }
 
 .popup-success {
     background-color: green;
-
 }
+
 .popup-warning {
     background-color: orange;
 }
+
 .popup-error {
     background-color: red;
 }
@@ -107,6 +105,7 @@
     justify-content: center;
     align-items: center;
     max-width: 400px;
+    transition: 100ms ease;
 
     label {
         font-size: 1.15rem;
@@ -121,4 +120,19 @@
     }
 
     
+}
+
+.no-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    grid-column: 2/3;
+    height: 100%;
+
+    img {
+        width: clamp(200px, 50%, 500px);
+        
+        object-fit: contain;
+    }
 }

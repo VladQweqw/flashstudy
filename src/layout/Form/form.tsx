@@ -1,8 +1,6 @@
 import {useState} from 'react'
-
 import SignIn from './signIn';
 import SignUp from './signUp';
-import Loader from '../../components/loader';
 import { Outlet } from 'react-router';
 
 export default function Form() {
@@ -16,7 +14,7 @@ export default function Form() {
         <div className="form-wrapper">
             
             <div className="form-left">
-                <h1 className="m3">{formState ? 'Sign in' : 'Sign up'}</h1>
+                <h1 className="m1">{formState ? 'Sign in' : 'Sign up'}</h1>
             
 
                 {formState ? <SignIn /> : <SignUp setFormState={setFormState} />}
@@ -31,7 +29,7 @@ export default function Form() {
                 </svg>
 
                 <div className="other-form-method">
-                    <h1 className='m2'>
+                    <h1 className='m3'>
                         {formState ? 'Dont have an account?' : 'Already have an account?'}
                     </h1>
 

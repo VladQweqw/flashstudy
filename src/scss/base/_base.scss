@@ -58,14 +58,23 @@ body {
     text-align: center;
 }
 
-.m3 {
-    font-size: calc(3.5vmin + 1.5rem) !important;
+.m6  { // big titles
+    font-size: .75 !important;
 }
-.m2 {
-    font-size: calc(1vmin + 1rem) !important;
+.m5 { // small details
+    font-size: calc(1rem) !important;
 }
-.m1 {
-    font-size: 1rem;
+.m4 { // also description
+    font-size: calc(1rem + .25vmin) !important;
+}
+.m3 { // description
+    font-size: calc(1.15rem + .75vmin) !important;
+}
+.m2 { // small details
+    font-size: calc(1rem + 2vmin) !important;
+}
+.m1 { // big titles
+    font-size: calc(1.5rem + 2vmin) !important;
 }
 
 .section-spacing {
@@ -241,6 +250,7 @@ input:focus, textarea:focus {
 
        input:-webkit-autofill{
         -webkit-text-fill-color: $primary-text !important;
+        transition: 200ms ease;
         }     
         input:-webkit-autofill,
         input:-webkit-autofill:hover, 
@@ -249,15 +259,15 @@ input:focus, textarea:focus {
             -webkit-box-shadow: 0 0 0 30px $background-contrast inset !important;
         }
 
-// .z-3 {
-//     z-index: 999;
-// }
-// .z-2 {
-//     z-index: 99;
-// }
-// .z-1 {
-//     z-index: 1;
-// }
-// .z-0 {
-//     z-index: -1;
-// }
+.z-3 {
+    z-index: 999;
+}
+.z-2 {
+    z-index: 99;
+}
+.z-1 {
+    z-index: 1;
+}
+.z-0 {
+    z-index: -1;
+}

@@ -6,25 +6,20 @@ import heroImage1 from '../../assets/images/hero-image-0.png'
 import heroImage2 from '../../assets/images/hero-image-1.png' 
 import heroImage3 from '../../assets/images/hero-image-2.png'   
 import heroImage4 from '../../assets/images/hero-image-3.png'   
-import { togglePopup } from '../../functions/functions'
 
 import Feed from './feed'
 import Reviews from './reviews'
 import Navbar from '../../components/navbar'
+import Footer from '../../components/footer'
 
 const heroImages = ['Easy to manage', 'Remind of you exams','See your progress','Quiz yourself']
 
-export default function Home() {
+export default function Home() { 
    const [heroIndex, setHeroIndex] = useState(0)
    const dinamicText = useRef<any>(null)
    const navigate = useNavigate()
    
    useEffect(() => {
-      togglePopup('card created', 'SUCCESS')
-      
-      window.addEventListener('scroll', (e) => {
-         (document.querySelector('.hero-wave-svg') as HTMLElement).classList.add('svg-test-hidden')
-      })
 
       anime({
          targets: '.hero-underline-svg > path',
@@ -95,10 +90,10 @@ export default function Home() {
       <div className="hero">
 
          <div className="hero-header">
-            <h1 id="hero-title" className='m3'>Flash study</h1>
+            <h1 id="hero-title" className='m1'>Flash study</h1>
             
             <div>
-               <p id="hero-description" className='m2'>Find more materials. 
+               <p id="hero-description" className='m3'>Find more materials. 
                <span className='accent accent-font'>Study more efficently. </span> 
                <br />
                Test your abilities.</p>
@@ -111,7 +106,7 @@ export default function Home() {
          </div>
 
          <div className="hero-left">
-            <p className='secondary-text'>Why ?</p>
+            <p className='secondary-text m5'>Why ?</p>
             <h1 id='hero-dinamic-text' ref={dinamicText}>{heroImages[heroIndex]}</h1>
          
             <svg className='hero-underline-svg svg' viewBox="0 0 260 49" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -144,19 +139,11 @@ export default function Home() {
          <button className="primary-btn" onClick={() => navigate('/form')} title='Join now' type='button'>Join now</button>
 
          </div>
-
-         <div className='svg-test'>
-         <svg className='hero-wave-svg'  fill="none" xmlns="http://www.w3.org/2000/svg">
-         <path d="M858.475 16.1804C590.369 -18.4957 175.188 10.535 1.10986/ 29.3848V100H1920V8.71698C1890.28 7.37739 1793.54 8.20028 1644.3 22.2085C1457.75 39.7188 1193.61 59.5255 858.475 16.1804Z" fill="#D09683"/>
-         <path d="M1061.53 56.9775C1329.63 39.1792 1744.81 54.0799 1918.89 63.7551V100H0V53.1468C29.7161 52.4592 126.458 52.8816 275.699 60.0716C462.251 69.0592 726.394 79.2255 1061.53 56.9775Z" fill="#915643" fillOpacity="0.58"/>
-         </svg>
-         </div>
-
       </div>
 
     <Feed />
     <Reviews />
-      
+    <Footer />
     </>
    )
 }
