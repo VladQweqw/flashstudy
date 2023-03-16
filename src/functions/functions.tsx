@@ -1,6 +1,32 @@
 import { colorThemes, slideCategories } from "./types";
 import axios from "axios";
 
+// colors
+export const ColorVariants: string[] = [
+    '#121212',
+    '#00626f',
+    "#0f3b57",
+    '#495e35',
+    '#900020',
+    '#980036',
+    '#af2f0d',
+    '#362d26',
+    '#5c5337'
+]
+
+export function changeColor(index: number, color: string): void {
+    const ColorVariants = document.querySelectorAll('.color'); 
+
+    ColorVariants.forEach((color) => {
+        color.classList.remove('color-select-active');   
+    })
+
+    ColorVariants[index].classList.add('color-select-active');
+
+    (document.querySelector('.note-modal') as HTMLDivElement).style.backgroundColor = color;
+    
+  }
+
 //QUIZ
 export const correctPhrases = [
     'Well done', 'Good job', 'Keep going', 'Awesome', 'Genius'
@@ -195,6 +221,10 @@ export function saveToSession(name: string, data: any) {
 
 export function getFromSession(name: string) {
     return JSON.parse(sessionStorage.getItem(name)!)
+}
+
+export function asyncLocalStorage(key: string, value: any) {
+    return Promise.resolve().then(() => encodeAndSave(key, value))
 }
 
 export function encodeAndSave(key: string, token: string) {

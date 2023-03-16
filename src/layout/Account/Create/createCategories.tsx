@@ -18,7 +18,6 @@ export function CardsAdd() {
     const imageInput = useRef<HTMLInputElement | null>(null);
     const image = useRef<HTMLImageElement | null>(null);
 
-
     function createImagePreview(e: HTMLInputElement) {
         if(e.files!.length > 0) {
            const src = URL.createObjectURL(e.files![0]);
@@ -50,6 +49,7 @@ export function CardsAdd() {
         }
       })
 
+
    return(
         <Modal>
             {status === 'loading' ? <Loader /> : 
@@ -76,17 +76,7 @@ export function CardsAdd() {
 
             </form>
             
-            <div className="color-select">
-                  {/* {colors.map((color, index: number) => {
-                     
-                     return <span
-                     title={color.colorName}
-                     onClick={() => setColorIndex(index)}
-                     key={index} className="color" style={{
-                        backgroundColor: color.colorHex
-                     }}></span>
-                  })} */}
-            </div>
+           
 
             <div className="add-slide-btn-wrapper">
                 <button className="add-slide-btn primary-btn " onClick={() => {                  
@@ -104,7 +94,7 @@ export function CardsAdd() {
                             authorization: ''
                         }
                     })
-                }}>Create</button>
+                }}>Create slide</button>
             </div>
 
             </CreateOption>}
@@ -169,7 +159,7 @@ export function NotesAdd() {
                                 authorization: ''
                             }
                         })
-                    }}>Create</button>
+                    }}>Create note</button>
                 </div>
  
              </CreateOption>}
@@ -269,7 +259,7 @@ export function ExamsAdd() {
                             }
                         })
                     }}
-                    >Create</button>
+                    >Create exam</button>
                 </div>
 
             </CreateOption>}

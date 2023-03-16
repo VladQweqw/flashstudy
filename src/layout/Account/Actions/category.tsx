@@ -1,16 +1,6 @@
-import {useState, useEffect} from 'react'
-import { Outlet, useNavigate, useParams } from 'react-router'
-import { useQuery } from 'react-query';
-import anime from 'animejs'
-import { singularURLNames, STAGGER_DURATION } from '../../../functions/functions';
-import { API } from '../../../functions/API';
-import { contextMenuType, slideCategories } from '../../../functions/types';
-import NoContent from '../../../components/noContent';
-import Loader from '../../../components/loader';
+import { slideCategories } from '../../../functions/types';
 
 import { Card, Exam, Note } from '../Slides/categories';
-
-
 
 function Slide(data: {
     item: any,

@@ -1,7 +1,28 @@
-import React,{} from 'react'
-
+import { useQuery } from "react-query"
+import { API } from "../../functions/API"
+import Loader from "../../components/loader";
+import { groupElementType } from "../../functions/types";
+import { formatDate } from "../../functions/functions";
 
 export default function Feed() {
+    let COUNT = 8;
+
+    const {
+        status,
+        data
+    } = useQuery({
+        queryFn: () => API({
+            method: 'GET',
+            url: `popularGroups?count=${COUNT}`,
+            data: {},
+            headers: {
+                authorization: ''
+            }
+        }),
+        queryKey: ['hash', COUNT]
+    })
+
+    if(status === 'loading') return <Loader />
 
    return(
     <div className="feed section-spacing">
@@ -23,14 +44,48 @@ export default function Feed() {
         </div>
 
         <div className="feed-content">
-            <h1 className="m1">Cal marian</h1>
-            <h2 className="m2">Cal marian</h2>
-            <h3 className="m3">Cal marian</h3>
-            <h4 className="m4">Cal marian</h4>
-            <h5 className="m5">Cal marian</h5>
-            <h6 className="m6">Cal marian</h6>
+            {data.data && data.data.map((item: groupElementType, index: number) => {
+                return <>
+                <FeedItem data={item} key={index} />
+                <FeedItem data={item} key={index} />
+                </>
+            })}
 
+            <span className="see-all"><p className="m4">See all</p></span>
         </div>
     </div>
    )
+}
+
+
+function FeedItem(item: {
+    data: groupElementType
+}) {
+    const { data } = item;
+    let liked = data.isLiked || false;    
+
+    return(
+        <div className="feed-item">
+            <span className="like-slide" onClick={() => {
+                liked = !liked
+            }}>
+                {data.likes} {liked ? 
+                <i className="fa-solid fa-heart"></i>
+                :
+                <i className="fa-regular fa-heart"></i>
+                }
+            </span>
+
+            <div className="text-wrapper">
+                <h1 className="slide-title m3">{data.name}awdddddddddddddddddddddddddddd</h1>
+                <p className="slide-description m4">{data.description} lorem200</p>
+            </div>
+
+            <footer className="feed-item-footer">
+                <span className="created m6 tag">{formatDate(new Date(data.UpdatedAt!)).dmhmy()}</span>
+            </footer>
+            
+        </div>
+    )
+
 }

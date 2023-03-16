@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
-import { formValidation, encodeAndSave, togglePopup } from '../../functions/functions';
+import { formValidation, encodeAndSave, togglePopup, asyncLocalStorage } from '../../functions/functions';
 import { useMutation } from 'react-query';
 import { API } from '../../functions/API';
 import Loader from '../../components/loader';
@@ -20,11 +20,11 @@ export default function SignIn() {
     } = useMutation({
       mutationFn: API,
       onSuccess: resp => {
-         if(encodeAndSave('token', resp.token)) {
+         asyncLocalStorage('token', resp.token).then((res) => {
             togglePopup('Logged in succesfully', 'SUCCESS')
             navigate('/account')
-         }
-
+         }).catch((err) => togglePopup('DEFAULT', 'ERROR'))
+      
       },
       onError: err => {
          togglePopup('Something went wrong', 'ERROR');

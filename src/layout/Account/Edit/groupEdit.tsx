@@ -1,11 +1,9 @@
 import { useMutation, useQueryClient } from 'react-query'
 import { useLocation, useParams } from 'react-router'
-import { useRef } from 'react'
-
+import { useRef, useState } from 'react'
 import { EditOption } from './editCategories'
-import { togglePopup } from '../../../functions/functions'
+import { togglePopup, ColorVariants, changeColor } from '../../../functions/functions'
 import { API } from '../../../functions/API'
-
 import Loader from '../../../components/loader'
 
 export default function GroupEdit() {
@@ -13,6 +11,7 @@ export default function GroupEdit() {
    const description = useRef<HTMLTextAreaElement | null>(null);
    const { state } = useLocation() 
    const { id } = useParams()
+   const [colorIndex, setColorIndex] = useState(0)
 
    const queryClient = useQueryClient();
 
@@ -31,7 +30,7 @@ export default function GroupEdit() {
              queryKey: ['account'],
          });
 
-
+         
          togglePopup('Changes saved', 'SUCCESS')
       },
       onError: () => {
@@ -42,12 +41,30 @@ export default function GroupEdit() {
     return <EditOption type='note'>
 
     {status === 'loading' ? <Loader /> : 
-      <form className="add-slide-content">
-         <input ref={title} type="text" defaultValue={state.item.name || ''}  id='edit-group-input' className="input add-slide-input" placeholder='Title'  name='Title' />
+      <>
+         <form className="add-slide-content">
+            <input ref={title} type="text" defaultValue={state.item.name || ''}  id='edit-group-input' className="input add-slide-input" placeholder='Title'  name='Title' />
+            <textarea ref={description} defaultValue={state.item.description || ''} className='input textarea add-slide-textarea'id='add-group-textarea ' placeholder='Description (optional)'></textarea>
+         </form>
 
-         <textarea ref={description} defaultValue={state.item.description || ''} className='input textarea add-slide-textarea'id='add-group-textarea ' placeholder='Description (optional)'></textarea>
-      </form>
-    
+         <div className="color-select">
+         {ColorVariants.map((color: string, index: number) => {
+            
+            return <span
+            
+            onClick={(e) => {
+               changeColor(index, color);
+               setColorIndex(index);
+
+               (e.target as HTMLSpanElement).classList.add('color-select-active')    
+         }}
+            key={index} className={`${index === 0 ? "color color-select-active" : "color"}`} style={{
+               backgroundColor: color
+            }}></span>
+         })}
+         </div>
+      
+      </>
     }
 
     <div className="add-slide-btn-wrapper">
@@ -74,7 +91,7 @@ export default function GroupEdit() {
             method: 'PUT',
             url: 'group/update',
             data: {
-               color: '#FFFFFF',
+               color: ColorVariants[colorIndex],
                description: description.current!.value || 'Untitled',
                name: title.current!.value || 'Untitled',
                id: parseInt(id!),
