@@ -87,7 +87,8 @@ function Group({
            onContextMenu={() => {
             navigate(`${data.ID}/edit`, {state: {item: {
                name: data?.name,
-               description: data?.description
+               description: data?.description,
+               color: data?.color
             }}})
            }}
            onClick={() => navigate('edit') } className="account-slide slide group group-slide">

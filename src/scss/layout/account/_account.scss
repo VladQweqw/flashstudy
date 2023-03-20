@@ -378,6 +378,7 @@
     padding: 2vw;
     width: 100%;
 
+    
     .modal--wrapper {
         max-width: 900px;
         width: 100%;
@@ -385,11 +386,39 @@
         border-radius: 8px;
         min-height: 600px;
         display: grid;
-        grid-template-rows: 300px auto 75px;
         transition: 200ms ease;
         border: 2px solid $accent-color;
+        overflow: hidden;
         justify-items: center;
-        
+        position: relative;
+
+        .remove-slide-btn {
+            border: 2px dashed red;
+        }
+        .remove-slide-btn:hover {
+            border: 2px dotted red;
+        }
+
+        .group-modal {
+            grid-template-rows: 325px 75px auto;
+        }
+
+        .modal-svg {
+            position: absolute;
+
+        }
+
+        .modal-svg-left {
+            left: 0;
+            top: calc(100% - 199px);
+        }
+
+        .modal-svg-right {
+            left: calc(100% - 116px);
+            top: calc(100% - 155px);
+            
+        }
+
         .add-slide-content {
             padding: clamp(.5rem, 2vw, 1rem);        
             display: flex;
@@ -397,7 +426,8 @@
             gap: clamp(1rem, 2vw, 2rem);
             width: 100%;
             padding-top: 2rem;
-            
+
+
             .input-wrapper {
                 position: relative;
                 
@@ -412,8 +442,8 @@
                     position: absolute;
                     top: 50%;
                     z-index: 1;
-                    font-size: 1.75rem;
-                    left: 90px;
+                    font-size: clamp(1.5rem, 2vw, 1.75rem);
+                    left: 80px;
                     transition: 200ms ease;
                     transform: translate(-50%, -50%);
                 }
@@ -441,14 +471,113 @@
             
         }
 
+        .color-select {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-around;
+            cursor: pointer;
+            overflow: hidden;
+            overflow-x: auto;
+            padding: .5rem;
+
+            .color {
+                height: 45px;
+                width: 45px;
+                border-radius: 50px;
+                flex: none;
+                transition: 200ms ease;
+                outline: 2px solid transparent;
+
+            }
+
+            .color-select-active {
+                outline: 2px solid white;
+            }
+
+        }
+
+        .add-slide-btn-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100%;
+            gap: .5rem;
+            padding-bottom: 2vw;
+
+        }
+
+        
+    }   
+
+    .slide-modal {       	
+        grid-template-rows: 200px auto 100px;
+
+        .thumbnail-image-wrapper {	
+            width: 100%;	
+            cursor: pointer;	
+            border-radius: 8px 8px 0 0;	
+            overflow: hidden;	
+            position: relative;	
+
+            .overlay {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 999;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $background-contrast);
+            }
+
+            .card-upload {	
+                background-color: transparent;	
+                color: transparent;	
+                width: 100%;	
+                height: 100%;	
+                position: absolute;	
+                cursor: pointer;	
+                z-index: 999;	
+
+            }	
+
+            .thumbnail-image {	
+                width: 100%;	
+                height: 100%;	
+                object-fit: cover;	
+                transition: 200ms ease;	
+            }	
+        }	
+
+        .thumbnail-image-wrapper:hover {	
+            .thumbnail-image {	
+                scale: 1.2;	
+            }	
+        }	
     }
 
-    .group-modal {
-        display: grid;
-        gap: 1rem;
-        grid-template-rows:auto 50px auto;
+    .note-modal {
+        textarea {
+            height: 100%;
+        }
     }
 
+    .exam-modal {
+        grid-template-rows: 100px auto 100px;
+        padding-top: 2rem;
+
+        .slide-header {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+            max-width: 300px;
+            width: 100%;
+            
+
+        }
+    }
+    
     .settings {
         max-width: 900px;
         width: 100%;
@@ -798,7 +927,37 @@
 
 }
 
+
 @media (max-width: 500px) {
+
+    .modal-wrapper {
+
+        
+        .modal--wrapper {
+            
+            .add-slide-btn-wrapper {
+                padding-bottom: 4rem ;
+            }
+
+            .modal-svg {
+                width: 100px;
+                height: 140px;
+
+                
+            }
+            
+            .modal-svg-left {
+                top: calc(100% - 135px);
+            }
+
+            .modal-svg-right {
+                left: calc(100% - 100px);
+                top: calc(100% - 135px);
+
+            }
+        }
+
+    }
 
     .account-slides {
         position: relative;

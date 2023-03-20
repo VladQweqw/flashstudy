@@ -62,8 +62,7 @@ export function Card(data: {
    item: cardType,
    type: slideCategories
 }) {
-   const { item } = data;
-   
+   const { item } = data;   
     return <CategoryOption
         {...data}
         >
@@ -77,8 +76,9 @@ export function Card(data: {
 
         <div className="slide-thumbnail">
         <div className="card-image-overlay"></div>
-        {/* {item.image &&  <img src={item.image} className='slide-thumbnail-image' alt="slide-thumbnail" />} */}
-        <img src="https://images.pexels.com/photos/15476701/pexels-photo-15476701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className='slide-thumbnail-image' alt="slide-thumbnail" />
+        <img src={`http://trphost.go.ro:8081/${item.image}`} onError={(e) => {
+            (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/15476701/pexels-photo-15476701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        }} className='slide-thumbnail-image' alt="slide-thumbnail" />
         </div>
     </CategoryOption>
 

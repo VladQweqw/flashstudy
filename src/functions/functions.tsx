@@ -23,7 +23,7 @@ export function changeColor(index: number, color: string): void {
 
     ColorVariants[index].classList.add('color-select-active');
 
-    (document.querySelector('.note-modal') as HTMLDivElement).style.backgroundColor = color;
+    (document.querySelector('.group-modal') as HTMLDivElement).style.backgroundColor = color;
     
   }
 
