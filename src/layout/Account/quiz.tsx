@@ -191,7 +191,7 @@ function QuizResult(data: {correct: number, wrong: number}) {
             authorization: '',
          },
        })
-   
+       
    }, [])
    
    return(

@@ -8,7 +8,6 @@ import { useMutation } from 'react-query'
 import { API } from '../../../functions/API'
 import { useQueryClient } from 'react-query'
 import { ColorVariants, changeColor } from '../../../functions/functions'
-import { S } from 'chart.js/dist/chunks/helpers.core'
 
 export default function GroupAdd() {
   const navigate = useNavigate();
@@ -42,12 +41,27 @@ export default function GroupAdd() {
         <motion.div
         initial={slideInitial}
         animate={slideAnimate}
-        className="note-modal modal--wrapper" id='group-add'>
+        className="group-modal modal--wrapper" id='group-add'>
     
           {status === 'loading' ? <Loader /> : 
            <form className="add-slide-content">
-              <input ref={title} type="text"  id='add-group-input' className="input add-slide-input" placeholder='Title'  name='Title' />
-              <textarea ref={description} className='input textarea add-slide-textarea'id='add-group-textarea ' placeholder='Description (optional)'></textarea>
+              <div className="input-wrapper">
+                <input ref={title} type="text" onBlur={(e) => {
+                  if(!(e.target as HTMLInputElement).value) {
+                    document.querySelector('.place-holder')?.classList.remove('placeholder-active')
+                  }
+
+                }} onClick={() => {
+                  document.querySelector('.place-holder')?.classList.add('placeholder-active')
+                
+                }} id='add-group-input' className="input add-slide-input"   name='Title' />
+                <p className="place-holder">New Folder...</p>
+              </div>
+              <div className="input-wrapper">
+                <label htmlFor="add-group-textarea" className='m4 label'>More details?</label>
+                <textarea ref={description} className='input textarea add-slide-textarea'id='add-group-textarea' placeholder='Description (optional)'></textarea>
+              </div>
+
             </form>
           }
 
@@ -86,6 +100,8 @@ export default function GroupAdd() {
                 })
               }}>Create</button>
           </div>
+
+              
             </motion.div>
         </Modal>
    )

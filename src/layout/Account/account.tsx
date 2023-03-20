@@ -42,12 +42,12 @@ export default function Account() {
             }}
             className="extended-navbar not-close">
                 <div className='extended-wrapper not-close'>
-                    <div onClick={() => navigate('cards')} className="extended-navbar-item category-switch not-close">Cards</div>
-                    <div onClick={() => navigate('notes')} className="extended-navbar-item category-switch not-close">Notes</div>
-                    <div onClick={() => navigate('exams')} className="extended-navbar-item category-switch not-close">Exam</div>
+                    <div onClick={() => navigate(`/account/cards/${id}`)} className="extended-navbar-item category-switch not-close">Cards</div>
+                    <div onClick={() => navigate(`/account/notes/${id}`)} className="extended-navbar-item category-switch not-close">Notes</div>
+                    <div onClick={() => navigate(`/account/exams/${id}`)} className="extended-navbar-item category-switch not-close">Exam</div>
                 </div>
 
-                <div onClick={() => navigate('stats')}  className="extended-navbar-item extended-item-icon not-close">
+                <div onClick={() => navigate(`${id}/stats`)}  className="extended-navbar-item extended-item-icon not-close">
                     <span>
                     <i className="fa-solid fa-gear"></i>
                     <p>Stats</p>

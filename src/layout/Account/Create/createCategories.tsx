@@ -57,45 +57,44 @@ export function CardsAdd() {
                 type={'slide'}
             >
 
-            <div className="thumbnail-image-wrapper">
-               <input ref={imageInput} onChange={(e) => {                  
-                  createImagePreview((e.target as HTMLInputElement))
+                <div className="thumbnail-image-wrapper">
+                <input ref={imageInput} onChange={(e) => {                  
+                    createImagePreview((e.target as HTMLInputElement))
+                    
+                    
+                }} type="file" id="card-upload" hidden/>
+                <label htmlFor="card-upload" className='card-upload'>Choose File</label>
+
+                <img ref={image} src="https://images.unsplash.com/photo-1458222960031-58c2a8f3ae50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="slide-thumbnail-image" className="thumbnail-image" />
+                </div>
+
+                <form className="add-slide-content">
+
+                    <input ref={question} type="text" id='add-card-input' className="input add-slide-input" placeholder='Title' name='Title' />
+                    <textarea ref={answer} className='input textarea'id='add-card-textarea add-slide-textarea' placeholder='Description (optional)'></textarea>
+
+                </form>
                 
-                  
-               }} type="file" id="card-upload" hidden/>
-               <label htmlFor="card-upload" className='card-upload'>Choose File</label>
-
-               <img ref={image} src="https://images.unsplash.com/photo-1458222960031-58c2a8f3ae50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="slide-thumbnail-image" className="thumbnail-image" />
-            </div>
-
-            <form className="add-slide-content">
-
-               <input ref={question} type="text" id='add-card-input add-slide-input' className="input" placeholder='Title' name='Title' />
-
-               <textarea ref={answer} className='input textarea'id='add-card-textarea add-slide-textarea' placeholder='Description (optional)'></textarea>
-
-            </form>
             
-           
 
-            <div className="add-slide-btn-wrapper">
-                <button className="add-slide-btn primary-btn " onClick={() => {                  
-                    mutate({
-                        url:`slide/create`,
-                        method: 'POST',
-                        data: {
-                            answer: answer.current!.value || 'Untitled',
-                            question: question.current!.value || 'Untitled',
-                            tags: JSON.stringify([]),
-                            image: imageInput.current!.files![0],
-                            groupId: id
-                         },
-                        headers: {
-                            authorization: ''
-                        }
-                    })
-                }}>Create slide</button>
-            </div>
+                <div className="add-slide-btn-wrapper">
+                    <button className="add-slide-btn primary-btn " onClick={() => {                  
+                        mutate({
+                            url:`slide/create`,
+                            method: 'POST',
+                            data: {
+                                answer: answer.current!.value || 'Untitled',
+                                question: question.current!.value || 'Untitled',
+                                tags: JSON.stringify([]),
+                                image: imageInput.current!.files![0],
+                                groupId: id
+                            },
+                            headers: {
+                                authorization: ''
+                            }
+                        })
+                    }}>Create slide</button>
+                </div>
 
             </CreateOption>}
         </Modal>

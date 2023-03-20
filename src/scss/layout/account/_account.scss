@@ -377,82 +377,6 @@
     align-items: center;
     padding: 2vw;
     width: 100%;
-    
-
-
-    .color-select {
-        display: flex;
-        justify-content: space-evenly;
-        align-content: center;
-        gap: 1rem;
-        width: 100%;
-        overflow-x: auto;
-
-        padding: .5rem 2vw;
-        
-        .color {
-            flex: none;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            border-radius: 40px;
-            transition: 200ms ease;
-            outline: 2px solid transparent;
-            box-shadow: 1px 2px 5px #00000090;
-        }
-        .color:hover {
-            scale: 1.1;
-            outline: 2px solid white;
-        }
-        .color:active {
-            scale: .9;
-        }
-
-        .color-select-active {
-            outline: 2px solid white;
-
-        }
-    }
-
-    textarea {
-        min-height: 150px;
-    }
-
-    .add-slide-content {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-        justify-content: center;
-        padding: 2vw;
-        
-    }
-
-    .add-slide-btn-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        gap: 10px;
-        
-
-        .add-slide-btn, .remove-slide-btn {
-            max-width: 200px;
-            width: 100%;
-        }
-
-        .remove-slide-btn {
-            border: 2px dashed red;
-        }
-
-        .remove-slide-btn:hover {
-            border: 2px dotted red;
-        }
-    }
-
 
     .modal--wrapper {
         max-width: 900px;
@@ -461,12 +385,69 @@
         border-radius: 8px;
         min-height: 600px;
         display: grid;
-        grid-template-rows: 200px auto 75px;
+        grid-template-rows: 300px auto 75px;
         transition: 200ms ease;
+        border: 2px solid $accent-color;
         justify-items: center;
-        // padding: 1vw;
+        
+        .add-slide-content {
+            padding: clamp(.5rem, 2vw, 1rem);        
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1rem, 2vw, 2rem);
+            width: 100%;
+            padding-top: 2rem;
+            
+            .input-wrapper {
+                position: relative;
+                
+                textarea {
+                    margin-top: 5px;
+                    display: flex;
+                    height: 100%;
+                    
+                }
+                    
+                .place-holder {
+                    position: absolute;
+                    top: 50%;
+                    z-index: 1;
+                    font-size: 1.75rem;
+                    left: 90px;
+                    transition: 200ms ease;
+                    transform: translate(-50%, -50%);
+                }
+
+                .placeholder-active {
+                    font-size: 1rem;
+                    top: 5%;
+                    left: 60px;
+                }
+            }
+
+            .add-slide-input {
+                outline: none;
+                border-bottom: 2px solid $accent-color;
+                border-radius: 0px;
+                z-index: 3;
+                position: relative;
+                background-color: transparent;
+
+                
+            }
+            .add-slide-input:focus {
+                background-color: transparent;
+            }
+            
+        }
+
     }
 
+    .group-modal {
+        display: grid;
+        gap: 1rem;
+        grid-template-rows:auto 50px auto;
+    }
 
     .settings {
         max-width: 900px;
@@ -633,83 +614,6 @@
     
     }
 
-    
-    .slide-modal {       
-        
-        .thumbnail-image-wrapper {
-            width: 100%;
-            cursor: pointer;
-            border-radius: 8px 8px 0 0;
-            overflow: hidden;
-            position: relative;
-
-            .card-upload {
-                background-color: transparent;
-                color: transparent;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                cursor: pointer;
-                z-index: 999;
-                
-            }
-
-            .thumbnail-image {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: 200ms ease;
-            }
-        }
-
-        .thumbnail-image-wrapper:hover {
-            .thumbnail-image {
-                scale: 1.2;
-            }
-        }
-    }
-
-    .note-modal {
-        display: grid;
-        grid-template-rows: auto 75px;
-        
-        textarea {
-            height: 100%;
-        }
-
-    }
-
-    .exam-modal {
-
-        .slide-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: .5rem;
-            flex-direction: column;
-
-            #slide-days-left {
-                color: $secondary-text;
-                font-size: 1.15rem;
-            }
-
-            input[type="date"] {
-                max-width: 400px;
-                text-align: center;
-            }
-        }
-
-    }
-    
-}
-
-#group-add {
-    grid-template-rows: auto 75px 75px;
-
-
-    input, textarea {
-        background-color: transparent;
-    }
 }
 
 .hamburger-wrapper {
