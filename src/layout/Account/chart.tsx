@@ -9,6 +9,7 @@ import { formatDate } from '../../functions/functions';
 import { chartDataType, chartOptionsType } from '../../functions/types';
 
 ChartJS.register(...registerables);
+document.title = 'Statistics'
 
 
 export default function Chart() {

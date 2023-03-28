@@ -47,7 +47,7 @@ export default function Category() {
 
     if(status === 'loading') return <Loader />
     if(status === 'error') return <NoContent />
-
+    
     return(
         <section className="account-slides cards" id='cards'>
         <Outlet />
@@ -79,6 +79,7 @@ function Slide(data: {
     item: any,
     type: slideCategories
  }): JSX.Element {
+    document.title = data.type[0].toUpperCase() + data.type.slice(1) + 's'
 
     if(data.type === 'card') return  <Card  {...data} />
     if(data.type === 'note')  return  <Note  {...data} />

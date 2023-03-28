@@ -26,6 +26,7 @@ export default function Feed() {
 
    return(
     <div className="feed section-spacing">
+
         <div className="feed-header">
 
             <header className="feed-titles">
@@ -45,10 +46,8 @@ export default function Feed() {
 
         <div className="feed-content">
             {data.data && data.data.map((item: groupElementType, index: number) => {
-                return <>
-                <FeedItem data={item} key={index} />
-                <FeedItem data={item} key={index} />
-                </>
+                return <FeedItem data={item} key={index} />
+             
             })}
 
             <span className="see-all"><p className="m4">See all</p></span>
@@ -77,8 +76,8 @@ function FeedItem(item: {
             </span>
 
             <div className="text-wrapper">
-                <h1 className="slide-title m3">{data.name}awdddddddddddddddddddddddddddd</h1>
-                <p className="slide-description m4">{data.description} lorem200</p>
+                <h1 className="slide-title m3">{data.name}</h1>
+                <p className="slide-description m4">{data.description}</p>
             </div>
 
             <footer className="feed-item-footer">

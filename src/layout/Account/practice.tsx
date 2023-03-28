@@ -9,6 +9,7 @@ import { API } from '../../functions/API';
 import NoContent from '../../components/noContent';
 
 export default function Practice() {
+    document.title = 'Practice'
     const [slideIndex, setSlideIndex] = useState(0);    
     const { id } = useParams();
 

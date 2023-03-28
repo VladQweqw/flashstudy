@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { useLocation, useNavigate, useParams } from 'react-router'
-
 import { slideAnimate, slideInitial, togglePopup, singularURLNames } from '../../../functions/functions'
 import { cardType, slideCategories, noteType } from '../../../functions/types'
 import { API } from '../../../functions/API'
+
 import Modal from '../../../components/modal'
 import Loader from '../../../components/loader'
 
@@ -29,7 +29,6 @@ export function CardsEdit() {
         }else {
            image.current!.src = 'https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=PM_optEhHBTZkuJQLlCjLz-v3zzxp-1mpNQZsdjrbns=';
         }
-     
     }
 
     const { 

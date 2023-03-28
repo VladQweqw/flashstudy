@@ -3,7 +3,9 @@ import { useLocation, useParams } from 'react-router'
 import { useRef, useState, useEffect } from 'react'
 import { EditOption } from './editCategories'
 import { togglePopup, ColorVariants, changeColor } from '../../../functions/functions'
+import { useNavigate } from 'react-router'
 import { API } from '../../../functions/API'
+
 import Loader from '../../../components/loader'
 
 export default function GroupEdit() {
@@ -12,16 +14,13 @@ export default function GroupEdit() {
    const { state } = useLocation() 
    const { id } = useParams()
    const [colorIndex, setColorIndex] = useState(0)
-
+   const navigate = useNavigate();
    const queryClient = useQueryClient();
 
    useEffect(() => {
-      
       if(state.item.color) {
-      
          changeColor(ColorVariants.indexOf(state.item.color), state.item.color) 
       }
-
    }, [])
    
    
@@ -39,9 +38,10 @@ export default function GroupEdit() {
          queryClient.refetchQueries({
              queryKey: ['account'],
          });
-
          
          togglePopup('Changes saved', 'SUCCESS')
+
+         navigate(-1);
       },
       onError: () => {
          togglePopup('DEFAULT', 'ERROR')

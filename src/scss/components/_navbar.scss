@@ -13,16 +13,17 @@
 }
 
 .logo {
-    font-size: clamp(2rem, 3.5vw , 3rem);
-    font-family: 'Righteous';
-    cursor: pointer;
+    width: 55px;
+    height: 55px;
+    border-radius: 0;
     transition: 200ms ease;
+    cursor: pointer;
+}
+.logo:hover {
+    opacity: .8;
 }
 .logo:active {
-    scale: .95;
-}
-.logo::first-letter {
-    color: $accent-color;
+    scale: .9;
 }
 
 .footer {

@@ -4,8 +4,7 @@ import SignUp from './signUp';
 import { Outlet } from 'react-router';
 
 export default function Form() {
-    const [formState, setFormState] = useState<boolean>(false)
-    
+    const [formState, setFormState] = useState<boolean>(false)    
 
    return(
     <>

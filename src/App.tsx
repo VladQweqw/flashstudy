@@ -28,6 +28,7 @@ import GroupEdit from './layout/Account/Edit/groupEdit'
 import Create from './layout/Account/Create/create'
 import Edit from './layout/Account/Edit/edit'
 import Category from './layout/Account/Create/category'
+import { View } from './layout/Account/Slides/view'
 
 export default function App() {
   const location = useLocation();
@@ -49,8 +50,12 @@ export default function App() {
     <Routes location={background || location}>
         <Route path='/' element={<Home />}></Route>
 
-        <Route path='/form' element={<Form />}>
-          <Route path='forgot' element={<ForgotPassword />}></Route>
+        <Route path='/form' element={<>
+          <Navbar />
+          <Form />
+          </>}>
+          
+        <Route path='forgot' element={<ForgotPassword />}></Route>
         </Route>
 
         <Route path='/account' element={<Account />}>
@@ -62,8 +67,9 @@ export default function App() {
             <Route path='create' element={<GroupAdd />}></Route>
             <Route path=':id/edit' element={<GroupEdit />}></Route>  
           </Route>
-          
+
           <Route path=':category/:id' element={<Category />}>
+            <Route path='view/:slideId' element={<View />}></Route>
             <Route path='create' element={<Create />}></Route>
             <Route path='edit/:slideId' element={<Edit />}></Route>
           </Route>

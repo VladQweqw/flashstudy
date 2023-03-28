@@ -5,7 +5,10 @@ import { formValidation, encodeAndSave, togglePopup, asyncLocalStorage } from '.
 import { useMutation } from 'react-query';
 import { API } from '../../functions/API';
 import Loader from '../../components/loader';
+
 export default function SignIn() {
+   document.title = 'Sign in'
+
    const email = useRef<HTMLInputElement>(null);
    const password = useRef<HTMLInputElement>(null); 
    const navigate = useNavigate()
@@ -23,6 +26,7 @@ export default function SignIn() {
          asyncLocalStorage('token', resp.token).then((res) => {
             togglePopup('Logged in succesfully', 'SUCCESS')
             navigate('/account')
+            window.location.reload()
          }).catch((err) => togglePopup('DEFAULT', 'ERROR'))
       
       },

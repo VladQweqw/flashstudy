@@ -7,15 +7,18 @@ export function Exam(data: {
     type: slideCategories
  }) {
    
-   function convertTime(timeInMs: number) {
-    let examDate = new Date(
-        timeInMs - new Date().getTime()
-    ).getTime();
-        
-    let days = (examDate / (1000 * 60* 60 * 24))
-       
-    return Math.ceil(days)
- }
+    function convertTime(timeInMs: number) {
+        let examDate = new Date(
+            timeInMs - new Date().getTime()
+        ).getTime();
+            
+        let days = Math.ceil((examDate / (1000 * 60* 60 * 24)))
+            
+        return days;
+    }
+    let convertedStoreDate = convertTime(new Date(data.item.examDate).getTime())
+    
+
 
     return <CategoryOption
         {...data}
@@ -30,13 +33,17 @@ export function Exam(data: {
         </div>
 
         <div className="slide-right">
-            <h1 className="exam-days-number">{
-            convertTime(new Date(data.item.examDate).getTime())
-        }</h1>
-            <p className="exam-days-number-bottom m3">days left</p>
+            {convertedStoreDate > 0 ? <>
+                    <h1 className="exam-days-number">{convertedStoreDate}</h1>
+                    <p className="exam-days-number-bottom m3">Days left</p>
+                </> :
+                convertedStoreDate === 0 ? <h1 className="exam-days-number m1">Today</h1> :
+                <h1 className="exam-days-number m2">Expired</h1>
+            }
         </div>
     </CategoryOption>
 }
+
 
 export function Note(data: {
     item: noteType,
@@ -95,7 +102,16 @@ export function CategoryOption(props: {
 
     return(
         <div 
-        onClick={() => navigate(
+        onClick={() => {
+            if(type === 'note') {
+                navigate(
+                    `view/${item.ID}`, {
+                        state: item
+                    }
+                )
+            }
+        }}
+        onContextMenu={() => navigate(
             `edit/${item.ID}`,
             {state: item}
         )} 

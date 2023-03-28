@@ -96,10 +96,10 @@ export const SETTINGS_IMAGES: {
 } = {
     custom: getFromLocal('customImages') || [],
     images: [
-        'https://images.pexels.com/photos/7889450/pexels-photo-7889450.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-        'https://images.pexels.com/photos/13211456/pexels-photo-13211456.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        'https://images.pexels.com/photos/2325446/pexels-photo-2325446.jpeg?auto=compress&cs=tinysrgb&w=1600',
-        'https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+        'https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/458983/pexels-photo-458983.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/922610/pexels-photo-922610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/2931251/pexels-photo-2931251.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
     ]
     
 }

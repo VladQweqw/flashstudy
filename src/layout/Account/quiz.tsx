@@ -9,6 +9,7 @@ import { API } from '../../functions/API';
 import Loader from '../../components/loader';
 
 export default function Quiz() {
+   document.title = 'Quiz'
    const [questionIndex, setQuestionIndex] = useState(0);
    const [shuffledAnswers, setShuffledAnswers] = useState<{answer: string, isCorrect: boolean}[]>([])
    const [statusMessage, setStatusMessage] = useState<string>('')

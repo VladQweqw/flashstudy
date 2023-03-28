@@ -1,4 +1,5 @@
 import { useNavigate, useLocation, useParams } from 'react-router'
+import Logo from '../assets/images/logo.svg'
 
 export default function SideNavbar() {
     const navigate = useNavigate();
@@ -7,8 +8,8 @@ export default function SideNavbar() {
     
    return(
     <>
-        <div className="logo" onClick={() => navigate('/account')}>
-            <h1 className='m1'>FS</h1>
+        <div className="account-logo-wrapper" onClick={() => navigate('/account')}>
+            <img src={Logo} alt="logo" className='logo' />
         </div>
     
         <div className="side-navbar">

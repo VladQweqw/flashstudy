@@ -15,6 +15,8 @@ import Footer from '../../components/footer'
 const heroImages = ['Easy to manage', 'Remind of you exams','See your progress','Quiz yourself']
 
 export default function Home() { 
+   document.title = 'Flashstudy'
+
    const [heroIndex, setHeroIndex] = useState(0)
    const dinamicText = useRef<any>(null)
    const navigate = useNavigate()

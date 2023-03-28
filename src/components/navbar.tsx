@@ -1,15 +1,15 @@
 import React,{} from 'react'
 
 import { useNavigate } from 'react-router'
+import Logo from '../assets/images/logo.svg'
 
 export default function Navbar() {
     const navigate = useNavigate()
-
-
+        
     return(
     <div className="navbar" >
         <div onClick={() => navigate('/')} className="brand">
-            <h1 className='logo'>FS</h1>
+            <img src={Logo} alt="logo" className='logo' />
         </div>
 
         <nav className="nav">

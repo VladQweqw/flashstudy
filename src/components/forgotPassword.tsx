@@ -1,11 +1,11 @@
 import {useRef, useState} from 'react'
-import Modal from './modal'
-import { slowSlideInitial, slowSlideAniamte, slowSlideVariant } from '../functions/functions'
+import { slowSlideVariant } from '../functions/functions'
 import { motion } from 'framer-motion'
+
+import Modal from './modal'
 
 export default function ForgotPassword() {
     const [isEmailSent, setIsEmailSent] = useState(true)
-    const [code, setCode] = useState(0);
 
    return(
     <Modal>
@@ -14,7 +14,7 @@ export default function ForgotPassword() {
         animate={'animate'}
         variants={slowSlideVariant}
         className="forgot-modal">
-            {isEmailSent ? <SendEmail /> : <CheckCode /> }
+            {!isEmailSent ? <SendEmail /> : <CheckCode /> }
         </motion.div>
     </Modal>
    )
@@ -25,7 +25,7 @@ function SendEmail() {
 
     return(
         <>
-            <label htmlFor="forgot-password-email" className='m3'>We'll send you a code to the email address.</label>
+            <label htmlFor="forgot-password-email" className='m4'>We'll send you a code to the email address.</label>
             <input type="email" ref={inp} className='forgot-pwd-email input' name="forgot-password-email" placeholder='Email' id="forgot-pwd-email" />
 
             <button className="primary-btn">Send</button>

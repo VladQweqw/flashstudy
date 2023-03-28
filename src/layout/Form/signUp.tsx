@@ -6,6 +6,7 @@ import { API } from '../../functions/API';
 import { useQuery } from 'react-query';
 
 export default function SignUp({setFormState}: {setFormState: (state: boolean) => void}) {
+   document.title = 'Register now'
 
    const name = useRef<HTMLInputElement>(null);
    const email = useRef<HTMLInputElement>(null);

@@ -11,6 +11,7 @@ import { useParams } from 'react-router'
 export default function Account() {
     const navigate = useNavigate();
     const [isModalOpen, setIModalOpen] = useState(false)
+    document.title = 'Home'
     
     const { category, id } = useParams()
     

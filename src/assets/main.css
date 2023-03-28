@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
 * {
   margin: 0;
@@ -309,18 +310,19 @@ input:-webkit-autofill:active {
 }
 
 .logo {
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-family: "Righteous";
-  cursor: pointer;
+  width: 55px;
+  height: 55px;
+  border-radius: 0;
   transition: 200ms ease;
+  cursor: pointer;
+}
+
+.logo:hover {
+  opacity: 0.8;
 }
 
 .logo:active {
-  scale: 0.95;
-}
-
-.logo::first-letter {
-  color: var(--accent-color, #D09683);
+  scale: 0.9;
 }
 
 .footer {
@@ -529,20 +531,130 @@ button {
   width: 100%;
 }
 
-.no-content {
+.no-content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 120px);
+  grid-column: 2/3;
+  padding: 0.5rem;
+}
+.no-content-wrapper .no-content {
+  background-color: var(--background-contrast, #1C1C1C);
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.no-content-wrapper .no-content .no-content-title {
+  opacity: 0.4;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2vw, 5rem);
+}
+@keyframes scaleColor {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 0;
+  }
+  100% {
+    scale: 1;
+  }
+}
+.no-content-wrapper .no-content .interactive {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  width: 100%;
-  grid-column: 2/3;
-  height: 100%;
+  gap: 1rem;
 }
-.no-content img {
-  width: clamp(200px, 50%, 500px);
-  -o-object-fit: contain;
-     object-fit: contain;
+.no-content-wrapper .no-content .interactive .square {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  background-color: var(--accent-color, #D09683);
+  transition: 0.2s;
+  border-radius: 0;
+}
+.no-content-wrapper .no-content .interactive .square:active {
+  scale: 0.5;
+}
+.no-content-wrapper .no-content .btn-wrapper {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
+.view-wrapper {
+  background-color: var(--background-contrast, #1C1C1C);
+  padding: clamp(0.5rem, 2vw, 1rem);
+  max-width: 900px;
+  height: 80%;
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: 50px auto 50px;
+  transition: 200ms ease;
+}
+.view-wrapper .view-title {
+  text-align: center;
+  font-weight: 400;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: 200ms ease;
+  text-overflow: ellipsis;
+}
+.view-wrapper .invalidText {
+  color: red;
+}
+.view-wrapper .content-wrapper {
+  max-height: 55dvh;
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding: 1vw;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+.view-wrapper .content-wrapper .content {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 1rem;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 28px;
+}
+.view-wrapper .content-wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.1568627451);
+}
+.view-wrapper .view-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+.view-wrapper .view-footer .primary-btn {
+  font-size: 1rem;
+}
+
+@media (max-width: 900px) {
+  .no-content-wrapper {
+    grid-column: 1/3;
+  }
+}
 .hero {
   height: calc(100vh - 80px);
   height: calc(100svh - 80px);
@@ -1107,18 +1219,11 @@ button {
   scale: 0.9;
 }
 
-.logo {
-  border-radius: 8px;
-  grid-row: 1;
-  cursor: pointer;
-}
-.logo h1 {
-  font-size: 2.7rem;
-  padding: 1rem;
-  font-family: var(--ff-logo, "Righteous");
-}
-.logo h1::first-letter {
-  color: var(--accent-color, #D09683);
+.account-logo-wrapper {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
 }
 
 .side-nav {

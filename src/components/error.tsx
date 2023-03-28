@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
-import anime from 'animejs'
 import { useNavigate } from 'react-router'
+
+import anime from 'animejs'
 
 export default function Error() {
    const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function Error() {
         <path id='reviews-left-svg' d="M145.5 204C220.434 69.5751 9.54402 14 3.05176e-05 0V496.5C38.176 490.167 93.7092 499.2 95.9998 404C98.863 285 72.7533 334.5 145.5 204Z" fill="#915643" fillOpacity="0.58"/>
         </svg>
         
-        <div className="error-text">
+         <div className="error-text">
             <div className="error-fullword" >
                <span className="error-word">4</span>
                <span className="error-word">0</span>
