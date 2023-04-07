@@ -77,6 +77,11 @@
        
         .practice-card-back {
             transform: rotateY(180deg);
+
+            .answer-image {
+                border-radius: 8px;
+                box-shadow: 0 4px 5px #00000070;
+            }
         }
 
         

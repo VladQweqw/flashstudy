@@ -4,6 +4,7 @@ import { getFromLocal, setDarkMode } from './functions/functions'
 
 // universal
 import Navbar from './components/navbar'
+import Footer from './components/footer'
 import Error from './components/error'
 import Practice from './layout/Account/practice'
 import Quiz from './layout/Account/quiz'
@@ -27,8 +28,12 @@ import GroupEdit from './layout/Account/Edit/groupEdit'
 //account
 import Create from './layout/Account/Create/create'
 import Edit from './layout/Account/Edit/edit'
-import Category from './layout/Account/Create/category'
+import Category from './layout/Account/Slides/category'
 import { View } from './layout/Account/Slides/view'
+
+//other
+import Terms from './layout/Other/terms'
+import FAQ from './layout/Other/faq'
 
 export default function App() {
   const location = useLocation();
@@ -68,6 +73,7 @@ export default function App() {
             <Route path=':id/edit' element={<GroupEdit />}></Route>  
           </Route>
 
+          <Route path='view/:id' element={<Category />}></Route>
           <Route path=':category/:id' element={<Category />}>
             <Route path='view/:slideId' element={<View />}></Route>
             <Route path='create' element={<Create />}></Route>
@@ -75,7 +81,23 @@ export default function App() {
           </Route>
         </Route>      
         
+        <Route path='/terms' element={
+          <>
+            <Navbar />
+            <Terms />
+            <Footer />
+          </>}>
+        </Route>
         
+        <Route path='/faq' element={
+          <>
+            <Navbar />
+            <FAQ />
+            <Footer />
+          </>
+        }></Route>
+          
+        <Route path='forgot' element={<ForgotPassword />}></Route>
         <Route path='*' element={<Error />}></Route>
     </Routes>
         {background && (
@@ -83,7 +105,6 @@ export default function App() {
             <Route path="settings" element={<Settings />} />
           </Routes>
         )}
-    {/* <Footer /> */}
     </>
   )
 }

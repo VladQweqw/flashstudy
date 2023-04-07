@@ -33,7 +33,7 @@ export const correctPhrases = [
  ]
  
 export const wrongPhrases = [
-    'Could be worse', 'Hard question anyway', 'Damn..', 'F'
+    'Could be worse', 'Next time', 'No worries', ':/', 'Not quite'
  ]
 
 export function checkLengts(min: number, max: number, string: string) {

@@ -1,10 +1,11 @@
 import {useState} from 'react'
+import { Outlet } from 'react-router';
 import SignIn from './signIn';
 import SignUp from './signUp';
-import { Outlet } from 'react-router';
 
 export default function Form() {
     const [formState, setFormState] = useState<boolean>(false)    
+
 
    return(
     <>
@@ -14,11 +15,7 @@ export default function Form() {
             
             <div className="form-left">
                 <h1 className="m1">{formState ? 'Sign in' : 'Sign up'}</h1>
-            
-
                 {formState ? <SignIn /> : <SignUp setFormState={setFormState} />}
-    
-
             </div>
 
             <div className="form-right">

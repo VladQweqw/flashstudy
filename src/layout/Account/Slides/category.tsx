@@ -8,7 +8,7 @@ import { slideCategories } from '../../../functions/types';
 import NoContent from '../../../components/noContent';
 import Loader from '../../../components/loader';
 
-import { Card, Exam, Note } from '../Slides/categories';
+import { Card, Exam, Note } from './categories';
 
 export default function Category() {
    const {category, id} = useParams();
@@ -16,7 +16,11 @@ export default function Category() {
    const [currentCategory, setCurrentCategory] = useState<slideCategories>('card')
    
     useEffect(() => {
-        setCurrentCategory(singularURLNames(category!))
+        if(!category) {
+            setCurrentCategory('card')
+        }else {
+            setCurrentCategory(singularURLNames(category!))
+        }
     }, [category])
     
     const {
@@ -42,8 +46,8 @@ export default function Category() {
         opacity: [0, 1],
         duration:  50,
      })
-
-  }, [data])
+     
+  }, [data])    
 
     if(status === 'loading') return <Loader />
     if(status === 'error') return <NoContent />
@@ -52,9 +56,11 @@ export default function Category() {
         <section className="account-slides cards" id='cards'>
         <Outlet />
 
-        <div onClick={() => navigate('create')} className="account-slide slide add-slide">
-            <h1>+</h1>
-        </div>
+        {category != undefined && 
+            <div onClick={() => navigate('create')} className="account-slide slide add-slide">
+                <h1>+</h1>
+            </div>
+        }
 
          {data?.data && data.data.map((item: any, index: number) => {
             return  <Slide 
@@ -64,7 +70,7 @@ export default function Category() {
             />
         })}
 
-        {currentCategory === 'card' && 
+        {(currentCategory === 'card' && category != undefined) && 
         <div className="practice-buttons">
             <button onClick={() => navigate('practice')} className="practice-button primary-btn" id='practice-btn'>Practice</button>
             <button onClick={() => navigate('quiz')} className="practice-button primary-btn" id='quiz-btn'>Quiz</button>

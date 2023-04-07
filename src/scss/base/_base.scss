@@ -24,7 +24,7 @@ button, input, textarea {
 
 a {
     text-decoration: none;
-    color: darkcyan;
+    color: $accent-color;
 }
 ::selection {
     background-color: $accent-color;
@@ -57,7 +57,9 @@ body {
     color: $secondary-text;
     text-align: center;
 }
-
+.center {
+    text-align: center;
+}
 .m6  { // big titles
     font-size: .75 !important;
 }

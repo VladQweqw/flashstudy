@@ -41,19 +41,19 @@ export default function Reviews() {
             <div className="review ">
                 <div className="review-header">
                     <div className="user">
-                        <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="review-user-image" className="review-user-image" />   
-                        <p className="review-user-name m3">Marques</p>
+                        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="review-user-image" className="review-user-image" />   
+                        <p className="review-user-name m3">David</p>
                     </div>   
                     
                     <div className="rating">
-                        <span className='rating-score m3'>5/5</span>
+                        <span className='rating-score m3'>4/5</span>
                         <i className="fas fa-star"></i>    
                     </div>      
                 </div>
 
                 <div className="review-text">
                     <p className='m4'>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia impedit, consequatur rerum dolores dolorum tenetur? Praesentium, modi quae?
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic  orem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic consectetur adipisicing elit. Aliquam eos nisi hic consectetur adipisicing elit. Aliquam eos nisi hic
                     </p>
                 </div>
             </div>
@@ -61,8 +61,8 @@ export default function Reviews() {
             <div className="review ">
                 <div className="review-header">
                     <div className="user">
-                        <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="review-user-image" className="review-user-image" />   
-                        <p className="review-user-name m3">Marques</p>
+                        <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="review-user-image" className="review-user-image" />   
+                        <p className="review-user-name m3">Andrew</p>
                     </div>   
                     
                     <div className="rating">
@@ -73,7 +73,7 @@ export default function Reviews() {
 
                 <div className="review-text">
                     <p className='m4'>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia impedit, consequatur rerum dolores dolorum tenetur? Praesentium, modi quae?
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia imped
                     </p>
                 </div>
             </div>
@@ -81,8 +81,8 @@ export default function Reviews() {
             <div className="review ">
                 <div className="review-header">
                     <div className="user">
-                        <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="review-user-image" className="review-user-image" />   
-                        <p className="review-user-name m3">Marques</p>
+                        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="review-user-image" className="review-user-image" />   
+                        <p className="review-user-name m3">Anna</p>
                     </div>   
                     
                     <div className="rating">
@@ -93,7 +93,7 @@ export default function Reviews() {
 
                 <div className="review-text">
                     <p className='m4'>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia impedit, consequatur rerum dolores dolorum tenetur? Praesentium, modi quae?
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos nisi hic cum, veritatis vitae, rem dolorem iure dignissimos ipsum laboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia impedit, consequatur rerum dolores dolorum tenetur? Praesentium, modi quae? aboriosam ratione quaerat totam saepe iusto in cupiditate natus, odit soluta sunt corporis molestias impedit possimus. Ullam repudiandae quis dicta. Officia impedit, consequatur rerum dolores dolorum tenetur? Praesentium, modi quae? 
                     </p>
                 </div>
             </div>

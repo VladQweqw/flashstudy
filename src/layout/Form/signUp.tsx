@@ -15,6 +15,17 @@ export default function SignUp({setFormState}: {setFormState: (state: boolean) =
    const [formErrors, setFormErrors] = useState< string[]>([]);
    const [seePassword, setSeePassword] = useState(true);
 
+   const child = {
+      animate: {
+         opacity: 1,
+         scale: 1,
+      },
+      initial: {
+         opacity: 0,
+         scale: 0,
+      }
+   }
+
    const {
       status,
       refetch,
@@ -42,22 +53,33 @@ export default function SignUp({setFormState}: {setFormState: (state: boolean) =
    
    if(status === 'loading') return <Loader />
    return(
-    <form action="submit" id="signup-form" className='login-form'>
+    <motion.form
+    variants={{
+      animate: {
+         transition: {
+            staggerChildren: .05,
+            duration: .1,
+         }
+      }
+   }}
+   animate={'animate'}
+   initial={'initial'}
+    action="submit" id="signup-form" className='login-form'>
 
-      <div className="input">
+      <motion.div variants={child} className="input">
          <input type="text"     ref={name} id='signup-name' className='name ' placeholder='Display name' />
-      </div>
-      <div className="input">
+      </motion.div>
+      <motion.div variants={child} className="input">
          <input type="email"    ref={email} id='signup-email' className='email' placeholder='Email' />
-      </div>
-      <div className="input">
+      </motion.div>
+      <motion.div variants={child} className="input">
          <input autoComplete="on" type={seePassword ? 'password': 'text'} ref={password} id='signup-pwd' className='pwd' placeholder='Password' />
          <span className="see-password" onClick={() => setSeePassword(!seePassword)}>
             {seePassword ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
          </span>
-      </div>
+      </motion.div>
 
-      <button type='submit' onClick={((e) => {
+      <motion.button type='submit' variants={child} onClick={((e) => {
          e.preventDefault();
          
          let resp = formValidation(
@@ -73,9 +95,9 @@ export default function SignUp({setFormState}: {setFormState: (state: boolean) =
          }
              
 
-      })} className='submit-btn primary-btn' id='signup-btn'>Submit</button>
+      })} className='submit-btn primary-btn' id='signup-btn'>Submit</motion.button>
 
-<div className="errors">
+      <div className="errors">
          <AnimatePresence>
             {formErrors && formErrors.map((error, index) => {
                return <motion.p 
@@ -96,6 +118,6 @@ export default function SignUp({setFormState}: {setFormState: (state: boolean) =
          </AnimatePresence>
       </div>
 
-    </form>
+    </motion.form>
    )
 }

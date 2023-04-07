@@ -82,6 +82,8 @@ const Question = (props:{
 }): JSX.Element => {
     const [seeAnswer, setSeeAnswer] = useState<boolean>(false)
         
+    console.log(props.data.image);
+    
     return(
         <div 
         style={{
@@ -99,12 +101,15 @@ const Question = (props:{
                 <div className="practice-card-front practice-card-side">
                     <h3 className="card-title">Question {props.translateIndex + 1}:</h3>
                     <h1 id="practice-question" className='practice-question'>{props.data.question}</h1>
+                  
                 </div>
 
                 <div className="practice-card-back practice-card-side">
                     <h3 className="card-title">Answer:</h3>
-
                     <h1 id="practice-question" className='practice-question'>{props.data.answer}</h1>
+                    {props.data.image && 
+                        <img className='answer-image' src={`http://trphost.go.ro:8081/${props.data.image}`} alt="practice-image" />
+                    }
                 </div>
 
             </div>

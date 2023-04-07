@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
-import { formValidation, encodeAndSave, togglePopup, asyncLocalStorage } from '../../functions/functions';
+import { formValidation, togglePopup, asyncLocalStorage } from '../../functions/functions';
 import { useMutation } from 'react-query';
 import { API } from '../../functions/API';
 import Loader from '../../components/loader';
@@ -24,7 +24,6 @@ export default function SignIn() {
       mutationFn: API,
       onSuccess: resp => {
          asyncLocalStorage('token', resp.token).then((res) => {
-            togglePopup('Logged in succesfully', 'SUCCESS')
             navigate('/account')
             window.location.reload()
          }).catch((err) => togglePopup('DEFAULT', 'ERROR'))
@@ -36,21 +35,47 @@ export default function SignIn() {
       mutationKey: ['login']
     })
 
+   const child = {
+      animate: {
+         opacity: 1,
+         scale: 1,
+      },
+      initial: {
+         opacity: 0,
+         scale: 0,
+      }
+   }
+
    if(status === 'loading') return <Loader />
    return(
-   <form action="submit" id="login-form" className='login-form'>
+   <motion.form
+   variants={{
+      animate: {
+         transition: {
+            staggerChildren: .05,
+            duration: .1,
+         }
+      }
+   }}
+   animate={'animate'}
+   initial={'initial'}
+   action="submit" id="login-form" className='login-form'>
 
-      <div className="input">
+      <motion.div
+      variants={child}
+      className="input">
          <input type="text" ref={email} id='signin-email' className='email m' placeholder='Email or name' />
-      </div>
-      <div className="input">
+      </motion.div>
+      <motion.div
+      variants={child}
+      className="input">
          <input autoComplete="on" type={seePassword ? 'password': 'text'} ref={password} id='signin-pwd' className='pwd' placeholder='Password' />
          <span className="see-password" onClick={() => setSeePassword(!seePassword)}>
          {seePassword ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
       </span>
-      </div>
+      </motion.div>
 
-      <button type='submit' onClick={(e) => {
+      <motion.button variants={child} type='submit' onClick={(e) => {
          e.preventDefault();
 
          let resp = formValidation(
@@ -76,7 +101,7 @@ export default function SignIn() {
                })
             }
          
-      }} className='submit-btn primary-btn' id='signin-btn' >Submit</button>
+      }} className='submit-btn primary-btn' id='signin-btn' >Submit</motion.button>
       <p id="forgot-pwd" className='secondary-text' onClick={() => navigate('forgot')}>Forgot details?</p>
    
 
@@ -101,6 +126,6 @@ export default function SignIn() {
       </AnimatePresence>
    </div>
       
-   </form>
+   </motion.form>
    )
 }

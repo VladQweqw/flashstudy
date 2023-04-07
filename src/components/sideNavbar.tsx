@@ -1,5 +1,6 @@
 import { useNavigate, useLocation, useParams } from 'react-router'
 import Logo from '../assets/images/logo.svg'
+import { motion } from 'framer-motion'
 
 export default function SideNavbar() {
     const navigate = useNavigate();
@@ -8,11 +9,28 @@ export default function SideNavbar() {
     
    return(
     <>
-        <div className="account-logo-wrapper" onClick={() => navigate('/account')}>
+        <motion.div
+        animate={{
+            scale: 1,
+        }}
+        initial={{
+           scale: 0
+        }}
+        className="account-logo-wrapper" onClick={() => navigate('/account')}>
             <img src={Logo} alt="logo" className='logo' />
-        </div>
+        </motion.div>
     
-        <div className="side-navbar">
+        <motion.div 
+        animate={{
+            translateX: '0%',
+            transition: {
+                duration: .4
+            }
+        }}
+        initial={{
+            translateX: '-100%'
+        }}
+        className="side-navbar">
           
             {category != undefined && 
             <NavbarItem navigate={navigate} id={'stats'} redirect={{
@@ -30,7 +48,7 @@ export default function SideNavbar() {
                 <i className="fa-solid fa-gear"></i>
             </NavbarItem>
      
-        </div>
+        </motion.div>
 
     </>
    )

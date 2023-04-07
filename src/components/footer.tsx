@@ -1,20 +1,24 @@
-import React,{} from 'react'
-
+import Logo from '../assets/images/logo.svg'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
 
    return(
     <footer className="footer">
-        <h1 className="logo-footer logo">FS</h1>
+         <div  className="brand">
+            <img src={Logo} alt="logo" className='logo' />
+        </div>
 
         <ul className="footer-items">
-            <li className="footer-item">FAQ</li>
-            <li className="footer-item">Terms</li>
-            <li className="footer-item">Contact</li>
-
+            <Link to={'/faq'}>
+                <li className="footer-item">FAQ</li>
+            </Link>
+            <Link to={'/terms'}>
+                <li className="footer-item">Terms</li>
+            </Link>
         </ul>
 
-        <p id="copyright">©Copyright </p>
+        <p id="copyright">©All rights reserved.</p>
     </footer>
    )
 }

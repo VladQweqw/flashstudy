@@ -11,6 +11,9 @@
     height: 80px;
     
 }
+.navbar-spacing {
+    margin-top: 80px;
+}
 
 .logo {
     width: 55px;
@@ -37,8 +40,6 @@
     .logo-footer {
         width: fit-content;
         grid-row: 1;
-        
-
     }
 
     .footer-items {

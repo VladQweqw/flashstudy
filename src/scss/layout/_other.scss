@@ -1,0 +1,43 @@
+.terms, .faq {
+    padding: 2vw;
+    min-height: 100vh;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    color: $accent-color;
+    position: relative;
+}
+
+.faq-wrapper {
+    display: grid;
+    gap: 2rem;
+}
+
+.faq-item {
+    
+    .title::before {
+        content: '';
+        height: 50px;
+        margin-top: 10px;
+        width: 3px;
+        background-color: $accent-color;
+        position: absolute;
+        top: 50%;
+        left: -8px;
+        transform-origin: top;
+        transform: translate(-50%, -50%);
+        transition: 200ms ease;
+    }
+}
+
+.faq-item:hover {
+
+    .title::before {
+        height: 150px;
+        margin-top: 60px;
+    }
+}
+
