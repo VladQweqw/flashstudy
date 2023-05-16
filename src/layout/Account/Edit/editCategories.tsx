@@ -47,8 +47,7 @@ export function CardsEdit() {
             queryClient.refetchQueries({
                 queryKey: [cat],
             });
-
-            navigate(-1);
+         
         }
        
       })
@@ -106,6 +105,7 @@ export function CardsEdit() {
                             authorization: ''
                         }
                     })
+                    
                 }else {
                     element.innerText = 'Are you sure?'
                 }
@@ -117,7 +117,11 @@ export function CardsEdit() {
                 fd.append('answer', answer.current!.value || 'Untitled')
                 fd.append('question', question.current!.value || 'Untitled')
                 fd.append('tags', JSON.stringify([]))
-                fd.append('image', imageInput.current!.files![0])
+
+                if(image.current!.src !== 'https://images.unsplash.com/photo-1458222960031-58c2a8f3ae50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80%22') {
+                    fd.append('image', imageInput.current!.files![0])
+                }    
+                     
                 fd.append('id', state.ID.toString() || id!?.toString())
 
 

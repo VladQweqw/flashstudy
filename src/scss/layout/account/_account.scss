@@ -62,6 +62,7 @@
 
         .account-option {
             cursor: pointer;
+            transition: 200ms ease;
             position: relative;
 
             .account-option-svg {
