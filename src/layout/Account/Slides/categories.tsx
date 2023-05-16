@@ -80,7 +80,7 @@ export function Card(data: {
                 formatDate(new Date(item.UpdatedAt || '')).dmhmy()
             }</p>
         </div>
-
+            
         <div className="slide-thumbnail">
             <div className="card-image-overlay"></div>
             <img src={`http://trphost.go.ro:8081/${item.image}`} onError={(e) => {

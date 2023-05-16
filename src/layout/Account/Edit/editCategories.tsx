@@ -106,6 +106,7 @@ export function CardsEdit() {
                             authorization: ''
                         }
                     })
+                    navigate(-1)
                 }else {
                     element.innerText = 'Are you sure?'
                 }
@@ -140,6 +141,7 @@ export function CardsEdit() {
 }
 
 export function NotesEdit() {
+    const navigate = useNavigate();
     const { id, slideId } = useParams()
     const { state }: {
         state: noteType
@@ -206,6 +208,8 @@ export function NotesEdit() {
                                 authorization: ''
                             }
                         })
+                        navigate(-1)
+                        
                         }else {
                             element.innerText = 'Are you sure?'
                         }
@@ -238,6 +242,7 @@ export function ExamsEdit() {
     const { state } = useLocation();
     const { id, slideId } = useParams()
     const queryClient = useQueryClient();
+    const navigate = useNavigate();
 
     const [daysUntilExam, setDaysUntilExam] = useState(convertTime(new Date(state.examDate).getTime()))
 
@@ -336,6 +341,7 @@ export function ExamsEdit() {
                         authorization: ''
                      }
                    })
+                   navigate(-1)
                 }else {
                     element.innerText = 'Are you sure?'
                 }
