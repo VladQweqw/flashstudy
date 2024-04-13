@@ -43,7 +43,7 @@ export default function Feed() {
         </div>
 
         <div className="feed-content">
-            {data.data && data.data.map((item: groupElementType, index: number) => {
+            {data?.data && data?.data.map((item: groupElementType, index: number) => {
                 return <FeedItem data={item} key={index} />
              
             })}
