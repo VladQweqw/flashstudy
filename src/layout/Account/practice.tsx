@@ -65,9 +65,6 @@ export default function Practice() {
             <span onClick={() => prev()} className="practice-prev practice-control">
                 <i className="fa-solid fa-arrow-left"></i>
             </span>
-            <span>
-                <p>Click on the card to see the answer.</p>
-            </span>
             <span onClick={() => next()} className="practice-next practice-control">
                 <i className="fa-solid fa-arrow-right"></i>
             </span>
