@@ -5,6 +5,7 @@ import { setBackground, SETTINGS_IMAGES } from '../functions/functions';
 import { slideInitial, slideAnimate } from '../functions/functions';
 
 import Modal from './modal';
+import { useNavigate } from 'react-router';
 
 
 
@@ -46,7 +47,7 @@ export default function Settings() {
 }
 
 function Account() {
-  
+  const navigate = useNavigate()
   return(
     <>
       <div className="settings-container">
@@ -56,8 +57,6 @@ function Account() {
           <button className="primary-btn">Change</button>
         </form>
       </div>
-     
-
     </>
   )
 }

@@ -78,6 +78,14 @@ export default function SideNavbar() {
             }}>
                 <i className="fa-solid fa-gear"></i>
             </NavbarItem>
+
+            <NavbarItem navigate={navigate} id={''} redirect={{
+                path: `/`,
+                state: {},
+            }}>
+                <i  className="fa-solid fa-arrow-right-from-bracket" onClick={ () => {localStorage.clear()}}></i>
+   
+            </NavbarItem>
      
         </motion.div>
 
