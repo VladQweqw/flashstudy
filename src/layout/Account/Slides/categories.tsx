@@ -74,7 +74,7 @@ export function Card(data: {
         >
         <div className="slide-text">
             <h1 className="slide-title m3">{item.question}</h1>
-            <p className="slide-description m4">Answer: {item.answer}</p>
+            <p className="slide-description m4">Answer:{item.answer}</p>
             
             <p className="slide-last-updated m5">Last edited: {
                 formatDate(new Date(item.UpdatedAt || '')).dmhmy()
@@ -83,10 +83,10 @@ export function Card(data: {
             
         <div className="slide-thumbnail">
             <div className="card-image-overlay"></div>
-            <img src={`http://127.0.0.1:8081/${item.image}`} onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/15476701/pexels-photo-15476701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-            }} className='slide-thumbnail-image' alt="slide-thumbnail" />
+            {item.image?<img src={`http://127.0.0.1:8081/${item.image}`} className='slide-thumbnail-image' alt="" />:""}
+
         </div>
+
     </CategoryOption>
 
 }

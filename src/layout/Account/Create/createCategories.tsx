@@ -67,7 +67,7 @@ export function CardsAdd() {
                 }} type="file" id="card-upload" hidden/>
                     <label htmlFor="card-upload" className='card-upload'>Choose File</label>
 
-                    <img ref={image} src="https://images.unsplash.com/photo-1458222960031-58c2a8f3ae50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="slide-thumbnail-image" className="thumbnail-image" />
+                    <img ref={image} src="https://i.ibb.co/3v4w3Dk/Group-31.png" alt="slide-thumbnail-image" className="thumbnail-image" />
                 </div>
 
                 <form className="add-slide-content">

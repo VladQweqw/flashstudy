@@ -99,7 +99,10 @@ const Question = (props:{
             }}>
 
                 <div className="practice-card-front practice-card-side">
+                    <div>
                     <h3 className="card-title">Question {props.translateIndex + 1}:</h3>
+                    <h6 style={{color: "#ffffff75"}}>Click card to see answer.</h6>
+                    </div>
                     <h1 id="practice-question" className='practice-question'>{props.data.question}</h1>
                   
                 </div>

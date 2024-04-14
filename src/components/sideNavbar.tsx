@@ -6,6 +6,8 @@ export default function SideNavbar() {
     const navigate = useNavigate();
     const location = useLocation();
     const { id, category } = useParams();
+
+    console.log(category);
     
    return(
     <>
@@ -31,13 +33,42 @@ export default function SideNavbar() {
             translateX: '-100%'
         }}
         className="side-navbar">
-          
             {category != undefined && 
             <NavbarItem navigate={navigate} id={'stats'} redirect={{
                 path: `/account/cards/${id}/stats`,
                 state: {},
             }}>
-                <i className="fa-solid fa-chart-simple"></i>     
+                <i className="fa-solid fa-chart-simple"></i>
+                
+   
+            </NavbarItem>
+            }
+
+            {category != undefined && 
+            <NavbarItem navigate={navigate} id={''} redirect={{
+                path: `/account/`,
+                state: {},
+            }}>
+                <i className="fa fa-folder" aria-hidden="true"></i>
+   
+            </NavbarItem>
+            }
+
+            {window.location.pathname.slice(-5) == "stats" && 
+            <NavbarItem navigate={navigate} id={''} redirect={{
+                path: `/account/cards/${id}`,
+                state: {},
+            }}>
+               <i className="fa-solid fa-images"></i>    
+            </NavbarItem>
+            }
+
+            {window.location.pathname.slice(-8) == "practice" && 
+            <NavbarItem navigate={navigate} id={''} redirect={{
+                path: `/account/cards/${id}`,
+                state: {},
+            }}>
+               <i className="fa-solid fa-images"></i>    
             </NavbarItem>
             }
             
