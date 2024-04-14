@@ -80,6 +80,7 @@ export function View() {
                          mutate({
                             method: 'PUT',
                             url: `note/update`,
+                            params:{},
                             data: {
                                 title: title.current!.innerText || '',
                                 text: text.current!.value.trim() || '' ,

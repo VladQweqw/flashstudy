@@ -16,7 +16,8 @@ export default function Feed() {
     } = useQuery({
         queryFn: () => API({
             method: 'GET',
-            url: `popularGroups?count=${COUNT}`,
+            url: `popularGroups`,
+            params: {count:COUNT},
             data: {},
             headers: {
                 authorization: ''
@@ -103,7 +104,8 @@ function SearchComponent() {
     } = useQuery({
         queryFn: () => API({
             method: 'GET',
-            url: `search?value=${searchInput.current!.value || ''}`,
+            url: `search`,
+            params: {value:searchInput.current!.value || ''},
             data: {},
             headers: {
                 authorization: ''

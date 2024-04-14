@@ -29,7 +29,8 @@ export default function Category() {
     } = useQuery({
         queryKey: [currentCategory, parseInt(id!)],
         queryFn: () => API({
-        url:`${currentCategory === 'card' ? 'slide' : currentCategory}?id=${id}`,
+        url:`${currentCategory === 'card' ? 'slide' : currentCategory}`,
+        params:{id:id},
         method: 'GET',
         data: null,
         headers: {

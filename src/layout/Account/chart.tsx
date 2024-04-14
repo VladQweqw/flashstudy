@@ -23,7 +23,8 @@ export default function Chart() {
     } = useQuery({
         queryKey:['stats'],
         queryFn: () => API({
-            url:`stats?id=${id}`,
+            url:`stats`,
+            params:{id:id},
             method:'GET',
             data: {},
             headers: {}

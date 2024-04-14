@@ -91,18 +91,22 @@ export function CardsAdd() {
                 </form>
                 
                 <div className="add-slide-btn-wrapper">
-                    <button className="add-slide-btn primary-btn " onClick={() => {              
+                    <button className="add-slide-btn primary-btn " onClick={() => {
                         const fd = new FormData();
 
                         fd.append('answer', answer.current!.value || 'Untitled')
                         fd.append('question', question.current!.value || 'Untitled')
                         fd.append('tags', JSON.stringify([]))
-                        fd.append('image', imageInput.current!.files![0])
+                        if (imageInput.current && imageInput.current.files && imageInput.current.files[0]) {
+                              fd.append('image', imageInput.current!.files![0])
+                        }
+                      
                         fd.append('groupId', id!?.toString())
 
                         mutate({
                             url:`slide/create`,
                             method: 'POST',
+                            params:{},
                             data: fd,
                             headers: {
                                 authorization: ''
@@ -174,6 +178,7 @@ export function NotesAdd() {
                          mutate({
                             url:`note/create`,
                             method: 'POST',
+                            params:{},
                             data: {
                                 title: title.current!.value || 'Untitled',
                                 text: text.current!.value || 'Untitled',
@@ -285,6 +290,7 @@ export function ExamsAdd() {
                         mutate({
                             url:'exam/create',
                             method: 'POST',
+                            params:{},
                             data: {
                                 description: description.current!.value || 'Untitled',
                                 examDate: examDate.current!.value || new Date(),

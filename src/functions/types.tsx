@@ -107,9 +107,14 @@ export type contextMenuType = {
 //API
 export type MethodsType = 'POST' | 'GET' | 'PUT' | 'DELETE';
 
+interface APIParams {
+   [key: string]: any;
+ }
+
 export type APIdefaultTypes = {
    method: MethodsType,
    url: string,
+   params: APIParams,
    data: any,
    headers: any
 }

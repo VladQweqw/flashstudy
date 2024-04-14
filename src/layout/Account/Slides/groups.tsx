@@ -22,6 +22,7 @@ export default function Groups() {
          method: 'GET',
          url: 'group',
          data: null,
+         params: {},
          headers: {
             authorization: '',
          }

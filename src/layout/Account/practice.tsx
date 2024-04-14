@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import { cardType } from '../../functions/types';
 import Loader from '../../components/loader';
 import { useQuery } from 'react-query';
-import { API } from '../../functions/API';
+import { API, ENDPOINT } from '../../functions/API';
 import NoContent from '../../components/noContent';
 
 export default function Practice() {
@@ -19,7 +19,8 @@ export default function Practice() {
     } = useQuery({
         queryFn: () => API({
             method: 'GET',
-            url: `slide?id=${id}`,
+            url: `slide`,
+            params: {id:id},
             data: null,
             headers: {
                 authorization: ''
@@ -64,7 +65,9 @@ export default function Practice() {
             <span onClick={() => prev()} className="practice-prev practice-control">
                 <i className="fa-solid fa-arrow-left"></i>
             </span>
-           
+            <span>
+                <p>Click on the card to see the answer.</p>
+            </span>
             <span onClick={() => next()} className="practice-next practice-control">
                 <i className="fa-solid fa-arrow-right"></i>
             </span>
@@ -108,7 +111,7 @@ const Question = (props:{
                     <h3 className="card-title">Answer:</h3>
                     <h1 id="practice-question" className='practice-question'>{props.data.answer}</h1>
                     {props.data.image && 
-                        <img className='answer-image' src={`http://trphost.go.ro:8081/${props.data.image}`} alt="practice-image" />
+                        <img className='answer-image' src={`${ENDPOINT}/${props.data.image}`} alt="practice-image" />
                     }
                 </div>
 

@@ -39,6 +39,7 @@ export default function SignUp({setFormState}: {setFormState: (state: boolean) =
       queryFn: () => API({
          method: 'POST',
          url: 'register',
+         params: {},
          data: {
             username:   name.current!.value,
             password:   password.current!.value,

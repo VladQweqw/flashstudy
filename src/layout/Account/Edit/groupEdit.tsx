@@ -106,7 +106,8 @@ export default function GroupEdit() {
                 
                 if(element.innerText === 'Are you sure?') {
                    mutate({
-                     url: `group/delete?id=${id}`,
+                     url: `group/delete`,
+                     params: {id:id},
                      method: 'DELETE',
                      data: {},
                      headers: {
@@ -123,6 +124,7 @@ export default function GroupEdit() {
          mutate({
             method: 'PUT',
             url: 'group/update',
+            params:{},
             data: {
                color: ColorVariants[colorIndex],
                description: description.current!.value || 'Untitled',

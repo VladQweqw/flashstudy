@@ -26,7 +26,8 @@ export default function Quiz() {
   } = useQuery({
       queryFn: () => API({
           method: 'GET',
-          url: `slide?id=${id}`,
+          url: `slide`,
+          params: {id:id},
           data: null,
           headers: {
               authorization: ''
@@ -182,6 +183,7 @@ function QuizResult(data: {correct: number, wrong: number}) {
    useEffect(() => {      
       mutate({
          url: 'stats/create',
+         params:{},
          method:'POST',
          data: {
             CorrectAnswer: data.correct,

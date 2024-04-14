@@ -89,6 +89,7 @@ export default function GroupAdd() {
                   mutate({
                     url: 'group/create',
                     method: 'POST',
+                    params:{},
                     data: {
                       color: ColorVariants[colorIndex],
                       description: description.current!.value || 'Untitled',

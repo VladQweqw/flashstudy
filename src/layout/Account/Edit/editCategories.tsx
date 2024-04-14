@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { useLocation, useNavigate, useParams } from 'react-router'
 import { slideAnimate, slideInitial, togglePopup, singularURLNames } from '../../../functions/functions'
 import { cardType, slideCategories, noteType } from '../../../functions/types'
-import { API } from '../../../functions/API'
+import { API, ENDPOINT } from '../../../functions/API'
 
 import Modal from '../../../components/modal'
 import Loader from '../../../components/loader'
@@ -73,7 +73,7 @@ export function CardsEdit() {
 
             <img ref={image} onError={(e) => {
                 (e.target as HTMLImageElement).src ='https://images.unsplash.com/photo-1458222960031-58c2a8f3ae50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"'
-            }} src={`http://trphost.go.ro:8081/${state.image}`} alt="slide-thumbnail-image" className="thumbnail-image" />
+            }} src={`${ENDPOINT}/${state.image}`} alt="slide-thumbnail-image" className="thumbnail-image" />
         </div>
 
         <form className="add-slide-content">
@@ -99,14 +99,15 @@ export function CardsEdit() {
                 
                 if(element.innerText === 'Are you sure?') {
                     mutate({
-                        url: `slide/delete?id=${state.ID}`,
+                        url: `slide/delete`,
+                        params: {id:state.ID},
                         method:'DELETE',
                         data: null,
                         headers: {
                             authorization: ''
                         }
                     })
-                    navigate(-1)
+                    //navigate(-1)
                 }else {
                     element.innerText = 'Are you sure?'
                 }
@@ -123,7 +124,8 @@ export function CardsEdit() {
 
 
                 mutate({
-                    url:`slide/update?id=${state.ID}`,
+                    url:`slide/update`,
+                    params: {id:state.ID},
                     method: 'PUT',
                     data: fd,
                     headers: {
@@ -201,7 +203,8 @@ export function NotesEdit() {
                         
                         if(element.innerText === 'Are you sure?') {
                         mutate({
-                            url: `note/delete?id=${slideId}`,
+                            url: `note/delete`,
+                            params: {id:slideId},
                             method: 'DELETE',
                             data: {},
                             headers: {
@@ -220,6 +223,7 @@ export function NotesEdit() {
                         mutate({
                             method: 'PUT',
                             url: `note/update`,
+                            params:{},
                             data: {
                                 title: title.current!.value || '',
                                 text: text.current!.value || '' ,
@@ -334,7 +338,8 @@ export function ExamsEdit() {
                 
                 if(element.innerText === 'Are you sure?') {
                    mutate({
-                     url: `exam/delete?id=${slideId}`,
+                     url: `exam/delete`,
+                     params: {id:slideId},
                      method: 'DELETE',
                      data: {},
                      headers: {
@@ -352,6 +357,7 @@ export function ExamsEdit() {
                 mutate({
                     method: 'PUT',
                     url: `exam/update`,
+                    params: {},
                     data: {
                         description: description.current!.value || " ",
                         name: name.current!.value || " ",
